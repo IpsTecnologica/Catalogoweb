@@ -1,0 +1,8 @@
+{
+  "name": "Remix IPS TECNOLÓGICA CATALOG STUDIO",
+  "description": "Plataforma web profesional para crear, gestionar, publicar y descargar catálogos de productos tecnológicos en formato PDF y web.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

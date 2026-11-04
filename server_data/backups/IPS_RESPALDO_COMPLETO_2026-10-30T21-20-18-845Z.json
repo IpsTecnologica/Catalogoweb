@@ -1,0 +1,2702 @@
+{
+  "products": [
+    {
+      "name": "Portátil Workstation Pro 16\" OLED Core i9",
+      "reference": "IPS-NB-001",
+      "shortDescription": "Intel Core i9-14900HX, 32GB DDR5, SSD 1TB NVMe, RTX 4070 8GB, Pantalla 16\" 3.2K 120Hz OLED.",
+      "category": "Portátiles y Cómputo",
+      "priceCOP": 9450000,
+      "images": [
+        "/uploads/prod_ips-nb-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_1",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "ASUS ProArt / IPS",
+      "stock": 15
+    },
+    {
+      "name": "Ultrabook Titan Slim 14\" Core Ultra 7",
+      "reference": "IPS-NB-002",
+      "shortDescription": "Intel Core Ultra 7 155H, 16GB LPDDR5X, SSD 512GB NVMe Gen4, Chasis magnesio 1.1kg, Batería 18h.",
+      "category": "Portátiles y Cómputo",
+      "priceCOP": 5290000,
+      "images": [
+        "/uploads/prod_ips-nb-002.svg"
+      ],
+      "isActive": true,
+      "id": "prod_2",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Lenovo ThinkPad",
+      "stock": 15
+    },
+    {
+      "name": "Servidor Rack Enterprise 1U Dual Xeon",
+      "reference": "IPS-SRV-001",
+      "shortDescription": "Dual Intel Xeon Silver 4410Y, 64GB ECC DDR5, 4x SSD Enterprise 960GB SAS, Fuente Redundante 800W Platinum.",
+      "category": "Servidores y Redes",
+      "priceCOP": 22800000,
+      "images": [
+        "/uploads/prod_ips-srv-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_3",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Dell PowerEdge",
+      "stock": 15
+    },
+    {
+      "name": "Switch Gestionable 48 Puertos PoE+ 10G",
+      "reference": "IPS-NET-001",
+      "shortDescription": "48 puertos Gigabit PoE+ (370W), 4 puertos SFP+ 10G, Capa L3 Lite, Montaje en rack 19\", Enrutamiento estático.",
+      "category": "Servidores y Redes",
+      "priceCOP": 3850000,
+      "images": [
+        "/uploads/prod_ips-net-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_4",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Cisco Catalyst",
+      "stock": 15
+    },
+    {
+      "name": "Router Corporativo SD-WAN Dual WAN Multi-Gigabit",
+      "reference": "IPS-NET-002",
+      "shortDescription": "Firewall con IPS/IDS integrado, balanceo de carga de 2.5 Gbps, VPN SSL/IPsec para hasta 200 túneles simultáneos.",
+      "category": "Servidores y Redes",
+      "priceCOP": 2490000,
+      "images": [
+        "/uploads/prod_ips-net-002.svg"
+      ],
+      "isActive": true,
+      "id": "prod_5",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Fortinet / Ubiquiti",
+      "stock": 15
+    },
+    {
+      "name": "Monitor Curvo Profesional 34\" WQHD 144Hz",
+      "reference": "IPS-MON-001",
+      "shortDescription": "Panel IPS UltraWide 3440x1440, 99% sRGB, USB-C con Power Delivery 90W, Hub KVM integrado y altavoces estéreo.",
+      "category": "Monitores y Pantallas",
+      "priceCOP": 3190000,
+      "images": [
+        "/uploads/prod_ips-mon-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_6",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "LG UltraWide Pro",
+      "stock": 15
+    },
+    {
+      "name": "Monitor Gráfico Calibrado 27\" 4K UHD HDR",
+      "reference": "IPS-MON-002",
+      "shortDescription": "Resolución 3840x2160, 100% Rec.709 y 98% DCI-P3, Delta E < 2 certificado de fábrica, Soporte pivotante ergonómico.",
+      "category": "Monitores y Pantallas",
+      "priceCOP": 2650000,
+      "images": [
+        "/uploads/prod_ips-mon-002.svg"
+      ],
+      "isActive": true,
+      "id": "prod_7",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "BenQ PD DesignVue",
+      "stock": 15
+    },
+    {
+      "name": "Smartphone Flagship Titanium 512GB 5G",
+      "reference": "IPS-MOB-001",
+      "shortDescription": "Procesador Octa-Core 4nm, Cámara triple 200MP con OIS, Pantalla AMOLED 6.8\" 120Hz LTPO, Carga rápida 100W.",
+      "category": "Móviles y Tablets",
+      "priceCOP": 5490000,
+      "images": [
+        "/uploads/prod_ips-mob-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_8",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Samsung Enterprise",
+      "stock": 15
+    },
+    {
+      "name": "Tablet Gráfica Corporativa 12.4\" con Stylus Pro",
+      "reference": "IPS-MOB-002",
+      "shortDescription": "Pantalla 12.4\" 2.8K 120Hz, 12GB RAM, 256GB, Lápiz con 4096 niveles de presión y cero latencia.",
+      "category": "Móviles y Tablets",
+      "priceCOP": 3790000,
+      "images": [
+        "/uploads/prod_ips-mob-002.svg"
+      ],
+      "isActive": true,
+      "id": "prod_9",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Wacom / Samsung",
+      "stock": 15
+    },
+    {
+      "name": "Audífonos Inalámbricos ANC Master Studio",
+      "reference": "IPS-AUD-001",
+      "shortDescription": "Cancelación Activa de Ruido Inteligente (-42dB), Drivers de berilio 40mm, Códecs LDAC y aptX HD, Autonomía de 45 horas.",
+      "category": "Audio y Streaming",
+      "priceCOP": 1490000,
+      "images": [
+        "/uploads/prod_ips-aud-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_10",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Sony Pro Audio",
+      "stock": 15
+    },
+    {
+      "name": "Micrófono de Condensador USB-C / XLR Broadcast",
+      "reference": "IPS-AUD-002",
+      "shortDescription": "Cápsula cardioide 25mm, Grabación 24-bit/96kHz, Filtro pop metálico integrado, Soporte antivibración y monitoreo directo.",
+      "category": "Audio y Streaming",
+      "priceCOP": 790000,
+      "images": [
+        "/uploads/prod_ips-aud-002.svg"
+      ],
+      "isActive": true,
+      "id": "prod_11",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Shure / Rode",
+      "stock": 15
+    },
+    {
+      "name": "Kit de Cámaras de Seguridad IP 4K PoE con NVR 2TB",
+      "reference": "IPS-SEC-001",
+      "shortDescription": "4 cámaras domo metálicas 8MP para exteriores IP67, Visión nocturna en color 30m, Detección de personas y vehículos con IA.",
+      "category": "Seguridad y Vigilancia",
+      "priceCOP": 2950000,
+      "images": [
+        "/uploads/prod_ips-sec-001.svg"
+      ],
+      "isActive": true,
+      "id": "prod_12",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "updatedAt": "2026-10-29T17:00:36.622Z",
+      "brand": "Hikvision AcuSense",
+      "stock": 15
+    }
+  ],
+  "promotions": [],
+  "company": {
+    "name": "IPS TECNOLÓGICA",
+    "slogan": "Innovación, Equipamiento y Soluciones Tecnológicas de Alta Gama",
+    "logoUrl": "/uploads/ips_official_logo.svg",
+    "description": "Empresa líder en Colombia dedicada a la distribución, comercialización y asesoría integral de tecnología de vanguardia, hardware profesional, cómputo corporativo y soluciones de conectividad para empresas y profesionales.",
+    "phone": "+57 (601) 745-8920",
+    "whatsapp": "+57 310 894 7231",
+    "email": "contacto@ipstecnologica.com.co",
+    "address": "Carrera 15 # 85-30, Edificio Tecnológico, Oficina 402",
+    "city": "Bogotá D.C., Colombia",
+    "website": "https://ipstecnologica.com.co",
+    "social": {
+      "facebook": "https://facebook.com/ipstecnologica",
+      "instagram": "https://instagram.com/ipstecnologica",
+      "tiktok": "https://tiktok.com/@ipstecnologica",
+      "youtube": "https://youtube.com/@ipstecnologica",
+      "whatsapp": "https://wa.me/573108947231",
+      "website": "https://ipstecnologica.com.co"
+    },
+    "colors": {
+      "primary": "#DC2626",
+      "secondary": "#111827",
+      "accent": "#475569",
+      "background": "#FFFFFF"
+    },
+    "commercialTerms": "Precios expresados en Pesos Colombianos (COP). Incluyen IVA. Garantía legal de 12 a 36 meses directamente con fabricante. Precios y disponibilidad sujetos a cambio sin previo aviso. Envíos asegurados a todo el territorio nacional."
+  },
+  "users": [
+    {
+      "id": "usr_1",
+      "name": "Jefferson Villada Rios",
+      "email": "jeffervr@gmail.com",
+      "role": "Administrador",
+      "phone": "+57 310 894 7231",
+      "passwordHash": "5ddaf891b6e711741bf93fa1a4f721e8cd152ce5876e7677cbf84cebd2e23885f66b67ee936816c04af4111648895402fcc16053eadd515c6b78b4340f1229e5",
+      "passwordSalt": "b98dcdaf5a39af94276d788a823a06a2",
+      "createdAt": "2026-10-29T17:00:36.387Z",
+      "isActive": true,
+      "status": "Activo"
+    },
+    {
+      "id": "usr_2",
+      "name": "Soporte IPS Tecnológica",
+      "email": "soporteipstecnologica@gmail.com",
+      "role": "Administrador",
+      "phone": "+57 (601) 745-8920",
+      "passwordHash": "e6a78d0cad477af1a7ddd09dab10c2c26d4266a537dd78c64dd78af0bc59b3e6445724e39884f6a63a24eb249ea6346ee5b0b874d614eccb5d4d8d275bb5e6f7",
+      "passwordSalt": "c80bff844c42e48bd6c59ee7a7079f93",
+      "createdAt": "2026-10-29T17:00:36.470Z",
+      "isActive": true,
+      "status": "Activo"
+    },
+    {
+      "id": "usr_3",
+      "name": "Soporte Técnico JefferVR",
+      "email": "soportejeffervr@gmail.com",
+      "role": "Administrador",
+      "phone": "+57 310 894 7232",
+      "passwordHash": "e479363d920448f9394d670ac20c517fabbdc7a6054d7b1c911426dfbef69556679c82a7f0daa9f8fa3d01e79bea974f6cf7f910741f48b08858f18ebd280514",
+      "passwordSalt": "3a01859a9b8cdae71604010da217081d",
+      "createdAt": "2026-10-29T17:00:36.521Z",
+      "isActive": true,
+      "status": "Activo"
+    },
+    {
+      "id": "usr_4",
+      "name": "Marina Guacheta",
+      "email": "marinaguacheta123@gmail.com",
+      "role": "Administrador",
+      "phone": "+57 315 442 8910",
+      "passwordHash": "891886b614d9c970fe60d9bf94ba7111f0ed5df96530883c7b25ff6fec98ee468d3f226600bedda5b5fdf12fdafb3b9989327627180626df527de54919eb5b10",
+      "passwordSalt": "8df87a6e6d0d6f5ffe9b75f79cfe6bb7",
+      "createdAt": "2026-10-29T17:00:36.572Z",
+      "isActive": true,
+      "status": "Activo"
+    },
+    {
+      "id": "usr_5",
+      "name": "Carlos Mendoza (Cliente Ejemplo)",
+      "email": "cliente@ejemplo.com",
+      "role": "Cliente",
+      "phone": "+57 300 123 4567",
+      "passwordHash": "d126cb1b69c871651de6ac4964febad93fcb9f946f6d699c2f695ee86a181d5211ed852857f4ec8993544da454c8a735b5981cdfed1d9843ddb800a3107c8b9f",
+      "passwordSalt": "0478b7c6f354df97a96acf69148f8804",
+      "createdAt": "2026-10-29T17:00:36.622Z",
+      "isActive": true,
+      "status": "Activo"
+    },
+    {
+      "id": "usr_1793300410796_6otu",
+      "name": "Cliente Prueba",
+      "email": "cliente_test_1793300410724@example.com",
+      "role": "Cliente",
+      "phone": "+57 300 111 2233",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "7cd6fce1bf746589e1080d2c1fc2634e6414374082239132f0f0cfc77d7712fb3503014245a59bc9e55d5cbc1efd27254597a35e62384dbbcb4a7a7b25e5d993",
+      "passwordSalt": "a32129dcf9842b461b5ce5a0a18e326e",
+      "createdAt": "2026-10-29T19:00:10.796Z"
+    },
+    {
+      "id": "usr_1793300465670_bho2",
+      "name": "Cliente Prueba",
+      "email": "cliente_test_1793300465597@example.com",
+      "role": "Cliente",
+      "phone": "+57 300 111 2233",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "7576b01d2114af4c178bcfcb2d34776d6856992fecf190d9c856af6ffc8408b49e58827543d9eaa05abd357600a6ff813b2f8a5e6a2e6a4f53348b4a35610bbf",
+      "passwordSalt": "d9e2b0db47fa4b3273dc285090c5bbd9",
+      "createdAt": "2026-10-29T19:01:05.671Z"
+    },
+    {
+      "id": "usr_1793300509044_9704",
+      "name": "Cliente Prueba",
+      "email": "cliente_test_1793300508983@example.com",
+      "role": "Cliente",
+      "phone": "+57 300 111 2233",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "1b0501e3872d514033f865e434d93b8813479aa372ece39aee5617940373598c9a5a983f204bf724d9d454e08242dac804be12ddd0e94a41744bf64272c325f9",
+      "passwordSalt": "34089a44b7033481a04dde93ff15ae77",
+      "createdAt": "2026-10-29T19:01:49.044Z"
+    },
+    {
+      "id": "usr_1793390672741_trgl",
+      "name": "Ing. Andrés Camilo Rojas (Técnico Especialista)",
+      "email": "tecnico@ipstecnologica.com.co",
+      "role": "Técnico",
+      "phone": "+57 311 550 8821",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "5ab62ac53d1aea087bf08718021b57c38718473ac1e279c424a46c013990f3085575076d04e4b198a7827e49d7aa2fb9db845e2de7350549f1141e3fa0b39827",
+      "passwordSalt": "1d75e52c37fea85db828d4bd3c977691",
+      "createdAt": "2026-10-30T20:04:32.741Z"
+    },
+    {
+      "id": "usr_1793390672793_ks06",
+      "name": "Ing. Diego Fernando Gómez (Técnico Redes y Servidores)",
+      "email": "redes@ipstecnologica.com.co",
+      "role": "Técnico",
+      "phone": "+57 312 640 9912",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "c4f05d60201babb4901d4ff377defd5e2abea7e044a37d48efd120dd55e1124ab182f29f45407a3682a3e16aa887c0ee9ab6f8ba7e4bca30336cb27c069671e4",
+      "passwordSalt": "e32fa87d84886a8826d3644a40c587a4",
+      "createdAt": "2026-10-30T20:04:32.793Z"
+    },
+    {
+      "id": "usr_1793390672833_qej8",
+      "name": "Laura Sofía Vargas (Supervisor Operativo)",
+      "email": "supervisor@ipstecnologica.com.co",
+      "role": "Supervisor",
+      "phone": "+57 314 778 1234",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "1eb8dcf9c18883471d35890664888883a66aab68e16820c1184d2a8380a67244acbcac37c289d104c6460af57a718af1f4be609f1b9508f7774f832defdf1691",
+      "passwordSalt": "2df2666576e858acca34b83ab6e4340a",
+      "createdAt": "2026-10-30T20:04:32.834Z"
+    },
+    {
+      "id": "usr_1793390672873_cirq",
+      "name": "Diana Marcela Ortiz (Caja y Facturación)",
+      "email": "caja@ipstecnologica.com.co",
+      "role": "Caja",
+      "phone": "+57 316 889 4567",
+      "status": "Activo",
+      "isActive": true,
+      "passwordHash": "b0ae36c46c55fd9e0d149b33551c246c90ea48251ed5b4ade0058876191b91edaeaad7c2d6b1b72b2c90a67d9ed18840b809dbd15bd0a7b2d16cb03f2bee0a13",
+      "passwordSalt": "a37f49b65823d6868de7c09bb2abedc9",
+      "createdAt": "2026-10-30T20:04:32.873Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "PED-2026-001",
+      "customerEmail": "cliente@ejemplo.com",
+      "customerName": "Carlos Mendoza",
+      "customerPhone": "+57 300 123 4567",
+      "date": "2026-10-26T17:00:36.300Z",
+      "totalCOP": 9450000,
+      "status": "Entregado",
+      "shippingAddress": "Calle 100 # 19-61, Oficina 502, Bogotá D.C.",
+      "notes": "Despacho corporativo con entrega en recepción.",
+      "items": [
+        {
+          "productId": "prod_1",
+          "reference": "IPS-NB-001",
+          "name": "Portátil Workstation Pro 16\" OLED Core i9",
+          "quantity": 1,
+          "unitPriceCOP": 9450000,
+          "subtotalCOP": 9450000
+        }
+      ]
+    },
+    {
+      "id": "PED-2026-002",
+      "customerEmail": "cliente@ejemplo.com",
+      "customerName": "Carlos Mendoza",
+      "customerPhone": "+57 300 123 4567",
+      "date": "2026-10-29T11:00:36.300Z",
+      "totalCOP": 4680000,
+      "status": "En preparación",
+      "shippingAddress": "Calle 100 # 19-61, Oficina 502, Bogotá D.C.",
+      "notes": "Facturar con IVA a nombre de la empresa.",
+      "items": [
+        {
+          "productId": "prod_6",
+          "reference": "IPS-MON-001",
+          "name": "Monitor Curvo Profesional 34\" WQHD 144Hz",
+          "quantity": 1,
+          "unitPriceCOP": 3190000,
+          "subtotalCOP": 3190000
+        },
+        {
+          "productId": "prod_10",
+          "reference": "IPS-AUD-001",
+          "name": "Audífonos Inalámbricos ANC Master Studio",
+          "quantity": 1,
+          "unitPriceCOP": 1490000,
+          "subtotalCOP": 1490000
+        }
+      ]
+    }
+  ],
+  "catalogs": [
+    {
+      "name": "Catálogo Prueba Fase 11",
+      "productCount": 13,
+      "status": "Publicado",
+      "pdfUrl": "",
+      "createdBy": "jeffervr@gmail.com",
+      "id": "cat_1793394107746",
+      "date": "2026-10-30T21:01:47.746Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "aud_1793395218839_wdy9",
+      "date": "2026-10-30T21:20:18.839Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ESTADO_INTEGRACION_WHATSAPP",
+      "detail": "Cambió estado de la integración WhatsApp Business a ACTIVA",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793395218833_6szj",
+      "date": "2026-10-30T21:20:18.833Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ESTADO_INTEGRACION_WHATSAPP",
+      "detail": "Cambió estado de la integración WhatsApp Business a INACTIVA",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793395218826_z3c5",
+      "date": "2026-10-30T21:20:18.826Z",
+      "user": "jeffervr@gmail.com",
+      "action": "PROBAR_CONEXION_WHATSAPP_META",
+      "detail": "Prueba real de conexión con Meta Graph API: Error de conexión (Error real de Meta Graph API: Malformed access token EAAG_TEST_SECRET_TOKEN_998877 (Código Meta: 190))",
+      "result": "ERROR"
+    },
+    {
+      "id": "aud_1793395214500_1oon",
+      "date": "2026-10-30T21:20:14.500Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CONFIGURAR_INTEGRACION_WHATSAPP",
+      "detail": "Actualizó integración WhatsApp Business: PUBLIC_APP_URL",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793395214490_943k",
+      "date": "2026-10-30T21:20:14.490Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CONFIGURAR_INTEGRACION_WHATSAPP",
+      "detail": "Actualizó integración WhatsApp Business: PUBLIC_APP_URL, VITE_PUBLIC_APP_URL, Estado=ACTIVO, WHATSAPP_ACCESS_TOKEN (Cifrado AES-256-GCM), WHATSAPP_PHONE_NUMBER_ID (Cifrado AES-256-GCM), WHATSAPP_VERIFY_TOKEN (Cifrado AES-256-GCM), WHATSAPP_APP_SECRET (Cifrado AES-256-GCM)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793395214418_6484",
+      "date": "2026-10-30T21:20:14.418Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T21-20-14-416Z.json\" (manual / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793395187776_h8yd",
+      "date": "2026-10-30T21:19:47.776Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CONFIGURAR_INTEGRACION_WHATSAPP",
+      "detail": "Actualizó integración WhatsApp Business: PUBLIC_APP_URL, VITE_PUBLIC_APP_URL, Estado=ACTIVO, WHATSAPP_ACCESS_TOKEN (Cifrado AES-256-GCM), WHATSAPP_PHONE_NUMBER_ID (Cifrado AES-256-GCM), WHATSAPP_VERIFY_TOKEN (Cifrado AES-256-GCM), WHATSAPP_APP_SECRET (Cifrado AES-256-GCM)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394120373_7od6",
+      "date": "2026-10-30T21:02:00.373Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json\" (bkp_1793394107617_ve4m) tras crear copia previa bkp_1793394120371_1ia2",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394120371_qiqt",
+      "date": "2026-10-30T21:02:00.371Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T21-02-00-370Z.json\" (pre_restauracion / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107839_tcsz",
+      "date": "2026-10-30T21:01:47.839Z",
+      "user": "cliente@ejemplo.com",
+      "action": "CREAR_SERVICIO_TECNICO",
+      "detail": "Solicitud SRV-2026-0002 y cita CIT-2026-0002 registradas para Cliente Prueba Fase 11 (2026-11-22 11:00)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107761_hrhr",
+      "date": "2026-10-30T21:01:47.761Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json\" (bkp_1793394107617_ve4m) tras crear copia previa bkp_1793394107759_c55b",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107759_5x64",
+      "date": "2026-10-30T21:01:47.759Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-758Z.json\" (pre_restauracion / completo) creado con 29 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107751_gy1b",
+      "date": "2026-10-30T21:01:47.751Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_SOLO_PRODUCTOS_2026-10-30T21-01-47-750Z.json\" (por_modulo / solo_productos) creado con 29 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107747_27tk",
+      "date": "2026-10-30T21:01:47.747Z",
+      "user": "jeffervr@gmail.com",
+      "action": "GENERAR_PDF",
+      "detail": "Catálogo \"Catálogo Prueba Fase 11\" guardado (13 productos)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107733_p440",
+      "date": "2026-10-30T21:01:47.733Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RECUPERAR_PRODUCTO",
+      "detail": "Recuperó producto eliminado \"Servidor Rack Enterprise IPS-2026 Editado\" (IPS-F11-2026)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107721_01mo",
+      "date": "2026-10-30T21:01:47.721Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Envió producto a papelera \"Servidor Rack Enterprise IPS-2026 Editado\" (Ref: IPS-F11-2026)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107711_dk2j",
+      "date": "2026-10-30T21:01:47.711Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Servidor Rack Enterprise IPS-2026 Editado\" (Ref: IPS-F11-2026) - Precio: $4.800.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107630_6urb",
+      "date": "2026-10-30T21:01:47.630Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Servidor Rack Enterprise IPS-2026\" (Ref: IPS-F11-2026) - Precio: $5.000.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793394107618_7atz",
+      "date": "2026-10-30T21:01:47.618Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json\" (manual / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392494764_xbbf",
+      "date": "2026-10-30T20:34:54.764Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-450Z.json\" (bkp_1793392489451_52vj) tras crear copia previa bkp_1793392494761_7akb",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392494761_o6lw",
+      "date": "2026-10-30T20:34:54.761Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-54-760Z.json\" (pre_restauracion / completo) creado con 34 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392494751_nr06",
+      "date": "2026-10-30T20:34:54.751Z",
+      "user": "jeffervr@gmail.com",
+      "action": "REINTENTAR_SINCRONIZACION",
+      "detail": "Cola de sincronización procesada (7 operaciones confirmadas)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392494235_fmd9",
+      "date": "2026-10-30T20:34:54.235Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $6.490.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392494223_dpqw",
+      "date": "2026-10-30T20:34:54.223Z",
+      "user": "otro.privado@empresa.co",
+      "action": "CREAR_SERVICIO_TECNICO",
+      "detail": "Solicitud SRV-2026-0003 y cita CIT-2026-0003 registradas para Otro Cliente Privado (2026-11-21 14:00)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489525_3hn1",
+      "date": "2026-10-30T20:34:49.525Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_SERVICIO_TECNICO",
+      "detail": "Actualizó orden SRV-2026-0002 (Estado: En reparación, Total: $240.000 COP)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489519_svma",
+      "date": "2026-10-30T20:34:49.519Z",
+      "user": "cliente@ejemplo.com",
+      "action": "CREAR_SERVICIO_TECNICO",
+      "detail": "Solicitud SRV-2026-0002 y cita CIT-2026-0002 registradas para Carlos Cliente Prueba (2026-11-20 10:00)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489511_1pp7",
+      "date": "2026-10-30T20:34:49.511Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-498Z.json\" (bkp_1793392489499_6ca7) tras crear copia previa bkp_1793392489509_50xp",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489509_bx9d",
+      "date": "2026-10-30T20:34:49.509Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-508Z.json\" (pre_restauracion / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489502_5n5m",
+      "date": "2026-10-30T20:34:49.502Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $9.999.999 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489499_fcsj",
+      "date": "2026-10-30T20:34:49.499Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-498Z.json\" (manual / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489493_mpij",
+      "date": "2026-10-30T20:34:49.493Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E\" actualizada (estado=Finalizada)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489487_5sv8",
+      "date": "2026-10-30T20:34:49.487Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E\" (product) creada con estado Activa",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489482_xfe3",
+      "date": "2026-10-30T20:34:49.482Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RECUPERAR_PRODUCTO",
+      "detail": "Recuperó producto eliminado \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489475_qqxg",
+      "date": "2026-10-30T20:34:49.475Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Envió producto a papelera \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489468_07uw",
+      "date": "2026-10-30T20:34:49.468Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $6.490.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489460_39ks",
+      "date": "2026-10-30T20:34:49.460Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Workstation IPS Titanium Z9 E2E\" (Ref: IPS-E2E-999) - Precio: $6.850.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489451_1wnw",
+      "date": "2026-10-30T20:34:49.451Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-450Z.json\" (manual / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489439_8cw9",
+      "date": "2026-10-30T20:34:49.439Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json\" (bkp_1793392362858_jf3c) tras crear copia previa bkp_1793392489437_xyw4",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392489437_ja2n",
+      "date": "2026-10-30T20:34:49.437Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-435Z.json\" (pre_restauracion / completo) creado con 32 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410671_n0up",
+      "date": "2026-10-30T20:33:30.671Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_SERVICIO_TECNICO",
+      "detail": "Actualizó orden SRV-2026-0002 (Estado: En reparación, Total: $240.000 COP)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410666_otfe",
+      "date": "2026-10-30T20:33:30.666Z",
+      "user": "cliente@ejemplo.com",
+      "action": "CREAR_SERVICIO_TECNICO",
+      "detail": "Solicitud SRV-2026-0002 y cita CIT-2026-0002 registradas para Carlos Cliente Prueba (2026-11-20 10:00)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410660_spfw",
+      "date": "2026-10-30T20:33:30.660Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-649Z.json\" (bkp_1793392410649_5ezs) tras crear copia previa bkp_1793392410659_2oym",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410659_3mrr",
+      "date": "2026-10-30T20:33:30.659Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-657Z.json\" (pre_restauracion / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410652_6u7r",
+      "date": "2026-10-30T20:33:30.652Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $9.999.999 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410649_ub0u",
+      "date": "2026-10-30T20:33:30.649Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-649Z.json\" (manual / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410645_iehn",
+      "date": "2026-10-30T20:33:30.645Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E\" actualizada (estado=Finalizada)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410641_3vt7",
+      "date": "2026-10-30T20:33:30.641Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E\" (product) creada con estado Activa",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410637_96g8",
+      "date": "2026-10-30T20:33:30.637Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RECUPERAR_PRODUCTO",
+      "detail": "Recuperó producto eliminado \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410633_gufc",
+      "date": "2026-10-30T20:33:30.633Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Envió producto a papelera \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410628_r3bw",
+      "date": "2026-10-30T20:33:30.628Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $6.490.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410622_sy0x",
+      "date": "2026-10-30T20:33:30.622Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Workstation IPS Titanium Z9 E2E\" (Ref: IPS-E2E-999) - Precio: $6.850.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410619_7xr9",
+      "date": "2026-10-30T20:33:30.619Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-618Z.json\" (manual / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410614_8k53",
+      "date": "2026-10-30T20:33:30.614Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json\" (bkp_1793392362858_jf3c) tras crear copia previa bkp_1793392410613_2lwd",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392410613_kt42",
+      "date": "2026-10-30T20:33:30.613Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-612Z.json\" (pre_restauracion / completo) creado con 32 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362907_nbdy",
+      "date": "2026-10-30T20:32:42.907Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_SERVICIO_TECNICO",
+      "detail": "Actualizó orden SRV-2026-0002 (Estado: En reparación, Total: $240.000 COP)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362903_5idj",
+      "date": "2026-10-30T20:32:42.903Z",
+      "user": "cliente@ejemplo.com",
+      "action": "CREAR_SERVICIO_TECNICO",
+      "detail": "Solicitud SRV-2026-0002 y cita CIT-2026-0002 registradas para Carlos Cliente Prueba (2026-11-20 10:00)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362896_2muf",
+      "date": "2026-10-30T20:32:42.896Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RESTAURAR_RESPALDO",
+      "detail": "Restauró respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-888Z.json\" (bkp_1793392362888_qboa) tras crear copia previa bkp_1793392362895_be36",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362895_77xp",
+      "date": "2026-10-30T20:32:42.895Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-895Z.json\" (pre_restauracion / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362890_77gf",
+      "date": "2026-10-30T20:32:42.890Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $9.999.999 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362888_m2bh",
+      "date": "2026-10-30T20:32:42.888Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-888Z.json\" (manual / completo) creado con 30 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362884_pixs",
+      "date": "2026-10-30T20:32:42.884Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E\" actualizada (estado=Finalizada)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362880_un9d",
+      "date": "2026-10-30T20:32:42.880Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E\" (product) creada con estado Activa",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362874_k957",
+      "date": "2026-10-30T20:32:42.874Z",
+      "user": "jeffervr@gmail.com",
+      "action": "RECUPERAR_PRODUCTO",
+      "detail": "Recuperó producto eliminado \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362870_vppe",
+      "date": "2026-10-30T20:32:42.870Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Envió producto a papelera \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362865_dun2",
+      "date": "2026-10-30T20:32:42.865Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Workstation IPS Titanium Z9 E2E ACTUALIZADO\" (Ref: IPS-E2E-999) - Precio: $6.490.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362860_374c",
+      "date": "2026-10-30T20:32:42.860Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Workstation IPS Titanium Z9 E2E\" (Ref: IPS-E2E-999) - Precio: $6.850.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362858_ji3x",
+      "date": "2026-10-30T20:32:42.858Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json\" (manual / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392362853_jpnb",
+      "date": "2026-10-30T20:32:42.853Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Envió producto a papelera \"Workstation IPS Titanium Z9 E2E\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392275241_vh8k",
+      "date": "2026-10-30T20:31:15.241Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Workstation IPS Titanium Z9 E2E\" (Ref: IPS-E2E-999) - Precio: $6.850.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392275230_8dj9",
+      "date": "2026-10-30T20:31:15.230Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-31-15-229Z.json\" (manual / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793392100440_42qw",
+      "date": "2026-10-30T20:28:20.440Z",
+      "user": "Sistema Automático",
+      "action": "CREAR_RESPALDO",
+      "detail": "Respaldo \"IPS_RESPALDO_COMPLETO_2026-10-30T20-28-20-440Z.json\" (automatico_diario / completo) creado con 28 registros",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793305751412_lyva",
+      "date": "2026-10-29T20:29:11.412Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_APP_CONFIG",
+      "detail": "Actualizó configuración de la App v2.5.0 (APK disponible: No)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793305751407_9l0r",
+      "date": "2026-10-29T20:29:11.407Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_APP_CONFIG",
+      "detail": "Actualizó configuración de la App v2.5.0 (APK disponible: Sí)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793305656102_2kbb",
+      "date": "2026-10-29T20:27:36.103Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ACTUALIZAR_APP_CONFIG",
+      "detail": "Actualizó configuración de la App v1.0.0 (APK disponible: Sí)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300764112_na7j",
+      "date": "2026-10-29T19:06:04.112Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_USUARIO",
+      "detail": "Eliminó cuenta de usuario: Cliente Prueba (cliente_test_1793300760929@example.com)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300764108_3wf7",
+      "date": "2026-10-29T19:06:04.108Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Eliminó producto \"Monitor Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300764105_fjkl",
+      "date": "2026-10-29T19:06:04.105Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Monitor Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300764102_waay",
+      "date": "2026-10-29T19:06:04.102Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PROMOCION",
+      "detail": "Promoción eliminada: \"Oferta Relámpago E2E 25% OFF\"",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300764094_3phc",
+      "date": "2026-10-29T19:06:04.094Z",
+      "user": "Sistema Automático (America/Bogota)",
+      "action": "PROMOCION_FINALIZADA",
+      "detail": "Promoción \"Oferta Relámpago E2E 25% OFF\" finalizó por tiempo. Precios restaurados al valor normal automáticamente.",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300761085_h2nd",
+      "date": "2026-10-29T19:06:01.085Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PROMOCION",
+      "detail": "Promoción \"Oferta Relámpago E2E 25% OFF\" (product) creada con estado Activa",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300761051_3jit",
+      "date": "2026-10-29T19:06:01.051Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Monitor Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300761044_nzk1",
+      "date": "2026-10-29T19:06:01.044Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Monitor Prueba Producción E2E\" (Ref: IPS-E2E-999) - Precio: $4.000.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300761021_cib6",
+      "date": "2026-10-29T19:06:01.021Z",
+      "user": "cliente_test_1793300760929@example.com",
+      "action": "REGISTRO_CLIENTE",
+      "detail": "Cuenta registrada: Cliente Prueba (Cliente)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300760921_ae3d",
+      "date": "2026-10-29T19:06:00.921Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Eliminó producto \"Monitor Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300509064_tnv3",
+      "date": "2026-10-29T19:01:49.065Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Monitor Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300509058_hw4i",
+      "date": "2026-10-29T19:01:49.058Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Monitor Prueba Producción E2E\" (Ref: IPS-E2E-999) - Precio: $4.000.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300509044_i3wf",
+      "date": "2026-10-29T19:01:49.044Z",
+      "user": "cliente_test_1793300508983@example.com",
+      "action": "REGISTRO_CLIENTE",
+      "detail": "Cuenta registrada: Cliente Prueba (Cliente)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300508978_zuu0",
+      "date": "2026-10-29T19:01:48.978Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Eliminó producto \"Portátil Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300465699_t0xk",
+      "date": "2026-10-29T19:01:05.699Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Portátil Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300465691_kmpb",
+      "date": "2026-10-29T19:01:05.691Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Portátil Prueba Producción E2E\" (Ref: IPS-E2E-999) - Precio: $4.000.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300465671_96kl",
+      "date": "2026-10-29T19:01:05.671Z",
+      "user": "cliente_test_1793300465597@example.com",
+      "action": "REGISTRO_CLIENTE",
+      "detail": "Cuenta registrada: Cliente Prueba (Cliente)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300465591_c5rt",
+      "date": "2026-10-29T19:01:05.591Z",
+      "user": "jeffervr@gmail.com",
+      "action": "ELIMINAR_PRODUCTO",
+      "detail": "Eliminó producto \"Portátil Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300410841_0m0w",
+      "date": "2026-10-29T19:00:10.841Z",
+      "user": "jeffervr@gmail.com",
+      "action": "EDITAR_PRODUCTO",
+      "detail": "Actualizó producto \"Portátil Prueba Producción E2E Actualizado\" (Ref: IPS-E2E-999)",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300410834_1p1k",
+      "date": "2026-10-29T19:00:10.834Z",
+      "user": "jeffervr@gmail.com",
+      "action": "CREAR_PRODUCTO",
+      "detail": "Agregó producto \"Portátil Prueba Producción E2E\" (Ref: IPS-E2E-999) - Precio: $4.000.000 COP",
+      "result": "EXITOSO"
+    },
+    {
+      "id": "aud_1793300410796_zts9",
+      "date": "2026-10-29T19:00:10.796Z",
+      "user": "cliente_test_1793300410724@example.com",
+      "action": "REGISTRO_CLIENTE",
+      "detail": "Cuenta registrada: Cliente Prueba (Cliente)",
+      "result": "EXITOSO"
+    }
+  ],
+  "appConfig": {
+    "appName": "IPS TECNOLÓGICA",
+    "shortName": "IPS Tech",
+    "packageId": "co.ipstecnologica.catalogo",
+    "versionName": "2.5.0",
+    "versionCode": 25,
+    "apkAvailable": false,
+    "apkDownloadUrl": null,
+    "apkFileName": null,
+    "apkFileSizeMB": null,
+    "apkUpdatedAt": null,
+    "releaseNotes": "Catálogo oficial con visualización rápida de productos tecnológicos, precios actualizados y promociones con cuenta regresiva en tiempo real.",
+    "showUpdateBanner": false,
+    "updatedAt": "2026-10-29T20:29:11.412Z",
+    "updatedBy": "jeffervr@gmail.com",
+    "version": "2.5.0",
+    "apkSizeMB": "0.00 MB",
+    "apkUploadedAt": "2026-10-29T20:27:36.102Z"
+  },
+  "technicalServices": [
+    {
+      "id": "SRV-2026-0001",
+      "customerName": "Carlos Mendoza",
+      "customerDocument": "80.123.456",
+      "customerPhone": "+57 300 123 4567",
+      "customerEmail": "cliente@ejemplo.com",
+      "city": "Bogotá D.C.",
+      "clientType": "Empresa",
+      "serviceType": "Mantenimiento de computadores",
+      "equipmentType": "Portátil Workstation",
+      "brandModel": "ASUS ProArt Studiobook 16 OLED",
+      "problemDescription": "Mantenimiento preventivo anual, limpieza de sistema térmico, cambio de pasta térmica de alto rendimiento y verificación de SSD NVMe.",
+      "modality": "En sede",
+      "preferredDate": "2026-10-31",
+      "preferredTime": "10:00",
+      "durationMinutes": 60,
+      "address": "Carrera 15 # 85-30, Oficina 402, Bogotá D.C.",
+      "initialPhotos": [],
+      "beforePhotos": [],
+      "afterPhotos": [],
+      "status": "Cita confirmada",
+      "assignedTechnicianId": "usr_5",
+      "assignedTechnicianName": "Ing. Andrés Camilo Rojas (Técnico Especialista)",
+      "assignedTechnicianEmail": "tecnico@ipstecnologica.com.co",
+      "diagnosis": "Equipo operativo con acumulación moderada de polvo en disipadores duales.",
+      "activitiesPerformed": "Recepción en laboratorio e inspección inicial de hardware.",
+      "spareParts": [
+        {
+          "id": "sp_1",
+          "name": "Pasta Térmica Arctic MX-6 Industrial",
+          "reference": "INS-TERM-01",
+          "quantity": 1,
+          "unitCostCOP": 45000,
+          "subtotalCOP": 45000
+        }
+      ],
+      "laborCostCOP": 120000,
+      "partsCostCOP": 45000,
+      "totalCostCOP": 165000,
+      "createdAt": "2026-10-29T13:49:33.026Z",
+      "updatedAt": "2026-10-30T13:49:33.026Z",
+      "updatedBy": "jeffervr@gmail.com"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "CIT-2026-0001",
+      "ticketId": "SRV-2026-0001",
+      "customerName": "Carlos Mendoza",
+      "customerPhone": "+57 300 123 4567",
+      "customerEmail": "cliente@ejemplo.com",
+      "serviceType": "Mantenimiento de computadores",
+      "problemDescription": "Mantenimiento preventivo anual y optimización térmica.",
+      "date": "2026-10-31",
+      "time": "10:00",
+      "durationMinutes": 60,
+      "modality": "En sede",
+      "address": "Carrera 15 # 85-30, Oficina 402, Bogotá D.C.",
+      "technicianId": "usr_5",
+      "technicianName": "Ing. Andrés Camilo Rojas (Técnico Especialista)",
+      "technicianEmail": "tecnico@ipstecnologica.com.co",
+      "status": "Confirmada",
+      "createdAt": "2026-10-29T13:49:33.026Z",
+      "updatedAt": "2026-10-30T13:49:33.026Z",
+      "updatedBy": "jeffervr@gmail.com"
+    }
+  ],
+  "warranties": [
+    {
+      "id": "GAR-2026-001",
+      "orderId": "PED-2026-001",
+      "productId": "prod_1",
+      "productReference": "IPS-NB-001",
+      "productName": "Portátil Workstation Pro 16\" OLED Core i9",
+      "customerEmail": "cliente@ejemplo.com",
+      "customerName": "Carlos Mendoza",
+      "serialNumber": "SN-IPS-PROART-994821",
+      "purchaseDate": "2026-10-27T13:49:33.026Z",
+      "expirationDate": "2027-10-27T13:49:33.026Z",
+      "monthsCoverage": 12,
+      "status": "Vigente",
+      "notes": "Garantía corporativa directa con laboratorio IPS TECNOLÓGICA por 12 meses.",
+      "createdAt": "2026-10-27T13:49:33.026Z",
+      "updatedAt": "2026-10-30T13:49:33.026Z"
+    }
+  ],
+  "inventoryMovements": [
+    {
+      "id": "mov_1793392362853_6jlo",
+      "productId": "prod_1793392275235_45vz",
+      "productReference": "IPS-E2E-999",
+      "productName": "Workstation IPS Titanium Z9 E2E",
+      "type": "ELIMINACION_LOGICA",
+      "quantity": 15,
+      "previousStock": 15,
+      "newStock": 0,
+      "reason": "Producto enviado a la papelera de recuperación",
+      "createdBy": "jeffervr@gmail.com",
+      "createdAt": "2026-10-30T20:32:42.853Z"
+    },
+    {
+      "id": "mov_1793392275235_ijpe",
+      "productId": "prod_1793392275235_45vz",
+      "productReference": "IPS-E2E-999",
+      "productName": "Workstation IPS Titanium Z9 E2E",
+      "type": "ENTRADA",
+      "quantity": 15,
+      "previousStock": 0,
+      "newStock": 15,
+      "reason": "Ingreso inicial de producto al inventario",
+      "createdBy": "jeffervr@gmail.com",
+      "createdAt": "2026-10-30T20:31:15.235Z"
+    }
+  ],
+  "whatsappConversations": [
+    {
+      "id": "wa_conv_1793395214523_60h",
+      "phone": "573109998877",
+      "clientPhone": "573109998877",
+      "customerPhone": "573109998877",
+      "clientName": "Cliente Webhook Real",
+      "customerName": "Cliente Webhook Real",
+      "status": "En atención por bot",
+      "botEnabled": true,
+      "unreadCount": 0,
+      "lastMessage": "Hola, ¿tienen monitores disponibles?",
+      "lastMessageText": "¡Hola! Es un gusto saludarte de parte de *IPS TECNOLÓGICA*. \n\nSí, actualmente contamos con los siguientes monitores de alta gama en nuestro ",
+      "lastMessagePreview": "¡Hola! Es un gusto saludarte de parte de *IPS TECNOLÓGICA*. \n\nSí, actualmente contamos con los siguientes monitores de alta gama en nuestro ",
+      "lastMessageAt": "2026-10-30T21:20:18.679Z",
+      "createdAt": "2026-10-30T21:20:14.523Z",
+      "updatedAt": "2026-10-30T21:20:18.679Z",
+      "messages": [
+        {
+          "id": "wamsg_1793395214523_inrk",
+          "sender": "client",
+          "senderName": "Cliente Webhook Real",
+          "text": "Hola, ¿tienen monitores disponibles?",
+          "timestamp": "2026-10-30T21:20:14.523Z"
+        },
+        {
+          "id": "wamsg_1793395218679_424x",
+          "sender": "gemini",
+          "senderName": "Asistente Gemini IPS",
+          "text": "¡Hola! Es un gusto saludarte de parte de *IPS TECNOLÓGICA*. \n\nSí, actualmente contamos con los siguientes monitores de alta gama en nuestro inventario:\n\n*   *Monitor Curvo Profesional 34\" WQHD 144Hz* (LG UltraWide Pro)\n    *   *Precio:* $3.190.000 (IVA incluido)\n    *   *Descripción:* Panel IPS UltraWide 3440x1440, USB-C con Power Delivery 90W, Hub KVM integrado y altavoces estéreo. Ideal para productividad y multitarea.\n\n*   *Monitor Gráfico Calibrado 27\" 4K UHD HDR* (BenQ PD DesignVue)\n    *   *Precio:* $2.650.000 (IVA incluido)\n    *   *Descripción:* Resolución 3840x2160, 100% Rec.709 y 98% DCI-P3, Delta E < 2 certificado de fábrica. Perfecto para diseño gráfico y edición de video profesional.\n\n*Información adicional:*\n*   *Garantía:* De 12 a 36 meses directamente con el fabricante.\n*   *Ubicación:* Carrera 15 # 85-30, Edificio Tecnológico, Oficina 402, Bogotá D.C.\n*   *Envíos:* Realizamos envíos asegurados a todo el territorio nacional.\n\n¿Te gustaría que te ayudemos con la cotización de alguno de estos modelos o requieres asesoría técnica adicional?",
+          "timestamp": "2026-10-30T21:20:18.679Z",
+          "intent": "consulta_catalogo_precios"
+        }
+      ]
+    },
+    {
+      "id": "wa_conv_1793394107846_zlo",
+      "phone": "+573105559988",
+      "clientPhone": "+573105559988",
+      "customerPhone": "+573105559988",
+      "clientName": "Cliente Prueba Fase 11",
+      "customerName": "Cliente Prueba Fase 11",
+      "status": "En atención por bot",
+      "botEnabled": true,
+      "unreadCount": 0,
+      "lastMessage": "Hola, ¿qué portátiles tienen disponibles y cuál es el estado de mi orden SRV-2026-0002?",
+      "lastMessageText": "Hola, te informamos el estado oficial de tu Orden de Servicio *SRV-2026-0002* en *IPS TECNOLÓGICA*:\n\n• *Servicio:* Mantenimiento preventivo ",
+      "lastMessagePreview": "Hola, te informamos el estado oficial de tu Orden de Servicio *SRV-2026-0002* en *IPS TECNOLÓGICA*:\n\n• *Servicio:* Mantenimiento preventivo ",
+      "lastMessageAt": "2026-10-30T21:02:00.360Z",
+      "createdAt": "2026-10-30T21:01:47.846Z",
+      "updatedAt": "2026-10-30T21:02:00.360Z",
+      "messages": [
+        {
+          "id": "wamsg_1793394107846_y5vo",
+          "sender": "client",
+          "senderName": "Cliente Prueba Fase 11",
+          "text": "Hola, ¿qué portátiles tienen disponibles y cuál es el estado de mi orden SRV-2026-0002?",
+          "timestamp": "2026-10-30T21:01:47.846Z"
+        },
+        {
+          "id": "wamsg_1793394120360_pbqu",
+          "sender": "gemini",
+          "senderName": "Asistente Gemini IPS",
+          "text": "Hola, te informamos el estado oficial de tu Orden de Servicio *SRV-2026-0002* en *IPS TECNOLÓGICA*:\n\n• *Servicio:* Mantenimiento preventivo de computadores\n• *Equipo:* Lenovo ThinkPad X1\n• *Estado actual:* Cita confirmada\n• *Técnico asignado:* Ing. Diego Fernando Gómez (Técnico Redes y Servidores)\n• *Cita programada:* 2026-11-22 11:00\n• *Diagnóstico:* En revisión técnica\n• *Valor total:* $ 0",
+          "timestamp": "2026-10-30T21:02:00.360Z",
+          "intent": "consulta_orden_servicio"
+        }
+      ]
+    },
+    {
+      "id": "wa_conv_1793392410675_83i",
+      "phone": "+57 315 222 3344",
+      "customerPhone": "+57 315 222 3344",
+      "clientName": "Carlos Cliente Prueba",
+      "customerName": "Carlos Cliente Prueba",
+      "status": "En atención por bot",
+      "botEnabled": true,
+      "unreadCount": 0,
+      "lastMessageText": "¡Hola, *Carlos*! Es un gusto saludarte. Con gusto te brindo la información solicitada sobre nuestros productos y el estado de tu servicio té",
+      "lastMessagePreview": "¡Hola, *Carlos*! Es un gusto saludarte. Con gusto te brindo la información solicitada sobre nuestros productos y el estado de tu servicio té",
+      "lastMessageAt": "2026-10-30T20:34:54.164Z",
+      "createdAt": "2026-10-30T20:33:30.675Z",
+      "updatedAt": "2026-10-30T20:34:54.164Z",
+      "messages": [
+        {
+          "id": "wamsg_1793392410675_d22p",
+          "sender": "client",
+          "senderName": "Carlos Cliente Prueba",
+          "text": "Hola, ¿qué precio tiene el Workstation IPS Titanium Z9 E2E ACTUALIZADO y cuál es el estado de mi orden SRV-2026-0002?",
+          "timestamp": "2026-10-30T20:33:30.675Z"
+        },
+        {
+          "id": "wamsg_1793392489531_wgmn",
+          "sender": "client",
+          "senderName": "Carlos Cliente Prueba",
+          "text": "Hola, ¿qué precio tiene el Workstation IPS Titanium Z9 E2E ACTUALIZADO y cuál es el estado de mi orden SRV-2026-0002?",
+          "timestamp": "2026-10-30T20:34:49.531Z"
+        },
+        {
+          "id": "wamsg_1793392494164_p0lw",
+          "sender": "gemini",
+          "senderName": "Asistente Gemini IPS",
+          "text": "¡Hola, *Carlos*! Es un gusto saludarte. Con gusto te brindo la información solicitada sobre nuestros productos y el estado de tu servicio técnico:\n\n*Información del Producto:*\n* *Producto:* Workstation IPS Titanium Z9 E2E ACTUALIZADO\n* *Precio:* $ 6.490.000 (IVA incluido)\n* *Disponibilidad:* 22 unidades en stock.\n* *Descripción:* Equipo de alto rendimiento con configuración actualizada y persistida en servidor.\n\n*Estado de tu Orden de Servicio (SRV-2026-0002):*\n* *Equipo:* Lenovo ThinkPad X1 Carbon\n* *Servicio:* Mantenimiento preventivo\n* *Estado actual:* *En reparación*\n* *Técnico encargado:* Ing. Diego Fernando Gómez\n* *Fecha programada:* 20 de noviembre de 2026 a las 10:00 AM\n* *Costo total:* $ 240.000\n\nSi necesitas más detalles o deseas adquirir la Workstation, quedo atento a tus indicaciones. \n\n*IPS TECNOLÓGICA*\n*WhatsApp:* +57 310 894 7231\n*Dirección:* Carrera 15 # 85-30, Of. 402, Bogotá.",
+          "timestamp": "2026-10-30T20:34:54.164Z",
+          "intent": "consulta_orden_servicio"
+        }
+      ]
+    },
+    {
+      "id": "wa_conv_1",
+      "customerPhone": "+57 300 123 4567",
+      "customerName": "Carlos Mendoza",
+      "customerEmail": "cliente@ejemplo.com",
+      "status": "en_atencion_bot",
+      "botEnabled": true,
+      "lastMessageAt": "2026-10-30T13:49:33.026Z",
+      "lastMessagePreview": "Consultaré nuestro catálogo de IPS TECNOLÓGICA para mostrarte los equipos disponibles.",
+      "unreadCount": 0,
+      "createdAt": "2026-10-30T12:49:33.026Z",
+      "messages": [
+        {
+          "id": "msg_1",
+          "sender": "customer",
+          "senderName": "Carlos Mendoza",
+          "text": "Hola, ¿tienen computadores portátiles disponibles y servicio de mantenimiento?",
+          "timestamp": "2026-10-30T12:49:33.026Z",
+          "intentDetected": "consulta_catalogo_y_soporte"
+        },
+        {
+          "id": "msg_2",
+          "sender": "bot",
+          "senderName": "Chatbot Gemini · IPS TECNOLÓGICA",
+          "text": "¡Hola Carlos! 👋 Claro que sí. En *IPS TECNOLÓGICA* contamos con el *Portátil Workstation Pro 16\" OLED Core i9* (Ref: IPS-NB-001) y el *Ultrabook Empresarial Carbon X1* (Ref: IPS-NB-002) con disponibilidad inmediata. También ofrecemos servicio de *Mantenimiento de computadores* en sede o a domicilio. ¿Deseas conocer el precio actualizado o agendar una cita técnica?",
+          "timestamp": "2026-10-30T12:49:43.026Z",
+          "intentDetected": "respuesta_catalogo_soporte",
+          "usedGemini": true
+        }
+      ]
+    }
+  ],
+  "whatsappConfig": {
+    "businessPhone": "+57 310 894 7231",
+    "chatbotActive": true,
+    "botActiveGlobal": true,
+    "geminiEnabled": true,
+    "geminiModel": "gemini-3.8-flash",
+    "welcomeMessage": "¡Hola! 👋 Bienvenido a *IPS TECNOLÓGICA*. Soy tu asistente inteligente con tecnología Gemini. Puedo ayudarte a consultar nuestro catálogo, precios actualizados, promociones vigentes, garantías o agendar soporte técnico especializado.",
+    "systemPrompt": "Eres el asistente virtual oficial de IPS TECNOLÓGICA en Colombia. Responde siempre con amabilidad, precisión técnica y basándote exclusivamente en los productos, precios en COP, promociones activas, servicios técnicos y políticas reales de la base de datos. Nunca inventes precios ni disponibilidad.",
+    "customSystemPrompt": "Eres el asistente virtual oficial de IPS TECNOLÓGICA en Colombia. Responde siempre con amabilidad, precisión técnica y basándote exclusivamente en los productos, precios en COP, promociones activas, servicios técnicos y políticas reales de la base de datos. Nunca inventes precios ni disponibilidad.",
+    "autoReplySchedules": "Lunes a Viernes de 8:00 a.m. a 6:00 p.m. y Sábados de 8:00 a.m. a 2:00 p.m. (Hora Colombia).",
+    "businessHoursText": "Lunes a Viernes de 8:00 a.m. a 6:00 p.m. y Sábados de 9:00 a.m. a 2:00 p.m. (Hora Colombia).",
+    "paymentMethodsText": "Transferencia bancaria Bancolombia / Davivienda, PSE, Nequi, Daviplata, tarjetas de crédito/débito y pago contra entrega en Bogotá D.C.",
+    "shippingPolicyText": "Envíos asegurados a todo el territorio nacional en Colombia (24 a 72 horas hábiles) a través de transportadoras certificadas. Entregas el mismo día en Bogotá D.C.",
+    "warrantyPolicyText": "Todos nuestros equipos cuentan con garantía legal y directa de 12 a 36 meses por defectos de fábrica, respaldada por el laboratorio técnico de IPS TECNOLÓGICA.",
+    "webhookVerifyToken": "ips_tecnologica_webhook_2026",
+    "phoneNumberId": "",
+    "metaPhoneNumberId": "",
+    "metaBusinessAccountId": "",
+    "metaWebhookVerifyToken": "ips_tecnologica_webhook_2026",
+    "metaCloudConfigured": false,
+    "updatedAt": "2026-10-30T13:49:33.026Z",
+    "updatedBy": "jeffervr@gmail.com"
+  },
+  "backups": [
+    {
+      "id": "bkp_1793395214418_t6rt",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-20-14-416Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-20-14-416Z.json",
+      "name": "Respaldo previo a prueba WhatsApp Vault",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T21:20:14.416Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 98860,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 2,
+      "filesIncluded": [
+        "IPS-F11-2026_1793394107738_test_foto_png.png",
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo previo a prueba WhatsApp Vault"
+    },
+    {
+      "id": "bkp_1793394120371_1ia2",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-02-00-370Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-02-00-370Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T21:02:00.370Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 98565,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 2,
+        "appointments": 2,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 2,
+        "appointments": 2,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 2,
+      "filesIncluded": [
+        "IPS-F11-2026_1793394107738_test_foto_png.png",
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json)"
+    },
+    {
+      "id": "bkp_1793394107759_c55b",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-758Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-758Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T21:01:47.758Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 93314,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 5
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 5
+      },
+      "recordCount": 29,
+      "filesIncludedCount": 2,
+      "filesIncluded": [
+        "IPS-F11-2026_1793394107738_test_foto_png.png",
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json)"
+    },
+    {
+      "id": "bkp_1793394107751_ev4l",
+      "fileName": "IPS_RESPALDO_SOLO_PRODUCTOS_2026-10-30T21-01-47-750Z.json",
+      "localFileName": "IPS_RESPALDO_SOLO_PRODUCTOS_2026-10-30T21-01-47-750Z.json",
+      "name": "Respaldo granular solo productos",
+      "type": "por_modulo",
+      "moduleScope": "solo_productos",
+      "createdAt": "2026-10-30T21:01:47.750Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 91770,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 5
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 5
+      },
+      "recordCount": 29,
+      "filesIncludedCount": 2,
+      "filesIncluded": [
+        "IPS-F11-2026_1793394107738_test_foto_png.png",
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo granular solo productos"
+    },
+    {
+      "id": "bkp_1793394107617_ve4m",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T21-01-47-616Z.json",
+      "name": "Respaldo de protección previo a las 20 pruebas de FASE 11",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T21:01:47.616Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 84815,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo de protección previo a las 20 pruebas de FASE 11"
+    },
+    {
+      "id": "bkp_1793392494761_7akb",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-54-760Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-54-760Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-450Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:34:54.760Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 91502,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 3,
+        "appointments": 3,
+        "warranties": 1,
+        "inventoryMovements": 7
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 3,
+        "appointments": 3,
+        "warranties": 1,
+        "inventoryMovements": 7
+      },
+      "recordCount": 34,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-450Z.json)"
+    },
+    {
+      "id": "bkp_1793392489509_50xp",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-508Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-508Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-498Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:34:49.508Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 78269,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-498Z.json)"
+    },
+    {
+      "id": "bkp_1793392489499_6ca7",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-498Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-498Z.json",
+      "name": "Respaldo Prueba 5",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:34:49.498Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 75868,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Prueba 5"
+    },
+    {
+      "id": "bkp_1793392489451_52vj",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-450Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-450Z.json",
+      "name": "Snapshot Pre-Pruebas E2E",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:34:49.450Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 66447,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Snapshot Pre-Pruebas E2E"
+    },
+    {
+      "id": "bkp_1793392489437_xyw4",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-435Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-34-49-435Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:34:49.435Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 70560,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 2,
+        "appointments": 2,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 2,
+        "appointments": 2,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 32,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json)"
+    },
+    {
+      "id": "bkp_1793392410659_2oym",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-657Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-657Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-649Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:33:30.657Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 62878,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-649Z.json)"
+    },
+    {
+      "id": "bkp_1793392410649_5ezs",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-649Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-649Z.json",
+      "name": "Respaldo Prueba 5",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:33:30.649Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 60477,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Prueba 5"
+    },
+    {
+      "id": "bkp_1793392410619_n2zj",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-618Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-618Z.json",
+      "name": "Snapshot Pre-Pruebas E2E",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:33:30.618Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 51056,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Snapshot Pre-Pruebas E2E"
+    },
+    {
+      "id": "bkp_1793392410613_2lwd",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-612Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-33-30-612Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:33:30.612Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 55169,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 2,
+        "appointments": 2,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 2,
+        "appointments": 2,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 32,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json)"
+    },
+    {
+      "id": "bkp_1793392362895_be36",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-895Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-895Z.json",
+      "name": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-888Z.json)",
+      "type": "pre_restauracion",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:32:42.895Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 48610,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Automático Pre-Restauración (antes de aplicar IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-888Z.json)"
+    },
+    {
+      "id": "bkp_1793392362888_qboa",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-888Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-888Z.json",
+      "name": "Respaldo Prueba 5",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:32:42.888Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 46209,
+      "recordCounts": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "countsSummary": {
+        "products": 13,
+        "users": 12,
+        "orders": 2,
+        "promotions": 1,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 6
+      },
+      "recordCount": 30,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo Prueba 5"
+    },
+    {
+      "id": "bkp_1793392362858_jf3c",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-32-42-858Z.json",
+      "name": "Snapshot Pre-Pruebas E2E",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:32:42.858Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 38559,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 2
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Snapshot Pre-Pruebas E2E"
+    },
+    {
+      "id": "bkp_1793392275230_wbvb",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-31-15-229Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-31-15-229Z.json",
+      "name": "Snapshot Pre-Pruebas E2E",
+      "type": "manual",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:31:15.229Z",
+      "createdBy": "jeffervr@gmail.com",
+      "sizeBytes": 32746,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 0
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 0
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Snapshot Pre-Pruebas E2E"
+    },
+    {
+      "id": "bkp_1793392100440_4gss",
+      "fileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-28-20-440Z.json",
+      "localFileName": "IPS_RESPALDO_COMPLETO_2026-10-30T20-28-20-440Z.json",
+      "name": "Respaldo diario automático del servidor (2026-10-30)",
+      "type": "automatico_diario",
+      "moduleScope": "completo",
+      "createdAt": "2026-10-30T20:28:20.440Z",
+      "createdBy": "Sistema Automático",
+      "sizeBytes": 31228,
+      "recordCounts": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 0
+      },
+      "countsSummary": {
+        "products": 12,
+        "users": 12,
+        "orders": 2,
+        "promotions": 0,
+        "technicalServices": 1,
+        "appointments": 1,
+        "warranties": 1,
+        "inventoryMovements": 0
+      },
+      "recordCount": 28,
+      "filesIncludedCount": 1,
+      "filesIncluded": [
+        "ips_official_logo.svg"
+      ],
+      "status": "Completado",
+      "result": "EXITOSO",
+      "notes": "Respaldo diario automático del servidor (2026-10-30)"
+    }
+  ],
+  "trash": [],
+  "syncQueue": [
+    {
+      "id": "sync_1793394107841_ldho",
+      "entity": "Servicios técnicos",
+      "action": "CREAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Cliente Prueba Fase 11\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Cliente Prueba Fase 11\"}",
+      "createdAt": "2026-10-30T21:01:47.841Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T21:01:47.842Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793394107724_b7lx",
+      "entity": "Productos",
+      "action": "ELIMINAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793394107625_zgwm\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793394107625_zgwm\"}",
+      "createdAt": "2026-10-30T21:01:47.724Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T21:01:47.725Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793394107713_13x9",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793394107625_zgwm\",\"reference\":\"IPS-F11-2026\",\"name\":\"Servidor Rack Enterprise IPS-2026 Editado\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793394107625_zgwm\",\"reference\":\"IPS-F11-2026\",\"name\":\"Servidor Rack Enterprise IPS-2026 Editado\"}",
+      "createdAt": "2026-10-30T21:01:47.713Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T21:01:47.714Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793394107634_hclt",
+      "entity": "Productos",
+      "action": "CREAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793394107625_zgwm\",\"reference\":\"IPS-F11-2026\",\"name\":\"Servidor Rack Enterprise IPS-2026\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793394107625_zgwm\",\"reference\":\"IPS-F11-2026\",\"name\":\"Servidor Rack Enterprise IPS-2026\"}",
+      "createdAt": "2026-10-30T21:01:47.634Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T21:01:47.635Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392494236_u88r",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:34:54.236Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.745Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392494225_fzdw",
+      "entity": "Servicios técnicos",
+      "action": "CREAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0003\",\"clientName\":\"Otro Cliente Privado\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0003\",\"clientName\":\"Otro Cliente Privado\"}",
+      "createdAt": "2026-10-30T20:34:54.225Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.226Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489527_132x",
+      "entity": "Servicios técnicos",
+      "action": "ACTUALIZAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"status\":\"En reparación\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"status\":\"En reparación\"}",
+      "createdAt": "2026-10-30T20:34:49.527Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:49.528Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489520_e5ae",
+      "entity": "Servicios técnicos",
+      "action": "CREAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Carlos Cliente Prueba\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Carlos Cliente Prueba\"}",
+      "createdAt": "2026-10-30T20:34:49.520Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:49.521Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489504_noqp",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:34:49.504Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:49.505Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489495_j0xc",
+      "entity": "Promociones",
+      "action": "ACTUALIZAR_PROMOCION",
+      "payloadSummary": "{\"id\":\"promo_1793392489487_677l\",\"name\":\"Oferta Relámpago E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Promociones",
+      "detail": "{\"id\":\"promo_1793392489487_677l\",\"name\":\"Oferta Relámpago E2E\"}",
+      "createdAt": "2026-10-30T20:34:49.495Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.747Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489489_inkj",
+      "entity": "Promociones",
+      "action": "CREAR_PROMOCION",
+      "payloadSummary": "{\"id\":\"promo_1793392489487_677l\",\"name\":\"Oferta Relámpago E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Promociones",
+      "detail": "{\"id\":\"promo_1793392489487_677l\",\"name\":\"Oferta Relámpago E2E\"}",
+      "createdAt": "2026-10-30T20:34:49.489Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.747Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489476_htmb",
+      "entity": "Productos",
+      "action": "ELIMINAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392489454_ajr3\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392489454_ajr3\"}",
+      "createdAt": "2026-10-30T20:34:49.476Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:49.477Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489470_f2no",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:34:49.470Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:49.470Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392489461_35sy",
+      "entity": "Productos",
+      "action": "CREAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392489454_ajr3\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "createdAt": "2026-10-30T20:34:49.461Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:49.462Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410672_1hpr",
+      "entity": "Servicios técnicos",
+      "action": "ACTUALIZAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"status\":\"En reparación\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"status\":\"En reparación\"}",
+      "createdAt": "2026-10-30T20:33:30.672Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:33:30.673Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410668_ejjb",
+      "entity": "Servicios técnicos",
+      "action": "CREAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Carlos Cliente Prueba\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Carlos Cliente Prueba\"}",
+      "createdAt": "2026-10-30T20:33:30.668Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:33:30.669Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410654_u0ye",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392410622_47uu\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392410622_47uu\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:33:30.654Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:33:30.655Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410646_62tk",
+      "entity": "Promociones",
+      "action": "ACTUALIZAR_PROMOCION",
+      "payloadSummary": "{\"id\":\"promo_1793392410641_fp3x\",\"name\":\"Oferta Relámpago E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Promociones",
+      "detail": "{\"id\":\"promo_1793392410641_fp3x\",\"name\":\"Oferta Relámpago E2E\"}",
+      "createdAt": "2026-10-30T20:33:30.646Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.748Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410642_ef5z",
+      "entity": "Promociones",
+      "action": "CREAR_PROMOCION",
+      "payloadSummary": "{\"id\":\"promo_1793392410641_fp3x\",\"name\":\"Oferta Relámpago E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Promociones",
+      "detail": "{\"id\":\"promo_1793392410641_fp3x\",\"name\":\"Oferta Relámpago E2E\"}",
+      "createdAt": "2026-10-30T20:33:30.642Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.749Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410634_xcie",
+      "entity": "Productos",
+      "action": "ELIMINAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392410622_47uu\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392410622_47uu\"}",
+      "createdAt": "2026-10-30T20:33:30.634Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:33:30.634Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410629_tvn9",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392410622_47uu\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392410622_47uu\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:33:30.629Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:33:30.630Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392410623_e6rr",
+      "entity": "Productos",
+      "action": "CREAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392410622_47uu\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392410622_47uu\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "createdAt": "2026-10-30T20:33:30.623Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:33:30.624Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362908_q6gx",
+      "entity": "Servicios técnicos",
+      "action": "ACTUALIZAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"status\":\"En reparación\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"status\":\"En reparación\"}",
+      "createdAt": "2026-10-30T20:32:42.908Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.909Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362904_m02l",
+      "entity": "Servicios técnicos",
+      "action": "CREAR_ORDEN_SERVICIO",
+      "payloadSummary": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Carlos Cliente Prueba\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Servicios técnicos",
+      "detail": "{\"ticketNumber\":\"SRV-2026-0002\",\"clientName\":\"Carlos Cliente Prueba\"}",
+      "createdAt": "2026-10-30T20:32:42.904Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.904Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362891_68yd",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392362860_gg8t\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392362860_gg8t\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:32:42.891Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.892Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362885_4v9c",
+      "entity": "Promociones",
+      "action": "ACTUALIZAR_PROMOCION",
+      "payloadSummary": "{\"id\":\"promo_1793392362880_mj4d\",\"name\":\"Oferta Relámpago E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Promociones",
+      "detail": "{\"id\":\"promo_1793392362880_mj4d\",\"name\":\"Oferta Relámpago E2E\"}",
+      "createdAt": "2026-10-30T20:32:42.885Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.749Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362881_41w0",
+      "entity": "Promociones",
+      "action": "CREAR_PROMOCION",
+      "payloadSummary": "{\"id\":\"promo_1793392362880_mj4d\",\"name\":\"Oferta Relámpago E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Promociones",
+      "detail": "{\"id\":\"promo_1793392362880_mj4d\",\"name\":\"Oferta Relámpago E2E\"}",
+      "createdAt": "2026-10-30T20:32:42.881Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:34:54.750Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362870_x4hu",
+      "entity": "Productos",
+      "action": "ELIMINAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392362860_gg8t\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392362860_gg8t\"}",
+      "createdAt": "2026-10-30T20:32:42.870Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.871Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362866_1c6a",
+      "entity": "Productos",
+      "action": "ACTUALIZAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392362860_gg8t\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392362860_gg8t\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E ACTUALIZADO\"}",
+      "createdAt": "2026-10-30T20:32:42.866Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.866Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362861_7dyx",
+      "entity": "Productos",
+      "action": "CREAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392362860_gg8t\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392362860_gg8t\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "createdAt": "2026-10-30T20:32:42.861Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.862Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392362854_mcbu",
+      "entity": "Productos",
+      "action": "ELIMINAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392275235_45vz\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392275235_45vz\"}",
+      "createdAt": "2026-10-30T20:32:42.854Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:32:42.855Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    },
+    {
+      "id": "sync_1793392275243_cbq7",
+      "entity": "Productos",
+      "action": "CREAR_PRODUCTO",
+      "payloadSummary": "{\"id\":\"prod_1793392275235_45vz\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "target": "GOOGLE_SHEETS",
+      "entityType": "Productos",
+      "detail": "{\"id\":\"prod_1793392275235_45vz\",\"reference\":\"IPS-E2E-999\",\"name\":\"Workstation IPS Titanium Z9 E2E\"}",
+      "createdAt": "2026-10-30T20:31:15.243Z",
+      "createdBy": "Sistema",
+      "lastAttemptAt": "2026-10-30T20:31:15.243Z",
+      "attempts": 0,
+      "status": "Sincronizado"
+    }
+  ],
+  "connectionLogs": [
+    {
+      "id": "clog_1793392494232_vdr8",
+      "service": "Google Sheets",
+      "date": "2026-10-30T20:34:54.232Z",
+      "message": "Modo sin conexión temporal activado",
+      "detail": "Las operaciones nuevas se guardarán en la cola persistente del servidor sin pérdida de datos.",
+      "resolved": false
+    }
+  ],
+  "sessions": [],
+  "resetTokens": []
+}

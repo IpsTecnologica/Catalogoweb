@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "PortalDocument": {
+      "title": "PortalDocument",
+      "description": "Operational persistent record stored by collection and document ID for IPS TECNOLÓGICA CATALOG STUDIO.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique document identifier",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "Logical collection name",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update",
+          "maxLength": 64
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Actor email or system identifier",
+          "maxLength": 128
+        },
+        "payloadJson": {
+          "type": "string",
+          "description": "Serialized entity state",
+          "maxLength": 900000
+        }
+      },
+      "required": ["id", "collectionName", "updatedAt", "updatedBy", "payloadJson"]
+    },
+    "ConnectionTest": {
+      "title": "ConnectionTest",
+      "description": "Health check document for Firestore connectivity validation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "checkedAt": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": ["status", "checkedAt"]
+    }
+  },
+  "firestore": {
+    "/portal_state/{docId}": {
+      "schema": { "$ref": "#/entities/PortalDocument" },
+      "description": "Operational state chunks for products, promotions, users, orders, technical services, appointments, backups, trash, and sync queue."
+    },
+    "/test/{docId}": {
+      "schema": { "$ref": "#/entities/ConnectionTest" },
+      "description": "Connection health check collection."
+    }
+  }
+}

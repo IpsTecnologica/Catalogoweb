@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Pillar 1: Global Default-Deny Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidPortalDocument(data) {
+      return data.keys().hasAll(['id', 'collectionName', 'updatedAt', 'updatedBy', 'payloadJson']) &&
+             data.keys().hasOnly(['id', 'collectionName', 'updatedAt', 'updatedBy', 'payloadJson']) &&
+             data.id is string && data.id.size() >= 1 && data.id.size() <= 128 &&
+             data.collectionName is string && data.collectionName.size() >= 1 && data.collectionName.size() <= 64 &&
+             data.updatedAt is string && data.updatedAt.size() >= 1 && data.updatedAt.size() <= 64 &&
+             data.updatedBy is string && data.updatedBy.size() >= 1 && data.updatedBy.size() <= 128 &&
+             data.payloadJson is string && data.payloadJson.size() >= 2 && data.payloadJson.size() <= 900000;
+    }
+
+    function isValidConnectionTest(data) {
+      return data.keys().hasAll(['status', 'checkedAt']) &&
+             data.keys().hasOnly(['status', 'checkedAt']) &&
+             data.status is string && data.status.size() >= 1 && data.status.size() <= 64 &&
+             data.checkedAt is string && data.checkedAt.size() >= 1 && data.checkedAt.size() <= 64;
+    }
+
+    // Operational Portal State managed by the Express Server
+    match /portal_state/{docId} {
+      allow get: if isValidId(docId);
+      allow list: if resource.data.collectionName is string && resource.data.collectionName.size() <= 64;
+      allow create: if isValidId(docId) &&
+                       isValidPortalDocument(incoming()) &&
+                       incoming().id == docId;
+      allow update: if isValidId(docId) &&
+                       isValidPortalDocument(incoming()) &&
+                       incoming().id == existing().id &&
+                       incoming().collectionName == existing().collectionName &&
+                       incoming().diff(existing()).affectedKeys().hasOnly(['updatedAt', 'updatedBy', 'payloadJson']);
+      allow delete: if false;
+    }
+
+    // Health check endpoint for getDocFromServer connection validation
+    match /test/{docId} {
+      allow get: if isValidId(docId);
+      allow create, update: if isValidId(docId) && isValidConnectionTest(incoming());
+      allow delete, list: if false;
+    }
+  }
+}

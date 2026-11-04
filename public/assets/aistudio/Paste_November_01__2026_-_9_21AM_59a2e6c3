@@ -1,0 +1,972 @@
+# PROMPT MAESTRO DEFINITIVO – IPS TECNOLÓGICA CATALOG STUDIO
+## Sistema empresarial integral, catálogo online, inventario, ventas, soporte técnico, garantías, envíos, automatización y respaldos
+
+Actúa como arquitecto de software, desarrollador full-stack, especialista en bases de datos, seguridad, automatización, diseño UX/UI y sistemas empresariales.
+
+Necesito que revises, actualices y completes mi proyecto existente **IPS TECNOLÓGICA CATALOG STUDIO**.
+
+Quiero un sistema empresarial completo, moderno, profesional y adaptable a computadores, portátiles, tabletas y celulares.
+
+**IMPORTANTE: NO CREAR OTRO PROYECTO DESDE CERO.** Debes trabajar sobre el código actual, conservar los módulos que ya funcionan, corregir los errores y agregar todas las funcionalidades solicitadas.
+
+---
+
+# 1. CONDICIONES GENERALES Y SERVICIOS GRATUITOS
+
+Mi condición es trabajar únicamente con servicios gratuitos que no soliciten tarjeta de crédito ni facturación.
+
+Utilizar:
+
+- Google Drive para almacenar imágenes, documentos, fotografías, PDF y respaldos.
+- Google Sheets para almacenar registros y datos del sistema.
+- Google Calendar para citas y programación de servicios.
+- Google Maps mediante enlaces gratuitos para mostrar direcciones y rutas.
+- Google Apps Script para conectar los servicios anteriores, dentro de sus cuotas gratuitas.
+
+No utilizar:
+
+- Firebase.
+- Firebase Authentication.
+- Firestore.
+- Firebase Hosting.
+- Google Cloud.
+- Cloud Run.
+- Cloud Functions.
+- WhatsApp Business API.
+- Secret Manager.
+- Servicios que exijan tarjeta de crédito.
+- Pruebas gratuitas que requieran registrar una tarjeta.
+
+No activar facturación ni servicios de pago.
+
+Si una función no puede ejecutarse con estas herramientas gratuitas, debes informarlo y ofrecer una alternativa gratuita. No simular que una integración funciona si no está conectada realmente.
+
+La aplicación debe tener un sistema de autenticación y permisos seguro. No guardar contraseñas en texto plano ni permitir que Google Sheets exponga información privada. Si no existe una alternativa gratuita y segura para una función, explicar la limitación antes de implementarla.
+
+# 2. IDENTIDAD CORPORATIVA Y CONFIGURACIÓN EMPRESARIAL
+
+Crear un módulo llamado **IDENTIDAD CORPORATIVA Y CONFIGURACIÓN EMPRESARIAL**.
+
+El administrador podrá modificar:
+
+- Nombre de la empresa.
+- Logo principal y logos alternativos.
+- NIT.
+- Dirección.
+- Ciudad.
+- Teléfonos.
+- WhatsApp.
+- Correo electrónico.
+- Página web.
+- Redes sociales.
+- Colores corporativos.
+- Tipografía.
+- Fondos.
+- Encabezados.
+- Botones.
+- Pie de página.
+- Imágenes institucionales.
+- Datos comerciales.
+- Información de contacto.
+
+Los cambios deben reflejarse automáticamente en:
+
+- Página web.
+- Catálogo online.
+- Catálogos PDF.
+- Cotizaciones.
+- Órdenes de servicio.
+- Garantías.
+- Reportes.
+- Documentos empresariales.
+
+Incluir vista previa antes de publicar.
+
+Guardar configuraciones en Google Sheets y archivos gráficos en Google Drive.
+
+# 3. SISTEMA DE PLANTILLAS Y DISEÑOS POR TEMPORADA
+
+Crear un generador profesional de plantillas para modificar el diseño del sitio web y de los catálogos PDF.
+
+Plantillas iniciales:
+
+- Corporativa IPS TECNOLÓGICA.
+- Halloween.
+- Navidad.
+- Diciembre y fin de año.
+- Amor y Amistad.
+- Día de la Mujer.
+- Día de la Madre.
+- Día del Padre.
+- Regreso a clases.
+- Black Friday.
+- Cyberlunes.
+- Vacaciones.
+- Año Nuevo.
+- Ofertas especiales.
+
+Cada plantilla permitirá cambiar:
+
+- Colores.
+- Fondos.
+- Banners.
+- Tipografías.
+- Marcos.
+- Tarjetas de productos.
+- Encabezados.
+- Pie de página.
+- Etiquetas de descuentos.
+- Elementos decorativos.
+- Portadas PDF.
+- Diseño de las páginas.
+
+Funciones administrativas:
+
+- Crear.
+- Editar.
+- Duplicar.
+- Eliminar con confirmación.
+- Activar.
+- Desactivar.
+- Programar fechas de inicio y finalización.
+- Vista previa.
+- Seleccionar diseño para la web.
+- Seleccionar diseño para el PDF.
+- Restaurar plantilla corporativa predeterminada.
+
+El cambio de plantilla nunca debe modificar productos, precios, inventario ni fotografías.
+
+# 4. ALMACENAMIENTO PERMANENTE Y CORRECCIÓN DE PÉRDIDA DE DATOS
+
+Este es uno de los módulos más importantes.
+
+Actualmente, cuando cierro sesión y vuelvo a ingresar, algunas modificaciones desaparecen. Debes corregir este problema de raíz.
+
+Implementar almacenamiento permanente utilizando Google Sheets para registros y Google Drive para archivos.
+
+Toda la información debe permanecer guardada después de:
+
+- Cerrar sesión.
+- Iniciar sesión.
+- Actualizar la página.
+- Cerrar el navegador.
+- Reiniciar el computador.
+- Ingresar desde otro dispositivo.
+
+Crear identificadores únicos, fechas de creación, fechas de modificación, control de duplicados, validación de escritura, manejo de errores y registro de cambios.
+
+No utilizar React State, localStorage o sessionStorage como almacenamiento definitivo.
+
+No mostrar confirmación de guardado hasta comprobar que el servidor o Apps Script guardó realmente la información.
+
+# 5. PRODUCTOS, IMÁGENES E INVENTARIO
+
+Crear y corregir la administración de productos.
+
+Permitir:
+
+- Crear productos.
+- Editar productos.
+- Eliminar o desactivar productos.
+- Crear categorías.
+- Agregar referencias.
+- Registrar marca y modelo.
+- Registrar descripción.
+- Registrar costo.
+- Registrar precio de venta.
+- Registrar existencia.
+- Registrar stock mínimo.
+- Registrar números de serie cuando corresponda.
+- Agregar varias fotografías.
+- Asociar promociones.
+- Asociar políticas de garantía.
+- Registrar productos nuevos, repuestos y remanufacturados.
+
+## Almacenamiento de fotografías
+
+Cuando se adjunte una imagen:
+
+1. Subirla a Google Drive.
+2. Guardarla en la carpeta correspondiente.
+3. Obtener el identificador del archivo.
+4. Guardar el identificador y la referencia del producto en Google Sheets.
+5. Recuperarla cuando se consulte el producto.
+6. Mostrarla en administración, inventario, catálogo y PDF.
+
+No almacenar imágenes Base64 dentro de las celdas de Google Sheets.
+
+Crear carpetas:
+
+- Productos.
+- Repuestos.
+- Remanufacturados.
+- Logos.
+- Banners.
+- Plantillas.
+- Documentos.
+- Clientes.
+- Órdenes de servicio.
+- Garantías.
+- Respaldos.
+
+Las imágenes deben conservarse después de cerrar sesión y restaurar una copia de seguridad.
+
+En inventarios mostrar fotografía, nombre, referencia, existencia, precio y estado del producto.
+
+# 6. ADMINISTRACIÓN DE USUARIOS, ROLES Y ACCESOS
+
+Crear un sistema de usuarios y permisos con estos roles:
+
+- Administrador.
+- Supervisor.
+- Técnico.
+- Caja.
+- Cliente.
+
+Administrador principal:
+
+**jeffervr@gmail.com**
+
+Este usuario debe tener control total y protección para impedir que otros usuarios lo eliminen o le retiren su rol principal.
+
+Conservar también las cuentas administrativas existentes:
+
+- soporteipstecnologica@gmail.com
+- soportejeffervr@gmail.com
+- marinaguacheta123@gmail.com
+
+Permitir:
+
+- Crear usuarios.
+- Editar usuarios.
+- Activar y desactivar cuentas.
+- Asignar roles.
+- Configurar permisos.
+- Consultar historial.
+- Recuperar usuarios.
+- Registrar actividad.
+
+Los clientes solo podrán acceder a sus propios datos, pedidos, servicios, documentos y garantías.
+
+No perder usuarios ni permisos al cerrar sesión.
+
+# 7. RESPALDOS Y RECUPERACIÓN DEL SISTEMA
+
+Crear un módulo profesional de **RESPALDOS Y RECUPERACIÓN DEL SISTEMA**.
+
+El respaldo debe incluir:
+
+- Productos.
+- Fotografías.
+- Categorías.
+- Repuestos.
+- Inventario.
+- Remanufacturados.
+- Clientes.
+- Usuarios.
+- Roles.
+- Pedidos.
+- Ventas.
+- Movimientos de caja.
+- Promociones.
+- Códigos de descuento.
+- Plantillas.
+- Configuración empresarial.
+- Banners.
+- Citas.
+- Calendario.
+- Órdenes de servicio.
+- Garantías.
+- Políticas de garantía.
+- Políticas de envío.
+- Documentos.
+- Historial.
+- Configuraciones.
+
+## Funciones
+
+- Respaldo manual.
+- Respaldo automático cuando las cuotas y la plataforma lo permitan.
+- Historial de respaldos.
+- Fecha y hora.
+- Tamaño.
+- Estado.
+- Usuario responsable.
+- Descargar.
+- Restaurar.
+- Verificar integridad.
+- Recuperación selectiva por módulo.
+
+Los respaldos deben guardarse en Google Drive.
+
+## Restauración
+
+Antes de restaurar:
+
+1. Crear un respaldo del estado actual.
+2. Mostrar el contenido del respaldo.
+3. Solicitar confirmación.
+4. Recuperar datos.
+5. Recuperar imágenes.
+6. Recuperar documentos.
+7. Recuperar referencias de Drive.
+8. Verificar que las imágenes cargan.
+9. Generar informe.
+
+Nunca restaurar únicamente los registros de Sheets dejando por fuera las imágenes de Drive.
+
+No borrar información nueva sin advertirlo.
+
+# 8. GESTIÓN DE PEDIDOS DE CLIENTES
+
+Crear un módulo completo para consultar y administrar pedidos.
+
+Permisos:
+
+- Administrador principal: consultar, crear, editar y eliminar o anular.
+- Administrador: actuar según permisos.
+- Supervisor: modificar o eliminar solamente con autorización expresa del administrador principal.
+- Caja: consultar y gestionar operaciones autorizadas.
+- Cliente: consultar sus propios pedidos.
+
+Crear flujo de autorización para supervisores:
+
+1. Solicitar autorización.
+2. Notificar al administrador.
+3. Aprobar o rechazar.
+4. Registrar responsable.
+5. Registrar fecha y hora.
+6. Registrar cambios realizados.
+
+No eliminar pedidos definitivamente sin auditoría. Utilizar anulación o eliminación lógica.
+
+# 9. WHATSAPP INTELIGENTE E INTEGRACIÓN CON GEMINI
+
+Crear un módulo llamado **WHATSAPP INTELIGENTE – IPS TECNOLÓGICA**.
+
+Utilizar únicamente alternativas gratuitas.
+
+WhatsApp:
+
+- Enlaces wa.me.
+- Botón de contacto.
+- Mensajes preparados.
+- Compartir productos.
+- Compartir catálogo.
+- Contactar técnicos.
+- Enviar datos de citas.
+- Enviar datos de pedidos.
+- Enviar información de garantías.
+
+No utilizar WhatsApp Business API ni automatizaciones no oficiales de WhatsApp Web.
+
+Gemini:
+
+- Permitir configurar una clave API cuando exista una opción gratuita elegible.
+- Seleccionar únicamente modelos disponibles en nivel gratuito.
+- Mostrar límites y consumo cuando sea posible.
+- No activar facturación.
+- No utilizar modelos pagos.
+- Proteger las claves en el servidor o entorno seguro, nunca exponerlas en el navegador.
+
+Gemini debe consultar datos reales del catálogo y servicios. No inventar precios, existencias, garantías ni citas confirmadas.
+
+Si una función requiere pago, ofrecer alternativa manual gratuita.
+
+# 10. GESTIÓN DE SOPORTE TÉCNICO Y ÓRDENES SRV
+
+Crear un módulo para administrar servicios técnicos y órdenes.
+
+Permitir:
+
+- Crear órdenes.
+- Editar.
+- Modificar.
+- Asignar técnico.
+- Cambiar fechas.
+- Registrar diagnóstico.
+- Registrar actividades.
+- Agregar repuestos.
+- Adjuntar imágenes.
+- Agregar observaciones.
+- Cambiar estado.
+- Cancelar.
+- Anular.
+- Consultar historial.
+- Generar PDF.
+- Imprimir.
+
+Estados:
+
+- Recibido.
+- Pendiente de diagnóstico.
+- En diagnóstico.
+- En reparación.
+- Esperando repuesto.
+- Terminado.
+- Entregado.
+- Cancelado.
+
+Sincronizar con Google Sheets y Calendar.
+
+No perder información después de cerrar sesión.
+
+# 11. AGENDA TU SERVICIO TÉCNICO
+
+Crear una agenda pública para clientes.
+
+Formulario:
+
+- Nombre.
+- Teléfono.
+- Correo.
+- Ciudad.
+- Dirección.
+- Tipo de cliente.
+- Servicio.
+- Equipo.
+- Marca.
+- Modelo.
+- Descripción del problema.
+- Modalidad.
+- Fecha.
+- Hora.
+- Técnico seleccionado.
+- Fotografías.
+
+## Selección de técnico
+
+Cuando el cliente seleccione un técnico, mostrar únicamente una lista sencilla de técnicos disponibles.
+
+Mostrar:
+
+- Nombre.
+- Especialidad.
+- Disponibilidad.
+
+No mostrar información privada.
+
+## Confirmación
+
+Al confirmar:
+
+1. Guardar solicitud en Sheets.
+2. Registrar evento en Calendar.
+3. Asignar técnico.
+4. Generar número de solicitud.
+5. Preparar mensaje de WhatsApp para el técnico.
+6. Permitir abrir WhatsApp con el mensaje dirigido al número configurado.
+
+La cita solo se considera confirmada cuando se haya guardado correctamente.
+
+No enviar mensajes automáticamente mediante servicios de pago.
+
+# 12. PROMOCIONES PROGRAMADAS, CUENTAS REGRESIVAS Y CÓDIGOS DE DESCUENTO
+
+Crear un módulo completo de promociones.
+
+Permitir:
+
+- Crear.
+- Editar.
+- Programar.
+- Activar.
+- Desactivar.
+- Establecer fechas.
+- Descuentos porcentuales.
+- Descuentos fijos.
+- Asociar productos.
+- Asociar categorías.
+- Cuenta regresiva.
+- Precio original.
+- Precio promocional.
+- Recuperación del precio original al terminar la promoción.
+
+## Generador de códigos
+
+Permitir generar códigos manuales y aleatorios.
+
+Configurar:
+
+- Porcentaje.
+- Valor fijo.
+- Fecha de vencimiento.
+- Cantidad máxima de usos.
+- Productos permitidos.
+- Categorías permitidas.
+- Compra mínima.
+- Estado.
+- Historial de uso.
+
+Ejemplos:
+
+- IPS10.
+- NAVIDAD20.
+- HALLOWEEN15.
+- AMORYAMISTAD.
+- MUJER2027.
+
+Validar cada código antes de aplicar el descuento.
+
+# 13. CATÁLOGO ONLINE Y BANNER DE TRES PROMOCIONES
+
+Agregar un banner principal con tres espacios para imágenes promocionales.
+
+Permitir:
+
+- Subir tres imágenes.
+- Cambiar imágenes.
+- Cambiar orden.
+- Agregar título.
+- Agregar descripción.
+- Agregar botón.
+- Enlazar producto o categoría.
+- Programar vigencia.
+- Activar o desactivar.
+
+Guardar las imágenes en Drive y referencias en Sheets.
+
+Mostrar correctamente en móviles, tablets y computadores.
+
+# 14. GENERADOR PROFESIONAL DE CATÁLOGOS PDF
+
+Crear un generador de catálogos PDF que utilice la plantilla seleccionada por el administrador.
+
+Permitir diseños por temporadas:
+
+- Corporativo.
+- Navidad.
+- Halloween.
+- Amor y Amistad.
+- Día de la Mujer.
+- Día de la Madre.
+- Black Friday.
+- Temporada escolar.
+- Ofertas especiales.
+
+El PDF debe incluir:
+
+- Portada.
+- Logo.
+- Datos empresariales.
+- Fotografías.
+- Nombre de productos.
+- Referencias.
+- Descripciones.
+- Precios.
+- Descuentos.
+- Información de contacto.
+- Pie de página.
+
+Requisitos:
+
+- Fotografías sin deformación.
+- No cortar imágenes.
+- No superponer textos.
+- No cortar precios.
+- Paginación automática.
+- Buena resolución.
+- Diseño profesional.
+- Adaptación al diseño de temporada.
+
+# 15. POLÍTICAS DE GARANTÍAS Y ENVÍOS DE IPS TECNOLÓGICA
+
+Crear un módulo independiente llamado **POLÍTICAS DE GARANTÍAS Y ENVÍOS**.
+
+Este módulo es obligatorio y debe estar conectado con productos, ventas, pedidos, inventario, clientes, órdenes de servicio y catálogo online.
+
+El administrador principal podrá crear, editar, publicar, desactivar, duplicar y actualizar las políticas.
+
+Cada política debe tener:
+
+- Nombre.
+- Tipo.
+- Categoría.
+- Descripción.
+- Condiciones.
+- Cobertura.
+- Exclusiones.
+- Duración.
+- Procedimiento.
+- Documentos adjuntos.
+- Fecha de publicación.
+- Fecha de actualización.
+- Estado.
+- Versión.
+
+## 15.1. GARANTÍA DE PRODUCTOS NUEVOS
+
+Crear políticas independientes para productos nuevos.
+
+Permitir configurar por producto o categoría:
+
+- Tiempo de garantía.
+- Fecha de inicio.
+- Cobertura del fabricante.
+- Cobertura ofrecida por IPS TECNOLÓGICA.
+- Procedimiento para solicitar garantía.
+- Requisitos de compra.
+- Número de serie.
+- Documentos requeridos.
+- Condiciones de recepción.
+- Procedimiento de revisión.
+- Tiempo estimado de atención.
+
+Diferenciar garantía legal y garantía del fabricante cuando corresponda.
+
+## 15.2. GARANTÍA DE REPUESTOS Y COMPONENTES
+
+Crear políticas para repuestos y partes:
+
+- Memorias RAM.
+- Discos SSD y HDD.
+- Pantallas.
+- Baterías.
+- Cargadores.
+- Fuentes de poder.
+- Teclados.
+- Tarjetas electrónicas.
+- Ventiladores.
+- Componentes internos.
+- Otros repuestos.
+
+Permitir configurar individualmente:
+
+- Duración.
+- Cobertura.
+- Condiciones de instalación.
+- Requisitos de diagnóstico.
+- Evidencia de falla.
+- Exclusiones válidas.
+- Procedimiento de reclamación.
+
+Relacionar cada repuesto con su factura, cliente y orden de instalación cuando corresponda.
+
+## 15.3. GARANTÍA DE PRODUCTOS REMANUFACTURADOS O REACONDICIONADOS
+
+Crear políticas especiales para equipos remanufacturados o reacondicionados.
+
+Permitir especificar:
+
+- Estado del producto.
+- Grado estético.
+- Componentes revisados.
+- Componentes reemplazados.
+- Pruebas realizadas.
+- Tiempo de garantía.
+- Cobertura.
+- Condiciones de uso.
+- Exclusiones válidas.
+- Procedimiento de atención.
+
+Mostrar claramente al comprador que el producto es remanufacturado o reacondicionado.
+
+No presentar productos remanufacturados como nuevos.
+
+La duración de la garantía debe ser configurable según el producto y cumplir la normativa colombiana aplicable.
+
+## 15.4. GARANTÍA DE SERVICIOS TÉCNICOS
+
+Crear políticas para servicios técnicos realizados por IPS TECNOLÓGICA:
+
+- Mantenimiento preventivo.
+- Mantenimiento correctivo.
+- Instalación de software.
+- Instalación de hardware.
+- Configuración de equipos.
+- Recuperación de información.
+- Redes.
+- Instalaciones a domicilio.
+- Soporte remoto.
+- Diagnóstico técnico.
+
+Permitir configurar:
+
+- Tiempo de garantía del servicio.
+- Alcance del trabajo realizado.
+- Actividades cubiertas.
+- Condiciones para solicitar revisión.
+- Exclusiones justificadas.
+- Evidencias del servicio.
+- Responsable técnico.
+- Número de orden SRV.
+- Fecha de realización.
+- Fecha de vencimiento.
+
+La garantía del servicio no debe confundirse con la garantía del producto o repuesto instalado.
+
+## 15.5. REGISTRO Y SEGUIMIENTO DE GARANTÍAS
+
+Crear un registro por cada solicitud.
+
+Campos:
+
+- Número de caso.
+- Cliente.
+- Documento de compra.
+- Producto o servicio.
+- Número de serie.
+- Fecha de compra o servicio.
+- Fecha de vencimiento.
+- Tipo de garantía.
+- Descripción de la falla.
+- Fotografías.
+- Documentos.
+- Diagnóstico.
+- Técnico responsable.
+- Solución.
+- Observaciones.
+- Estado.
+
+Estados:
+
+- Vigente.
+- Solicitud recibida.
+- En revisión.
+- En diagnóstico.
+- En trámite con proveedor.
+- Aprobada.
+- Rechazada con justificación.
+- Reparada.
+- Reemplazada.
+- Finalizada.
+
+El cliente podrá consultar sus propios casos y su estado.
+
+## 15.6. POLÍTICAS DE ENVÍO DE PRODUCTOS
+
+Crear un administrador de políticas de envío a nivel nacional.
+
+Permitir configurar:
+
+- Envíos dentro de Cali.
+- Envíos al Valle del Cauca.
+- Envíos a otras ciudades de Colombia.
+- Transportadoras.
+- Costos.
+- Envíos gratuitos.
+- Tiempo estimado.
+- Condiciones de despacho.
+- Restricciones.
+- Seguimiento.
+- Procedimiento de novedades.
+- Responsabilidades de las partes.
+
+Tipos de envío:
+
+- Gratis.
+- Pagado por el cliente.
+- Incluido en el precio.
+- Cotizado según destino.
+
+Configurar las reglas por producto, categoría, ciudad o municipio.
+
+Mostrar claramente si el envío está incluido o si el comprador debe asumirlo.
+
+## 15.7. GESTIÓN Y SEGUIMIENTO DE ENVÍOS
+
+Relacionar cada envío con un pedido.
+
+Guardar:
+
+- Número de pedido.
+- Cliente.
+- Teléfono.
+- Dirección.
+- Ciudad.
+- Departamento.
+- Transportadora.
+- Número de guía.
+- Fecha de despacho.
+- Fecha estimada.
+- Estado.
+- Observaciones.
+- Enlace de seguimiento.
+
+Estados:
+
+- Pendiente de despacho.
+- Preparando pedido.
+- Despachado.
+- En tránsito.
+- En reparto.
+- Entregado.
+- Novedad.
+- Devuelto.
+
+Permitir ingresar manualmente el número de guía y el enlace de seguimiento de la transportadora.
+
+No simular integración automática si no existe.
+
+## 15.8. POLÍTICAS VISIBLES EN EL CATÁLOGO Y EN LA COMPRA
+
+Crear páginas públicas para:
+
+- Garantías de productos nuevos.
+- Garantías de repuestos.
+- Garantías de remanufacturados.
+- Garantías de servicios técnicos.
+- Políticas de envío.
+
+En cada producto mostrar su política aplicable.
+
+En cada pedido mostrar las condiciones de envío y garantía correspondientes.
+
+Permitir descargar las políticas en PDF.
+
+Guardar la versión de la política aplicable al momento de la compra, su fecha y el registro de aceptación cuando corresponda.
+
+Las políticas deben poder actualizarse sin modificar el código.
+
+No inventar condiciones legales, tiempos de garantía ni exclusiones. Configurar los valores por producto o servicio y permitir su revisión antes de publicar.
+
+Cumplir la normativa colombiana de protección al consumidor, especialmente la Ley 1480 de 2011 y sus disposiciones aplicables. Diferenciar la garantía legal, la garantía suplementaria y la garantía ofrecida por fabricantes.
+
+# 16. NOTIFICACIONES DEL ADMINISTRADOR PRINCIPAL
+
+El administrador principal **jeffervr@gmail.com** debe tener un panel de notificaciones.
+
+Informar sobre:
+
+- Nuevos clientes.
+- Nuevos pedidos.
+- Pedidos modificados.
+- Solicitudes de autorización.
+- Nuevas citas.
+- Órdenes de servicio.
+- Garantías solicitadas.
+- Garantías próximas a vencer.
+- Envíos pendientes.
+- Novedades de transportadoras.
+- Promociones por finalizar.
+- Códigos utilizados.
+- Errores de almacenamiento.
+- Errores de sincronización.
+- Respaldos exitosos.
+- Respaldos fallidos.
+- Restauraciones.
+
+Guardar las notificaciones permanentemente.
+
+# 17. SEGURIDAD, PERMISOS Y AUDITORÍA
+
+Implementar control de acceso en todas las operaciones.
+
+Registrar:
+
+- Usuario.
+- Acción.
+- Módulo.
+- Registro afectado.
+- Fecha y hora.
+- Resultado.
+- Autorización cuando corresponda.
+
+No permitir que un usuario cambie su propio rol para obtener permisos superiores.
+
+No permitir que los clientes accedan a datos de otros clientes.
+
+Proteger las credenciales y claves API.
+
+No exponer información privada mediante enlaces públicos de Drive.
+
+# 18. DISEÑO RESPONSIVE Y EXPERIENCIA DE USUARIO
+
+Mantener identidad visual moderna, tecnológica y profesional, con predominio del rojo corporativo de IPS TECNOLÓGICA.
+
+Adaptar la aplicación a:
+
+- Escritorio.
+- Portátil.
+- Tablet.
+- Android.
+- iPhone.
+
+Comprobar resoluciones de 360, 390, 768, 1024 y 1440 píxeles.
+
+Evitar:
+
+- Tablas cortadas.
+- Imágenes deformadas.
+- Botones sin funcionamiento.
+- Menús que no abren.
+- Formularios que no guardan.
+- Textos superpuestos.
+- Pérdida de datos.
+
+# 19. PRUEBAS OBLIGATORIAS
+
+No finalizar el trabajo sin ejecutar pruebas reales.
+
+1. Crear un producto.
+2. Subir varias fotografías.
+3. Cerrar sesión.
+4. Volver a iniciar sesión.
+5. Verificar que producto e imágenes permanecen.
+6. Editar el producto y comprobar el cambio.
+7. Crear un usuario.
+8. Cerrar sesión y comprobar que permanece.
+9. Crear un cliente y un pedido.
+10. Comprobar que no se pierden.
+11. Crear una orden de servicio.
+12. Modificarla y consultar su historial.
+13. Crear una cita y verificar Calendar.
+14. Probar el enlace de Google Maps.
+15. Crear una promoción.
+16. Generar un código de descuento.
+17. Cambiar una plantilla de temporada.
+18. Generar un PDF con la nueva plantilla.
+19. Crear una política de garantía para un producto nuevo.
+20. Crear una política de garantía para un repuesto.
+21. Crear una política para un producto remanufacturado.
+22. Crear una política de garantía para un servicio técnico.
+23. Crear una política de envío.
+24. Asociar la política a un producto.
+25. Consultar las políticas desde el catálogo público.
+26. Crear una solicitud de garantía.
+27. Registrar un envío y su número de guía.
+28. Crear un respaldo en Drive.
+29. Comprobar que contiene imágenes y documentos.
+30. Restaurar una copia de prueba.
+31. Comprobar nuevamente las imágenes.
+32. Verificar los permisos de todos los roles.
+
+No afirmar que una función está terminada sin comprobarla.
+
+# 20. IMPLEMENTACIÓN Y ENTREGA
+
+Trabajar sobre el proyecto existente.
+
+Antes de modificar:
+
+1. Revisar estructura.
+2. Identificar errores.
+3. Hacer copia de seguridad.
+4. Identificar dónde se guardan actualmente los datos.
+5. Crear un plan de cambios.
+6. Proteger la información existente.
+
+Implementar todos los módulos solicitados, sin eliminar funciones existentes.
+
+Si una función no puede completarse por una limitación gratuita, explicar qué falta y ofrecer una alternativa que no requiera tarjeta.
+
+Al finalizar entregar:
+
+- Archivos modificados.
+- Módulos implementados.
+- Módulos pendientes.
+- Resultados de pruebas.
+- Instrucciones para autorizar Drive.
+- Instrucciones para autorizar Sheets.
+- Instrucciones para autorizar Calendar.
+- Procedimiento de respaldos.
+- Procedimiento de restauración.
+- Instrucciones de publicación.
+
+**OBJETIVO FINAL:** IPS TECNOLÓGICA debe disponer de una plataforma empresarial completa con catálogo online, identidad corporativa, plantillas por temporadas, productos, inventario, pedidos, clientes, usuarios, roles, soporte técnico, agenda, promociones, garantías de productos nuevos, repuestos, remanufacturados y servicios técnicos, políticas de envío, catálogos PDF, notificaciones y respaldos completos en Google Drive.
+
+La información y las imágenes deben permanecer guardadas y recuperables. No quiero volver a perder modificaciones al cerrar sesión.
+
+**ADMINISTRADOR PRINCIPAL: jeffervr@gmail.com**
+
+**CONDICIÓN FINAL: NO UTILIZAR SERVICIOS QUE EXIJAN TARJETA DE CRÉDITO NI GENEREN COBROS.**

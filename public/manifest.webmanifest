@@ -1,0 +1,83 @@
+{
+  "id": "/",
+  "name": "IPS TECNOLÓGICA",
+  "short_name": "IPS Tech",
+  "description": "Catálogo oficial de productos tecnológicos, precios actualizados, promociones con cuenta regresiva y pedidos en línea de IPS TECNOLÓGICA.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "theme_color": "#DC2626",
+  "background_color": "#FFFFFF",
+  "prefer_related_applications": false,
+  "categories": ["shopping", "business", "technology"],
+  "lang": "es-CO",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/uploads/ips_official_logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Catálogo de Productos",
+      "short_name": "Catálogo",
+      "description": "Explorar todos los productos tecnológicos disponibles",
+      "url": "/?source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Promociones Activas",
+      "short_name": "Ofertas",
+      "description": "Ver productos con descuento y cuenta regresiva",
+      "url": "/?promo=active&source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

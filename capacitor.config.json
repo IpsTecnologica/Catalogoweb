@@ -1,0 +1,17 @@
+{
+  "appId": "com.ipstecnologica.catalogstudio",
+  "appName": "IPS TECNOLÓGICA",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://ais-pre-ouzmtvpcklhtkaxl7txrq4-235668912498.us-west2.run.app",
+    "cleartext": false,
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false,
+    "backgroundColor": "#FFFFFF"
+  }
+}
