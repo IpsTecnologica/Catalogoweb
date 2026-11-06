@@ -137,7 +137,7 @@ export const AdminSupportManager: React.FC<AdminSupportManagerProps> = ({
       ]);
       setTickets(ticketsRes);
       if (catalogRes.technicians) setTechnicians(catalogRes.technicians);
-      if (workloadRes?.technicians) setWorkloadList(workloadRes.technicians);
+      if (workloadRes?.technicians) setWorkloadList(workloadRes.technicians as any);
       if (selectedTicket) {
         const refreshed = ticketsRes.find(t => t.id === selectedTicket.id);
         if (refreshed) openTicketForEdit(refreshed);
@@ -1155,12 +1155,12 @@ export const AdminSupportManager: React.FC<AdminSupportManagerProps> = ({
                         Historial de Asignaciones y Reprogramaciones ({selectedTicket.scheduleHistory.length}):
                       </span>
                       <div className="max-h-24 overflow-y-auto space-y-1">
-                        {selectedTicket.scheduleHistory.slice(0, 4).map(h => (
-                          <div key={h.id} className="text-slate-600 bg-white px-2.5 py-1 rounded border border-slate-200 flex items-center justify-between">
+                        {selectedTicket.scheduleHistory.slice(0, 4).map((h, i) => (
+                          <div key={h.id || i} className="text-slate-600 bg-white px-2.5 py-1 rounded border border-slate-200 flex items-center justify-between">
                             <span>
                               <strong>{h.action}</strong>: {h.technicianName || 'Sin técnico'} ({h.newDate || 'S/F'} {h.newTime || ''}) {h.reason ? `— ${h.reason}` : ''}
                             </span>
-                            <span className="text-[10px] text-slate-400">{new Date(h.changedAt).toLocaleDateString('es-CO')}</span>
+                            <span className="text-[10px] text-slate-400">{new Date(h.changedAt || h.date).toLocaleDateString('es-CO')}</span>
                           </div>
                         ))}
                       </div>

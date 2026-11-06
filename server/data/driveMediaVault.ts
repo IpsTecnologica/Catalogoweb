@@ -33,6 +33,15 @@ interface MediaVaultStore {
 }
 
 export const OFFICIAL_DRIVE_FOLDERS: DriveOfficialFolderPath[] = [
+  'IPS TECNOLÓGICA / PRODUCTOS',
+  'IPS TECNOLÓGICA / CATEGORÍAS',
+  'IPS TECNOLÓGICA / BANNERS',
+  'IPS TECNOLÓGICA / PLANTILLAS PDF',
+  'IPS TECNOLÓGICA / TEMPORADAS',
+  'IPS TECNOLÓGICA / CATÁLOGOS GENERADOS',
+  'IPS TECNOLÓGICA / CLIENTES',
+  'IPS TECNOLÓGICA / DOCUMENTOS',
+  'IPS TECNOLÓGICA / COPIAS DE SEGURIDAD',
   'IPS TECNOLÓGICA / Productos',
   'IPS TECNOLÓGICA / Productos / Fotografías principales',
   'IPS TECNOLÓGICA / Productos / Fotografías adicionales',
@@ -319,6 +328,29 @@ class DriveMediaVaultManager {
       asset,
       reusedExisting: Boolean(existing)
     });
+  }
+
+  /**
+   * Marks any previous active assets for a product that are no longer in currentImages as archived_previous
+   * so historical images are preserved in the vault and never lost.
+   */
+  public markProductPreviousAssetsArchived(productId: string, currentImages: string[]): void {
+    let changed = false;
+    const activeNames = new Set((currentImages || []).map(img => path.basename(String(img).split('?')[0])));
+    for (const entry of Object.values(this.store.entries)) {
+      if (
+        entry.asset.productId === productId &&
+        entry.asset.status === 'active' &&
+        !activeNames.has(entry.asset.fileName)
+      ) {
+        entry.asset.status = 'archived_previous';
+        entry.asset.lastVerifiedAt = new Date().toISOString();
+        changed = true;
+      }
+    }
+    if (changed) {
+      this.saveVault();
+    }
   }
 
   /**

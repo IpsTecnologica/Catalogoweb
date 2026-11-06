@@ -44,13 +44,20 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
   const { user, notify, canEdit } = useAuth();
   const [seasonalTemplates, setSeasonalTemplates] = useState<SeasonalTemplate[]>([]);
 
-  // Generator Options
+  // Generator Options (Section 11 & 12: 4/6/8/12 products, Carta/A4, Vertical/Horizontal, Index, BackCover)
   const [options, setOptions] = useState<CatalogOptions>({
     title: 'PORTAFOLIO OFICIAL DE TECNOLOGÍA',
     subtitle: 'Hardware Corporativo, Cómputo Profesional y Soluciones TI',
     includeCover: true,
+    includeIndex: false,
+    includeBackCover: true,
     template: 'corporativo',
     categoryFilter: 'Todas',
+    selectionMode: 'all',
+    selectedProductIds: [],
+    productsPerPage: 12,
+    paperFormat: 'letter',
+    orientation: 'portrait',
     onlyActive: true,
     includePrice: true,
     includeReference: true,
@@ -153,17 +160,41 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
     }
   };
 
-  // Filter products according to current settings
+  // Filter products according to current settings (All, Category, or Custom Selection)
   const filteredProducts = products.filter(p => {
     if (options.onlyActive && !p.isActive) return false;
-    if (options.categoryFilter && options.categoryFilter !== 'Todas' && p.category !== options.categoryFilter) {
+    if (options.selectionMode === 'custom') {
+      return (options.selectedProductIds || []).includes(p.id);
+    }
+    if (
+      options.selectionMode === 'category' &&
+      options.categoryFilter &&
+      options.categoryFilter !== 'Todas' &&
+      p.category !== options.categoryFilter
+    ) {
+      return false;
+    }
+    if (
+      (!options.selectionMode || options.selectionMode === 'all') &&
+      options.categoryFilter &&
+      options.categoryFilter !== 'Todas' &&
+      p.category !== options.categoryFilter
+    ) {
       return false;
     }
     return true;
   });
 
+  const activeProductsPerPage = options.productsPerPage || PRODUCTS_PER_PAGE;
+
   // Calculate pages
-  const { interiorPages, totalPages } = calculateCatalogPages(filteredProducts.length, options.includeCover);
+  const { interiorPages, totalPages } = calculateCatalogPages(
+    filteredProducts.length,
+    options.includeCover,
+    activeProductsPerPage,
+    Boolean(options.includeIndex),
+    Boolean(options.includeBackCover)
+  );
 
   // Execute PDF compilation after image verification
   const compileAndDeliverPDF = async (preloaded: PreloadedCatalogAssets, mode: 'download' | 'share-pdf') => {
@@ -187,7 +218,8 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
       }
 
       doc.save(filename);
-      notify(`¡Catálogo PDF (${totalPages} páginas Carta con logo y fotografías) descargado con éxito!`, 'success');
+      const fmtLabel = options.paperFormat === 'a4' ? 'A4' : 'Carta';
+      notify(`¡Catálogo PDF (${totalPages} páginas ${fmtLabel}, ${activeProductsPerPage} prods/pág) descargado con éxito!`, 'success');
     } catch (err: any) {
       console.error('PDF generation error', err);
       notify('Error al compilar el catálogo PDF.', 'error');
@@ -282,10 +314,14 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
 
   // Slice products for the current active preview page
   const isCoverActive = options.includeCover && activePreviewPage === 1;
-  const interiorPageIndex = options.includeCover ? activePreviewPage - 2 : activePreviewPage - 1;
+  const preProductPagesCount = (options.includeCover ? 1 : 0) + (options.includeIndex ? 1 : 0);
+  const interiorPageIndex = Math.max(0, activePreviewPage - preProductPagesCount - 1);
   const currentInteriorProducts =
     !isCoverActive && interiorPageIndex >= 0
-      ? filteredProducts.slice(interiorPageIndex * PRODUCTS_PER_PAGE, (interiorPageIndex + 1) * PRODUCTS_PER_PAGE)
+      ? filteredProducts.slice(
+          interiorPageIndex * activeProductsPerPage,
+          (interiorPageIndex + 1) * activeProductsPerPage
+        )
       : [];
 
   return (
@@ -296,12 +332,12 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-red-600" />
-              <h1 className="text-xl font-bold text-slate-900 tracking-tight">
-                Generador Profesional de Catálogos PDF (Carta 3x4)
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight uppercase">
+                DISEÑADOR DE CATÁLOGOS Y PLANTILLAS PDF
               </h1>
             </div>
             <p className="text-xs text-slate-500 mt-1">
-              Incluye logo empresarial oficial, fotografías verificadas en bóveda permanente, precios promocionales vigentes y numeración de páginas
+              17 ediciones para fechas especiales · 4, 6, 8 o 12 productos por página · Formato Carta o A4 · Vertical u Horizontal · Fotografías permanentes en Google Drive
             </p>
           </div>
 
@@ -652,31 +688,117 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
               />
             </div>
 
-            {/* Category Filter */}
+            {/* Scope / Selection Mode (Catálogo completo, por categoría o selección personalizada) */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Filtrar por Categoría
+                Alcance del Catálogo PDF
               </label>
               <select
-                value={options.categoryFilter}
+                value={options.selectionMode || 'all'}
                 onChange={e => {
-                  setOptions({ ...options, categoryFilter: e.target.value });
+                  const nextMode = e.target.value as 'all' | 'category' | 'custom';
+                  setOptions({
+                    ...options,
+                    selectionMode: nextMode,
+                    categoryFilter: nextMode === 'all' ? 'Todas' : options.categoryFilter,
+                    selectedProductIds:
+                      nextMode === 'custom' && (!options.selectedProductIds || options.selectedProductIds.length === 0)
+                        ? products.map(p => p.id)
+                        : options.selectedProductIds
+                  });
                   setActivePreviewPage(1);
                 }}
-                className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+                className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white font-semibold"
               >
-                <option value="Todas">Todas las categorías ({products.length} productos)</option>
-                {categories.map(c => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
+                <option value="all">Catálogo Completo ({products.length} productos)</option>
+                <option value="category">Catálogo por Categorías</option>
+                <option value="custom">Selección Personalizada de Productos</option>
               </select>
             </div>
 
-            {/* 14 Seasonal Templates Selector for PDF */}
+            {/* Category Filter */}
+            {options.selectionMode !== 'custom' && (
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Filtrar por Categoría
+                </label>
+                <select
+                  value={options.categoryFilter}
+                  onChange={e => {
+                    setOptions({
+                      ...options,
+                      categoryFilter: e.target.value,
+                      selectionMode: e.target.value === 'Todas' ? 'all' : 'category'
+                    });
+                    setActivePreviewPage(1);
+                  }}
+                  className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+                >
+                  <option value="Todas">Todas las categorías ({products.length} productos)</option>
+                  {categories.map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Custom Product Checklist */}
+            {options.selectionMode === 'custom' && (
+              <div className="border border-slate-200 rounded-lg p-2.5 bg-slate-50 space-y-1.5">
+                <div className="flex items-center justify-between text-[11px] font-bold text-slate-700">
+                  <span>Seleccionados: {(options.selectedProductIds || []).length}</span>
+                  <div className="space-x-2">
+                    <button
+                      type="button"
+                      onClick={() => setOptions({ ...options, selectedProductIds: products.map(p => p.id) })}
+                      className="text-red-600 hover:underline cursor-pointer"
+                    >
+                      Todos
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setOptions({ ...options, selectedProductIds: [] })}
+                      className="text-slate-500 hover:underline cursor-pointer"
+                    >
+                      Ninguno
+                    </button>
+                  </div>
+                </div>
+                <div className="max-h-36 overflow-y-auto space-y-1 pr-1">
+                  {products.map(prod => {
+                    const checked = (options.selectedProductIds || []).includes(prod.id);
+                    return (
+                      <label
+                        key={prod.id}
+                        className="flex items-center gap-2 text-[11px] text-slate-700 cursor-pointer hover:bg-white p-1 rounded"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={e => {
+                            const current = options.selectedProductIds || [];
+                            const next = e.target.checked
+                              ? [...current, prod.id]
+                              : current.filter(id => id !== prod.id);
+                            setOptions({ ...options, selectedProductIds: next });
+                            setActivePreviewPage(1);
+                          }}
+                          className="w-3.5 h-3.5 text-red-600 rounded"
+                        />
+                        <span className="font-mono text-red-600 font-bold">{prod.reference}</span>
+                        <span className="truncate">{prod.name}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* 17 Seasonal Templates Selector for PDF */}
             {seasonalTemplates.length > 0 && (
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Plantilla de Temporada (14 Ediciones Oficiales)
+                  Plantilla de Fecha Especial ({seasonalTemplates.length} Ediciones Oficiales)
                 </label>
                 <select
                   value={options.seasonalTemplate?.id || ''}
@@ -701,10 +823,73 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
               </div>
             )}
 
+            {/* PDF Layout Configuration: Products per Page, Format & Orientation */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  Productos / Pág.
+                </label>
+                <select
+                  value={options.productsPerPage || 12}
+                  onChange={e => {
+                    setOptions({
+                      ...options,
+                      productsPerPage: Number(e.target.value) as 4 | 6 | 8 | 12
+                    });
+                    setActivePreviewPage(1);
+                  }}
+                  className="w-full px-2 py-1.5 text-xs border border-slate-300 rounded-lg bg-white font-bold"
+                >
+                  <option value={4}>4 productos</option>
+                  <option value={6}>6 productos</option>
+                  <option value={8}>8 productos</option>
+                  <option value={12}>12 productos</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  Formato Papel
+                </label>
+                <select
+                  value={options.paperFormat || 'letter'}
+                  onChange={e =>
+                    setOptions({
+                      ...options,
+                      paperFormat: e.target.value as 'letter' | 'a4'
+                    })
+                  }
+                  className="w-full px-2 py-1.5 text-xs border border-slate-300 rounded-lg bg-white font-bold"
+                >
+                  <option value="letter">Formato Carta</option>
+                  <option value="a4">Formato A4</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                  Orientación
+                </label>
+                <select
+                  value={options.orientation || 'portrait'}
+                  onChange={e =>
+                    setOptions({
+                      ...options,
+                      orientation: e.target.value as 'portrait' | 'landscape'
+                    })
+                  }
+                  className="w-full px-2 py-1.5 text-xs border border-slate-300 rounded-lg bg-white font-bold"
+                >
+                  <option value="portrait">Vertical</option>
+                  <option value="landscape">Horizontal</option>
+                </select>
+              </div>
+            </div>
+
             {/* Configurable Page Margins (8mm to 16mm) */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Márgenes de Página Carta (Sin desborde ni superposición)
+                Márgenes de Página (Sin desborde ni superposición)
               </label>
               <select
                 value={options.marginMm || 10}
@@ -736,6 +921,32 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
               <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-700">
                 <input
                   type="checkbox"
+                  checked={Boolean(options.includeIndex)}
+                  onChange={e => {
+                    setOptions({ ...options, includeIndex: e.target.checked });
+                    setActivePreviewPage(1);
+                  }}
+                  className="w-3.5 h-3.5 text-red-600 rounded border-slate-300 focus:ring-red-500"
+                />
+                <span className="font-medium">Incluir Índice Opcional de Categorías y Productos</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-700">
+                <input
+                  type="checkbox"
+                  checked={Boolean(options.includeBackCover)}
+                  onChange={e => {
+                    setOptions({ ...options, includeBackCover: e.target.checked });
+                    setActivePreviewPage(1);
+                  }}
+                  className="w-3.5 h-3.5 text-red-600 rounded border-slate-300 focus:ring-red-500"
+                />
+                <span className="font-medium">Incluir Página Final de Contacto Comercial</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-700">
+                <input
+                  type="checkbox"
                   checked={options.onlyActive}
                   onChange={e => {
                     setOptions({ ...options, onlyActive: e.target.checked });
@@ -753,7 +964,7 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
                   onChange={e => setOptions({ ...options, includeTermsFooter: e.target.checked })}
                   className="w-3.5 h-3.5 text-red-600 rounded border-slate-300 focus:ring-red-500"
                 />
-                <span>Incluir cláusula de vigencia de precios en pie de página</span>
+                <span>Incluir cláusula tributaria y vigencia en pie de página</span>
               </label>
             </div>
           </div>
@@ -761,7 +972,8 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
           {/* 3. Page Metrics Summary Card */}
           <div className="bg-slate-900 text-white rounded-xl p-4 space-y-2">
             <span className="text-[10px] font-bold tracking-wider uppercase text-red-400">
-              Métricas de Paginación Carta (8.5 × 11 in)
+              Métricas de Paginación ({options.paperFormat === 'a4' ? 'Formato A4' : 'Formato Carta'} ·{' '}
+              {options.orientation === 'landscape' ? 'Horizontal' : 'Vertical'})
             </span>
             <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
               <div className="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700">
@@ -777,7 +989,9 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
             </div>
             <div className="text-[11px] text-slate-300 space-y-1 pt-1">
               <p>• {options.includeCover ? '1 Portada Corporativa con Logo' : 'Sin portada'}</p>
-              <p>• {interiorPages} Páginas Interiores (Máx. 12 productos 3×4 por página)</p>
+              {options.includeIndex && <p>• 1 Página de Índice por Categorías</p>}
+              <p>• {interiorPages} Páginas de Productos ({activeProductsPerPage} productos por página)</p>
+              {options.includeBackCover && <p>• 1 Página Final de Contacto Comercial</p>}
             </div>
           </div>
         </div>
@@ -969,8 +1183,14 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
                       </div>
                     </div>
 
-                    {/* Exact 3 Columns x 4 Rows Grid (Max 12 products) */}
-                    <div className="grid grid-cols-3 gap-2.5">
+                    {/* Configurable Grid (4, 6, 8, or 12 products per page) */}
+                    <div
+                      className={`grid gap-2.5 ${
+                        activeProductsPerPage === 4 || activeProductsPerPage === 6 || activeProductsPerPage === 8
+                          ? 'grid-cols-2'
+                          : 'grid-cols-3'
+                      }`}
+                    >
                       {currentInteriorProducts.map(p => {
                         const hasImg = p.images && p.images.length > 0;
                         const promo = p.activePromotion;
@@ -984,7 +1204,7 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
                                 ? 'bg-slate-50 border-slate-300'
                                 : 'bg-white border-slate-200'
                             }`}
-                            style={{ height: '112px' }}
+                            style={{ height: activeProductsPerPage <= 6 ? '148px' : '112px' }}
                           >
                             <div>
                               {/* Photo / Thumbnail */}
@@ -1039,7 +1259,11 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
                                 </span>
                               )}
                               <span className="text-[6.5px] text-slate-500 font-normal">
-                                {promo ? 'Oferta' : 'Disponible'}
+                                {promo
+                                  ? 'Oferta'
+                                  : company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog
+                                  ? company.taxConfig.priceLabelText
+                                  : 'Precio COP'}
                               </span>
                             </div>
                           </div>
@@ -1048,12 +1272,15 @@ export const CatalogStudio: React.FC<CatalogStudioProps> = ({
                     </div>
                   </div>
 
-                  {/* Interior Footer */}
+                  {/* Interior Footer (Strictly tax-compliant) */}
                   <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-[8px] text-slate-500">
                     <div>
                       <span>{company.name} · PBX: {company.phone} · {company.email}</span>
                       <p className="text-[7px] text-slate-400">
-                        Precios en pesos colombianos (COP). Incluyen IVA. Garantía legal oficial.
+                        {company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog
+                          ? company.taxConfig.invoiceFooterText
+                          : company.taxConfig?.invoiceFooterText ||
+                            'Precios en pesos colombianos (COP). Persona natural no responsable de IVA. Garantía legal oficial.'}
                       </p>
                     </div>
 

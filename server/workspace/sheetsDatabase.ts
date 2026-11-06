@@ -231,6 +231,83 @@ export const TAB_HEADERS: Record<string, string[]> = {
     'Estado',
     'Términos'
   ],
+  Cotizaciones: [
+    'ID Cotización',
+    'Cliente Nombre',
+    'Cliente Correo',
+    'Título / Proyecto',
+    'Valor Estimado COP',
+    'Etapa',
+    'Fecha Cierre Estimada',
+    'Responsable',
+    'Régimen Tributario'
+  ],
+  'Cuentas de cobro': [
+    'ID Documento',
+    'Pedido / Orden SRV',
+    'Cliente Nombre',
+    'Cliente Correo / NIT',
+    'Valor Total COP (No responsable de IVA)',
+    'Estado Pago',
+    'Fecha Emisión'
+  ],
+  'Órdenes de servicio': [
+    'ID Servicio',
+    'Número Orden (SRV)',
+    'Cliente Nombre',
+    'Cliente Correo',
+    'Teléfono / WhatsApp',
+    'Tipo Servicio',
+    'Equipo (Marca / Modelo)',
+    'Serial',
+    'Descripción Falla',
+    'Modalidad',
+    'Prioridad',
+    'Estado Actual',
+    'Técnico Asignado',
+    'Diagnóstico Técnico',
+    'Costo Total COP',
+    'Garantía Servicio',
+    'Fecha Creación'
+  ],
+  Envíos: [
+    'ID Envío',
+    'Número Pedido',
+    'Cliente Nombre',
+    'Transportadora',
+    'Número de Guía',
+    'Enlace de Seguimiento Oficial',
+    'Fecha de Despacho',
+    'Ciudad Destino',
+    'Estado del Envío',
+    'Observaciones'
+  ],
+  CRM: [
+    'ID Registro CRM',
+    'Nombre Completo / Empresa',
+    'Correo Electrónico',
+    'Teléfono / WhatsApp',
+    'Ciudad',
+    'Clasificación Comercial',
+    'Total Compras COP',
+    'Consentimiento Comercial (Ley 1581)',
+    'Último Contacto'
+  ],
+  Configuraciones: [
+    'Nombre',
+    'NIT',
+    'Régimen Tributario DIAN',
+    'Eslogan',
+    'Enlace Logotipo Oficial',
+    'WhatsApp',
+    'Teléfono PBX',
+    'Correo Electrónico',
+    'Dirección',
+    'Ciudad',
+    'Sitio Web',
+    'Condiciones Comerciales'
+  ],
+  'Historial de operaciones': ['Fecha (ISO)', 'Usuario', 'Acción', 'Detalle', 'Resultado'],
   'Historial de cambios': ['Fecha (ISO)', 'Usuario', 'Acción', 'Detalle', 'Resultado'],
   Configuración: [
     'Nombre',
@@ -871,12 +948,75 @@ class SheetsDatabase {
       (o.items || []).map(i => `${i.quantity}x ${i.name}`).join(' | ')
     ]);
 
+    const shipmentRows = db.getShipments().map(s => [
+      s.id,
+      s.orderId,
+      s.clientName,
+      s.carrier,
+      s.trackingNumber,
+      s.trackingUrl || '',
+      s.dispatchDate || s.createdAt.slice(0, 10),
+      `${s.city} (${s.department})`,
+      s.status,
+      s.notes || ''
+    ]);
+
+    const crmRows = db.getCrmCustomers().map(c => [
+      c.id,
+      c.fullName,
+      c.email,
+      c.phone,
+      c.city,
+      c.classification,
+      c.totalPurchasesCOP,
+      c.marketingConsent && !c.optedOut ? 'Autorizado' : 'Baja / Sin consentimiento',
+      c.lastContactDate || c.updatedAt
+    ]);
+
+    const quoteRows = db.getCrmOpportunities().map(op => [
+      op.id,
+      op.customerName,
+      op.customerEmail,
+      op.title,
+      op.estimatedValueCOP,
+      op.stage,
+      op.expectedCloseDate,
+      op.assignedTo,
+      comp.taxConfig?.regime || 'Persona natural - No responsable de IVA'
+    ]);
+
+    const billingRows = db.getAllOrders().map(o => [
+      `CC-${o.id}`,
+      o.id,
+      o.customerName,
+      o.customerEmail,
+      o.totalCOP,
+      o.status,
+      o.date
+    ]);
+
+    const configuracionesRow = [
+      comp.name,
+      comp.nit || '901.458.920-1',
+      comp.taxConfig?.regime || 'Persona natural - No responsable de IVA',
+      comp.slogan,
+      comp.logoUrl?.startsWith('data:') ? '/uploads/ips_official_logo.svg' : (comp.logoUrl || ''),
+      comp.whatsapp,
+      comp.phone,
+      comp.email,
+      comp.address,
+      comp.city,
+      comp.website,
+      comp.commercialTerms
+    ];
+
     const dataPayload: Array<{ range: string; values: any[][] }> = [
       { range: `'Productos'!A2`, values: productRows.map(r => r.map(sanitizeCellValue)) },
       { range: `'Categorías'!A2`, values: categories.map(r => r.map(sanitizeCellValue)) },
       { range: `'Usuarios'!A2`, values: userRows.map(r => r.map(sanitizeCellValue)) },
       { range: `'Roles'!A2`, values: roleRows.map(r => r.map(sanitizeCellValue)) },
       { range: `'Usuarios y roles'!A2`, values: userRows.map(r => r.map(sanitizeCellValue)) },
+      { range: `'Configuraciones'!A2`, values: [configuracionesRow.map(sanitizeCellValue)] },
       { range: `'Configuración'!A2`, values: [empresaRow.map(sanitizeCellValue)] },
       { range: `'Configuración de la empresa'!A2`, values: [empresaRow.map(sanitizeCellValue)] }
     ];
@@ -891,11 +1031,18 @@ class SheetsDatabase {
     if (salesRows.length > 0) {
       dataPayload.push({ range: `'Ventas'!A2`, values: salesRows.map(r => r.map(sanitizeCellValue)) });
     }
+    if (quoteRows.length > 0) {
+      dataPayload.push({ range: `'Cotizaciones'!A2`, values: quoteRows.map(r => r.map(sanitizeCellValue)) });
+    }
+    if (billingRows.length > 0) {
+      dataPayload.push({ range: `'Cuentas de cobro'!A2`, values: billingRows.map(r => r.map(sanitizeCellValue)) });
+    }
     if (promoRows.length > 0) {
       dataPayload.push({ range: `'Promociones'!A2`, values: promoRows.map(r => r.map(sanitizeCellValue)) });
     }
     if (serviceRows.length > 0) {
       dataPayload.push({ range: `'Servicios técnicos'!A2`, values: serviceRows.map(r => r.map(sanitizeCellValue)) });
+      dataPayload.push({ range: `'Órdenes de servicio'!A2`, values: serviceRows.map(r => r.map(sanitizeCellValue)) });
     }
     if (appointmentRows.length > 0) {
       dataPayload.push({
@@ -917,6 +1064,18 @@ class SheetsDatabase {
       dataPayload.push({
         range: `'Garantías'!A2`,
         values: warrantyRows.map(r => r.map(sanitizeCellValue))
+      });
+    }
+    if (shipmentRows.length > 0) {
+      dataPayload.push({
+        range: `'Envíos'!A2`,
+        values: shipmentRows.map(r => r.map(sanitizeCellValue))
+      });
+    }
+    if (crmRows.length > 0) {
+      dataPayload.push({
+        range: `'CRM'!A2`,
+        values: crmRows.map(r => r.map(sanitizeCellValue))
       });
     }
     if (inventoryRows.length > 0) {
@@ -955,8 +1114,8 @@ class SheetsDatabase {
     await this.logAudit(
       accessToken,
       adminEmail || 'Sistema',
-      'SINCRONIZACION_INTEGRAL_16_HOJAS',
-      `Sincronizadas las 16 hojas oficiales en Google Sheets (${now})`,
+      'SINCRONIZACION_INTEGRAL_18_HOJAS',
+      `Sincronizadas las 18 hojas oficiales en Google Sheets (${now})`,
       'EXITOSO'
     );
   }

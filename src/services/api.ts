@@ -772,6 +772,10 @@ export const api = {
     return await request<PromoBannerItem[]>('/api/promo-banners');
   },
 
+  async getPromotionalPosters(): Promise<PromoBannerItem[]> {
+    return await request<PromoBannerItem[]>('/api/promo-banners');
+  },
+
   async updatePromoBanner(
     slotOrId: number | string,
     updates: Partial<PromoBannerItem>
@@ -854,6 +858,15 @@ export const api = {
 
   async getMyShipments(): Promise<ShipmentRecord[]> {
     return await request<ShipmentRecord[]>('/api/shipments/my-shipments');
+  },
+
+  async createShipment(
+    payload: Partial<ShipmentRecord> & { statusNote?: string }
+  ): Promise<{ shipment: ShipmentRecord; message: string }> {
+    return await request('/api/shipments', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
   },
 
   async updateShipment(
@@ -1250,11 +1263,14 @@ export const api = {
     type?: import('../types').CustomerPushEventType;
     title: string;
     body: string;
+    tag?: string;
     url?: string;
+    promotionId?: string;
     targetAudience?: 'all_customers' | 'specific_customer';
     targetCustomerEmail?: string;
     targetCustomerPhone?: string;
     targetOrderId?: string;
+    productId?: string;
     relatedProductId?: string;
     relatedProductRef?: string;
     relatedCategory?: string;
@@ -1289,6 +1305,7 @@ export const api = {
     healthyImages: number;
     rehydratedCount: number;
     missingOrBrokenCount: number;
+    message?: string;
     details: Array<{
       productId: string;
       reference: string;
@@ -1324,6 +1341,7 @@ export const api = {
     passedCount?: number;
     pending24hCount?: number;
     failedCount?: number;
+    summary?: string;
     steps: import('../types').DrivePersistenceTestStep[];
   }> {
     return await request('/api/drive/persistence-test', {
@@ -1384,6 +1402,7 @@ export const api = {
     campaigns: import('../types').MarketingCampaign[];
     opportunities: import('../types').CrmOpportunity[];
     topSellingProducts: Array<{
+      productId: string;
       reference: string;
       name: string;
       quantitySold: number;
@@ -1392,6 +1411,7 @@ export const api = {
     }>;
     metrics?: {
       topSellingProducts: Array<{
+        productId: string;
         reference: string;
         name: string;
         quantitySold: number;

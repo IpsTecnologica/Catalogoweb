@@ -41,7 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       id: 'home',
       label: 'Inicio Web Corporativa',
       icon: Building2,
-      badge: '19 Secc.',
+      badge: 'Web',
       isProtected: false
     },
     {
@@ -49,13 +49,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: 'Catálogo Online (/catalogo)',
       icon: Globe,
       badge: 'Tienda',
-      isProtected: false
-    },
-    {
-      id: 'public-support',
-      label: 'Agenda tu Servicio Técnico',
-      icon: Wrench,
-      badge: 'Citas SRV',
       isProtected: false
     },
     {
@@ -67,9 +60,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
     {
       id: 'studio',
-      label: 'Generador PDF Carta',
+      label: 'Diseñador de Catálogos y Plantillas PDF',
       icon: FileText,
-      badge: '3×4 (12 p/pág)',
+      badge: '4/6/8/12',
       isProtected: false
     },
     ...(canEdit
@@ -117,9 +110,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           },
           {
             id: 'templates-banners',
-            label: 'Plantillas (14 Temporadas)',
+            label: 'Plantillas (17 Ediciones)',
             icon: Layers,
-            badge: '14 Temp.',
+            badge: '17 Temp.',
             isProtected: true
           }
         ]
@@ -173,6 +166,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
     ...(isAdmin
       ? [
           {
+            id: 'drive-images',
+            label: 'Gestión de Imágenes Google Drive',
+            icon: HardDrive,
+            badge: '9 Carpetas',
+            isProtected: true
+          },
+          {
             id: 'integrations-whatsapp',
             label: 'Conectar WhatsApp (QR / API)',
             icon: MessageCircle,
@@ -188,7 +188,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           },
           {
             id: 'system-backups',
-            label: 'Respaldos y Bóveda Fotos',
+            label: 'Respaldos y Recuperación',
             icon: HardDrive,
             badge: 'Seguridad',
             isProtected: true
@@ -204,12 +204,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             id: 'workspace',
             label: 'Google Sheets & Drive',
             icon: FileText,
-            badge: '16 Hojas',
+            badge: '18 Hojas',
             isProtected: true
           },
           {
             id: 'company',
-            label: 'Identidad & Logo',
+            label: 'Identidad & Config. Tributaria',
             icon: Building2,
             isProtected: true
           },

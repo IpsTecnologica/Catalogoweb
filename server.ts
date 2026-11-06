@@ -2572,6 +2572,19 @@ app.get('/api/shipments/my-shipments', requireAuth, (req: Request & { user?: any
   res.json(db.getShipmentsForClient(req.user.email));
 });
 
+app.post('/api/shipments', requireSupportStaff, (req: Request & { user?: any }, res: Response) => {
+  try {
+    const orderId = String(req.body.orderId || `PED-${new Date().getFullYear()}-${Math.floor(100 + Math.random() * 900)}`).trim();
+    const created = db.createOrUpdateShipment(orderId, req.body, req.user?.email || 'jeffervr@gmail.com');
+    res.status(201).json({
+      shipment: created,
+      message: `Envío registrado exitosamente para el pedido ${created.orderId} (Guía: ${created.trackingNumber}).`
+    });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message || 'Error al registrar el envío.' });
+  }
+});
+
 app.put('/api/shipments/:orderId', requireSupportStaff, (req: Request & { user?: any }, res: Response) => {
   try {
     const updated = db.createOrUpdateShipment(req.params.orderId, req.body, req.user?.email || 'jeffervr@gmail.com');

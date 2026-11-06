@@ -62,14 +62,13 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
     else if (onGoToClientPortal) onGoToClientPortal();
   };
 
+  const [contactTabMode, setContactTabMode] = useState<'form' | 'appointment'>('form');
+
   const handleSupportBookingClick = () => {
-    if (onOpenSupportBooking) {
-      onOpenSupportBooking();
-    } else {
-      const el = document.getElementById('agendar-cita');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-      else setShowBookingModal(true);
-    }
+    setContactTabMode('appointment');
+    const el = document.getElementById('contacto');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    else setShowBookingModal(true);
   };
 
   useEffect(() => {
@@ -86,7 +85,7 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
     }).catch(() => {});
   }, []);
 
-  const featuredProducts = products.filter(p => p.featured || p.stock > 0).slice(0, 8);
+  const featuredProducts = products.filter(p => p.featured || (p.stock || 0) > 0).slice(0, 8);
 
   const rawPhone = (cms?.contactPhone || company.phone || '573000000000').replace(/\D/g, '');
   const cleanPhone = rawPhone.startsWith('57') ? rawPhone : `57${rawPhone}`;
@@ -313,20 +312,17 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
             <button onClick={() => scrollToSection('promociones')} className="px-3 py-1.5 rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors cursor-pointer">
               Promociones
             </button>
-            <button onClick={() => scrollToSection('agendar-cita')} className="px-3 py-1.5 rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors cursor-pointer">
-              Soporte
-            </button>
             <button onClick={() => scrollToSection('contacto')} className="px-3 py-1.5 rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors cursor-pointer">
               Contacto
             </button>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <button
-              onClick={() => scrollToSection('agendar-cita')}
+              onClick={() => scrollToSection('servicios')}
               className="px-3.5 py-1.5 bg-red-700 hover:bg-red-600 text-white font-bold text-xs rounded-lg shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Calendar className="w-3.5 h-3.5" />
-              Agendar Soporte
+              Servicios y Citas
             </button>
             <button
               onClick={handleClientPortalClick}
@@ -371,11 +367,11 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
               </button>
 
               <button
-                onClick={() => scrollToSection('agendar-cita')}
+                onClick={() => scrollToSection('servicios')}
                 className="px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl shadow-md flex items-center gap-2 transition-all cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-red-600" />
-                {cms?.heroSecondaryCta || 'Agendar Servicio Técnico'}
+                {cms?.heroSecondaryCta || 'Ver Servicios y Agendar Cita'}
               </button>
 
               <button
@@ -441,12 +437,12 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
-                  onClick={() => scrollToSection('agendar-cita')}
+                  onClick={handleSupportBookingClick}
                   className="p-3.5 rounded-xl bg-slate-800/70 hover:bg-red-950/60 border border-slate-700 hover:border-red-500/50 transition-all group text-left cursor-pointer"
                 >
                   <Wrench className="w-5 h-5 text-red-400 mb-1.5 group-hover:scale-110 transition-transform" />
-                  <p className="font-bold text-sm text-white">Agendar Laboratorio</p>
-                  <p className="text-xs text-slate-400">Revisión y diagnóstico</p>
+                  <p className="font-bold text-sm text-white">Solicitar Cita de Servicio</p>
+                  <p className="text-xs text-slate-400">Desde Servicios y Contacto</p>
                 </button>
 
                 <a
@@ -578,7 +574,7 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
                 <p className="text-sm text-slate-300">Evaluamos el estado de los equipos de tu oficina y entregamos informe técnico de actualización y seguridad.</p>
               </div>
               <button
-                onClick={() => scrollToSection('agendar-cita')}
+                onClick={handleSupportBookingClick}
                 className="mt-5 inline-flex items-center justify-center gap-2 bg-emerald-500 text-slate-950 font-bold text-xs py-2.5 px-4 rounded-xl hover:bg-emerald-400 transition-colors cursor-pointer"
               >
                 Agendar Visita Empresarial <Calendar className="w-3.5 h-3.5" />
@@ -686,10 +682,10 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
 
               <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between gap-2">
                 <button
-                  onClick={() => scrollToSection('agendar-cita')}
+                  onClick={() => setShowBookingModal(true)}
                   className="text-xs font-bold text-slate-700 hover:text-red-600 flex items-center gap-1 cursor-pointer"
                 >
-                  <Calendar className="w-3.5 h-3.5" /> Agendar cita
+                  <Calendar className="w-3.5 h-3.5 text-red-600" /> Solicitar cita de este servicio
                 </button>
                 <a
                   href={getWhatsAppLink(srv.whatsappText || `Hola IPS TECNOLÓGICA, deseo información sobre ${srv.title}`)}
@@ -735,73 +731,6 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. AGENDA TU SERVICIO TÉCNICO (SIN SELECCIÓN DE TÉCNICO POR EL CLIENTE) */}
-      <section id="agendar-cita" className="bg-gradient-to-b from-slate-100 to-white py-16 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 border border-red-200 text-red-700 text-xs font-bold uppercase">
-                <Wifi className="w-3.5 h-3.5" /> Atención Presencial, a Domicilio y Remota
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
-                AGENDA TU SERVICIO TÉCNICO
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Solicita tu servicio de manera fácil y segura. Nuestro equipo revisará tu solicitud y confirmará la disponibilidad asignando al especialista idóneo según la marca y falla de tu equipo.
-              </p>
-
-              <div className="space-y-3 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-                <h3 className="font-bold text-sm text-slate-900 uppercase tracking-wider">¿Por qué agendar en línea?</h3>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
-                  <div>
-                    <h4 className="font-bold text-sm text-slate-900">Código Único de Orden y Ticket</h4>
-                    <p className="text-xs text-slate-600">Recibes confirmación inmediata en pantalla con tu código de seguimiento para consultar avances en el Portal de Clientes.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
-                  <div>
-                    <h4 className="font-bold text-sm text-slate-900">Asignación Inteligente de Especialista</h4>
-                    <p className="text-xs text-slate-600">Nuestra coordinación técnica asigna internamente al ingeniero certificado en la especialidad requerida.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
-                  <div>
-                    <h4 className="font-bold text-sm text-slate-900">Registro Fotográfico Previo</h4>
-                    <p className="text-xs text-slate-600">Puedes adjuntar fotografías del equipo o del error en pantalla para agilizar el diagnóstico.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-3 pt-1">
-                <a
-                  href="https://anydesk.com/es/downloads"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs flex items-center gap-2 transition-all"
-                >
-                  Descargar AnyDesk <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <a
-                  href="https://rustdesk.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-900 font-bold rounded-xl text-xs border border-slate-300 flex items-center gap-2 transition-all"
-                >
-                  Descargar RustDesk <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <PublicSupportBooking />
-            </div>
           </div>
         </div>
       </section>
@@ -1011,124 +940,179 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
               </div>
             </div>
 
-            <div className="lg:col-span-7">
-              <form onSubmit={handleContactSubmit} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
-                <h3 className="text-xl font-black text-slate-900">Formulario de Solicitud y Cotización</h3>
-                <p className="text-xs text-slate-500">
-                  Completa tus datos y un especialista comercial o de soporte te responderá a la brevedad.
-                </p>
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+                <button
+                  type="button"
+                  onClick={() => setContactTabMode('form')}
+                  className={`flex-1 py-2.5 px-4 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                    contactTabMode === 'form'
+                      ? 'bg-red-600 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white'
+                  }`}
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Contacto y Cotización Comercial</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContactTabMode('appointment')}
+                  className={`flex-1 py-2.5 px-4 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                    contactTabMode === 'appointment'
+                      ? 'bg-red-600 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white'
+                  }`}
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Solicitar Cita de Servicio</span>
+                </button>
+              </div>
 
-                {contactResult && (
-                  <div className={`p-4 rounded-xl border text-xs font-bold flex items-center gap-2 ${
-                    contactResult.ok
-                      ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                      : 'bg-red-50 border-red-200 text-red-800'
-                  }`}>
-                    {contactResult.ok ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
-                    <span>{contactResult.msg}</span>
+              {contactTabMode === 'appointment' ? (
+                <PublicSupportBooking company={company} />
+              ) : (
+                <form onSubmit={handleContactSubmit} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs space-y-4">
+                  <h3 className="text-xl font-black text-slate-900">Formulario de Solicitud y Cotización</h3>
+                  <p className="text-xs text-slate-500">
+                    Completa tus datos y un especialista comercial o de servicios te responderá a la brevedad.
+                  </p>
+
+                  {contactResult && (
+                    <div className={`p-4 rounded-xl border text-xs font-bold flex items-center gap-2 ${
+                      contactResult.ok
+                        ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                        : 'bg-red-50 border-red-200 text-red-800'
+                    }`}>
+                      {contactResult.ok ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
+                      <span>{contactResult.msg}</span>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Nombre completo *</label>
+                      <input
+                        type="text"
+                        required
+                        value={contactForm.name}
+                        onChange={e => setContactForm({ ...contactForm, name: e.target.value })}
+                        placeholder="Ej. Juan Pérez"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Empresa / Entidad (Opcional)</label>
+                      <input
+                        type="text"
+                        value={contactForm.companyName}
+                        onChange={e => setContactForm({ ...contactForm, companyName: e.target.value })}
+                        placeholder="Ej. Inversiones ABC S.A.S."
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
+                      />
+                    </div>
                   </div>
-                )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Teléfono / WhatsApp *</label>
+                      <input
+                        type="tel"
+                        required
+                        value={contactForm.phone}
+                        onChange={e => setContactForm({ ...contactForm, phone: e.target.value })}
+                        placeholder="Ej. 300 123 4567"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Correo electrónico</label>
+                      <input
+                        type="email"
+                        value={contactForm.email}
+                        onChange={e => setContactForm({ ...contactForm, email: e.target.value })}
+                        placeholder="correo@empresa.com"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Nombre completo *</label>
-                    <input
-                      type="text"
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Tipo de requerimiento</label>
+                    <select
+                      value={contactForm.subject}
+                      onChange={e => setContactForm({ ...contactForm, subject: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
+                    >
+                      <option value="Cotización Corporativa / Equipos">Cotización Corporativa / Equipos</option>
+                      <option value="Póliza de Mantenimiento y Soporte TI">Póliza de Mantenimiento y Soporte TI</option>
+                      <option value="Licenciamiento de Software Original">Licenciamiento de Software Original</option>
+                      <option value="Redes, Servidores y Cableado">Redes, Servidores y Cableado</option>
+                      <option value="Consulta de Garantía o Posventa">Consulta de Garantía o Posventa</option>
+                      <option value="Otro Requerimiento">Otro Requerimiento</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Detalle de tu solicitud *</label>
+                    <textarea
+                      rows={4}
                       required
-                      value={contactForm.name}
-                      onChange={e => setContactForm({ ...contactForm, name: e.target.value })}
-                      placeholder="Ej. Juan Pérez"
+                      value={contactForm.message}
+                      onChange={e => setContactForm({ ...contactForm, message: e.target.value })}
+                      placeholder="Cuéntanos qué equipos, repuestos o servicio necesitas..."
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Empresa / Entidad (Opcional)</label>
-                    <input
-                      type="text"
-                      value={contactForm.companyName}
-                      onChange={e => setContactForm({ ...contactForm, companyName: e.target.value })}
-                      placeholder="Ej. Inversiones ABC S.A.S."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
-                    />
+
+                  <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <button
+                      type="submit"
+                      disabled={contactSubmitting}
+                      className="px-6 py-3 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-bold text-sm rounded-xl shadow-md flex items-center gap-2 transition-all cursor-pointer"
+                    >
+                      <Send className="w-4 h-4" />
+                      {contactSubmitting ? 'Registrando solicitud...' : 'Enviar Solicitud Corporativa'}
+                    </button>
+
+                    <a
+                      href={getWhatsAppLink(`Hola IPS TECNOLÓGICA, deseo realizar una consulta comercial.`)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1"
+                    >
+                      <MessageSquare className="w-4 h-4" /> O escríbenos directamente por WhatsApp
+                    </a>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Teléfono / WhatsApp *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={contactForm.phone}
-                      onChange={e => setContactForm({ ...contactForm, phone: e.target.value })}
-                      placeholder="Ej. 300 123 4567"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Correo electrónico</label>
-                    <input
-                      type="email"
-                      value={contactForm.email}
-                      onChange={e => setContactForm({ ...contactForm, email: e.target.value })}
-                      placeholder="correo@empresa.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Tipo de requerimiento</label>
-                  <select
-                    value={contactForm.subject}
-                    onChange={e => setContactForm({ ...contactForm, subject: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
-                  >
-                    <option value="Cotización Corporativa / Equipos">Cotización Corporativa / Equipos</option>
-                    <option value="Póliza de Mantenimiento y Soporte TI">Póliza de Mantenimiento y Soporte TI</option>
-                    <option value="Licenciamiento de Software Original">Licenciamiento de Software Original</option>
-                    <option value="Redes, Servidores y Cableado">Redes, Servidores y Cableado</option>
-                    <option value="Consulta de Garantía o Posventa">Consulta de Garantía o Posventa</option>
-                    <option value="Otro Requerimiento">Otro Requerimiento</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Detalle de tu solicitud *</label>
-                  <textarea
-                    rows={4}
-                    required
-                    value={contactForm.message}
-                    onChange={e => setContactForm({ ...contactForm, message: e.target.value })}
-                    placeholder="Cuéntanos qué equipos, repuestos o servicio técnico necesitas..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:border-red-600"
-                  />
-                </div>
-
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-                  <button
-                    type="submit"
-                    disabled={contactSubmitting}
-                    className="px-6 py-3 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-bold text-sm rounded-xl shadow-md flex items-center gap-2 transition-all cursor-pointer"
-                  >
-                    <Send className="w-4 h-4" />
-                    {contactSubmitting ? 'Registrando solicitud...' : 'Enviar Solicitud Corporativa'}
-                  </button>
-
-                  <a
-                    href={getWhatsAppLink(`Hola IPS TECNOLÓGICA, deseo realizar una consulta comercial.`)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1"
-                  >
-                    <MessageSquare className="w-4 h-4" /> O escríbenos directamente por WhatsApp
-                  </a>
-                </div>
-              </form>
+                </form>
+              )}
             </div>
           </div>
         </div>
       </section>
+
+      {/* Modal para solicitar cita directamente desde las tarjetas de Servicios */}
+      {showBookingModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl border border-slate-200 my-8">
+            <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-red-400" />
+                <h3 className="font-bold text-sm sm:text-base">Solicitar Cita de Servicio Tecnológico</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowBookingModal(false)}
+                className="text-slate-400 hover:text-white text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 cursor-pointer"
+              >
+                Cerrar ✕
+              </button>
+            </div>
+            <div className="p-4 sm:p-6 max-h-[82vh] overflow-y-auto">
+              <PublicSupportBooking company={company} />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 12. PIE DE PÁGINA CORPORATIVO */}
       <footer className="bg-slate-950 text-slate-400 border-t border-slate-800">
@@ -1162,8 +1146,8 @@ export const CorporateHomePage: React.FC<CorporateHomePageProps> = ({
                 </button>
               </li>
               <li>
-                <button onClick={() => scrollToSection('agendar-cita')} className="hover:text-white transition-colors cursor-pointer">
-                  Agendar Servicio Técnico
+                <button onClick={handleSupportBookingClick} className="hover:text-white transition-colors cursor-pointer">
+                  Solicitar Cita de Servicio (Contacto)
                 </button>
               </li>
               <li>

@@ -1141,7 +1141,9 @@ export const PublicCatalog: React.FC<PublicCatalogProps> = ({
                         ) : (
                           <>
                             <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider block">
-                              Precio con IVA
+                              {company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog
+                                ? company.taxConfig.priceLabelText || 'Precio Oficial'
+                                : company.taxConfig?.priceLabelText || 'Precio Oficial COP'}
                             </span>
                             <span className="text-base font-extrabold text-slate-900 font-mono tabular-nums">
                               {formatCOP(product.priceCOP)}
@@ -1321,7 +1323,9 @@ export const PublicCatalog: React.FC<PublicCatalogProps> = ({
                     return (
                       <div className="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
                         <span className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider block">
-                          Precio Oficial con IVA · Envío: {selectedProductModal.shippingType || 'Nacional'}
+                          {company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog
+                            ? `${company.taxConfig.priceLabelText || 'Precio Oficial'} · Envío: ${selectedProductModal.shippingType || 'Nacional'}`
+                            : `${company.taxConfig?.priceLabelText || 'Precio Oficial COP'} · Envío: ${selectedProductModal.shippingType || 'Nacional'}`}
                         </span>
                         <span className="text-xl font-black text-slate-900 font-mono">
                           {formatCOP(selectedProductModal.priceCOP)}
@@ -1506,7 +1510,11 @@ export const PublicCatalog: React.FC<PublicCatalogProps> = ({
                       </div>
                     )}
                     <div className="flex justify-between text-sm font-black pt-1 border-t border-slate-700">
-                      <span>Total a Pagar (IVA Incluido):</span>
+                      <span>
+                        {company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog
+                          ? 'Total a Pagar:'
+                          : 'Total a Pagar (No responsable de IVA):'}
+                      </span>
                       <span className="font-mono text-amber-400">{formatCOP(finalTotal)}</span>
                     </div>
                   </div>

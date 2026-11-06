@@ -81,6 +81,37 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
   const [shipments, setShipments] = useState<ShipmentRecord[]>([]);
   const [shipmentSearch, setShipmentSearch] = useState('');
   const [selectedShipment, setSelectedShipment] = useState<ShipmentRecord | null>(null);
+  const [showNewShipmentModal, setShowNewShipmentModal] = useState(false);
+  const [carrierUrls, setCarrierUrls] = useState<Record<string, string>>(() => {
+    try {
+      const saved = localStorage.getItem('ips_carrier_tracking_urls_v1');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return {
+      Servientrega: 'https://www.servientrega.com/wps/portal/rastreo-envio',
+      'Inter Rapidísimo': 'https://www.interrapidisimo.com/sigue-tu-envio/',
+      Coordinadora: 'https://www.coordinadora.com/portafolio-de-servicios/servicios-en-linea/rastrear-guias/',
+      Envía: 'https://envia.co/',
+      TCC: 'https://tcc.com.co/courier/mensajeria/rastrear-envio/',
+      Deprisa: 'https://www.deprisa.com/Tracking/'
+    };
+  });
+  const [newShipmentForm, setNewShipmentForm] = useState<Partial<ShipmentRecord>>({
+    orderId: '',
+    clientName: '',
+    clientEmail: '',
+    clientPhone: '',
+    city: 'Cali',
+    department: 'Valle del Cauca',
+    address: '',
+    carrier: 'Servientrega',
+    trackingNumber: '',
+    trackingUrl: 'https://www.servientrega.com/wps/portal/rastreo-envio',
+    dispatchDate: new Date().toISOString().slice(0, 10),
+    shippingType: 'Envío Nacional Asegurado',
+    status: 'Despachado',
+    notes: ''
+  });
 
   const [loading, setLoading] = useState(true);
 
@@ -235,6 +266,37 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
     }
   };
 
+  const handleCreateShipmentRecord = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await api.createShipment({
+        ...newShipmentForm,
+        guideNumber: newShipmentForm.trackingNumber
+      });
+      setShipments(prev => [res.shipment, ...prev]);
+      setShowNewShipmentModal(false);
+      setNewShipmentForm({
+        orderId: '',
+        clientName: '',
+        clientEmail: '',
+        clientPhone: '',
+        city: 'Cali',
+        department: 'Valle del Cauca',
+        address: '',
+        carrier: 'Servientrega',
+        trackingNumber: '',
+        trackingUrl: carrierUrls['Servientrega'] || 'https://www.servientrega.com/wps/portal/rastreo-envio',
+        dispatchDate: new Date().toISOString().slice(0, 10),
+        shippingType: 'Envío Nacional Asegurado',
+        status: 'Despachado',
+        notes: ''
+      });
+      onNotify('Envío Registrado', res.message, 'success');
+    } catch (err: any) {
+      onNotify('Error', err.message || 'No se pudo registrar el envío.', 'error');
+    }
+  };
+
   const buildWhatsAppLink = (phone: string, text: string) => {
     const cleanPhone = String(phone || company.phone || '573001234567').replace(/[^0-9]/g, '');
     const fullPhone = cleanPhone.startsWith('57') ? cleanPhone : `57${cleanPhone}`;
@@ -285,8 +347,15 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
 
         <div className="flex flex-wrap items-center gap-2">
           <button
+            onClick={() => setShowNewShipmentModal(true)}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-lg transition cursor-pointer"
+          >
+            <Truck className="w-4 h-4" />
+            Registrar Envío / Guía
+          </button>
+          <button
             onClick={() => setShowNewWarrantyModal(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg transition"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Registrar Garantía
@@ -608,14 +677,24 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Buscar por pedido (PED-...), Número de Guía, transportadora, ciudad o cliente..."
+                placeholder="Buscar por pedido (ORD-...), Número de Guía, transportadora, ciudad o cliente..."
                 value={shipmentSearch}
                 onChange={e => setShipmentSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 text-xs border border-slate-300 rounded-xl"
               />
             </div>
-            <div className="text-xs text-slate-500">
-              Total envíos registrados: <strong>{filteredShipments.length}</strong>
+            <div className="flex items-center gap-3">
+              <div className="text-xs text-slate-500">
+                Total envíos registrados: <strong>{filteredShipments.length}</strong>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowNewShipmentModal(true)}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Registrar Envío / Guía
+              </button>
             </div>
           </div>
 
@@ -626,9 +705,9 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
                   <tr>
                     <th className="p-3.5">Pedido / Cliente</th>
                     <th className="p-3.5">Destino (Ciudad / Dirección)</th>
-                    <th className="p-3.5">Transportadora / Número de Guía</th>
-                    <th className="p-3.5">Modalidad</th>
-                    <th className="p-3.5">Estado del Envío (8 Estados)</th>
+                    <th className="p-3.5">Transportadora / Guía / Despacho</th>
+                    <th className="p-3.5">Enlace Oficial de Rastreo</th>
+                    <th className="p-3.5">Estado del Envío</th>
                     <th className="p-3.5 text-right">Acciones</th>
                   </tr>
                 </thead>
@@ -644,17 +723,43 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
                           {ship.city} ({ship.department})
                         </div>
                         <div className="text-[11px] text-slate-500">{ship.address}</div>
+                        {ship.address && (
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                              `${ship.address}, ${ship.city}, Colombia`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[10px] font-bold text-red-600 hover:underline mt-0.5"
+                          >
+                            <MapPin className="w-3 h-3" />
+                            Ver dirección en Google Maps
+                          </a>
+                        )}
                       </td>
                       <td className="p-3.5">
                         <div className="font-bold text-slate-900">{ship.carrier}</div>
                         <div className="font-mono text-[11px] text-blue-700 font-bold">
-                          Guía: {ship.trackingNumber}
+                          Guía: {ship.trackingNumber || ship.guideNumber}
+                        </div>
+                        <div className="text-[10px] text-slate-500">
+                          Despacho: {ship.dispatchDate || ship.shippedAt?.slice(0, 10) || 'Registrado'}
                         </div>
                       </td>
                       <td className="p-3.5">
-                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold text-[11px]">
-                          {ship.shippingType}
-                        </span>
+                        {ship.trackingUrl ? (
+                          <a
+                            href={ship.trackingUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold text-[11px]"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            Consultar mi envío
+                          </a>
+                        ) : (
+                          <span className="text-[11px] text-slate-400">Sin enlace</span>
+                        )}
                       </td>
                       <td className="p-3.5">
                         <span
@@ -672,14 +777,14 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
                       <td className="p-3.5 text-right space-x-1.5">
                         <button
                           onClick={() => setSelectedShipment({ ...ship })}
-                          className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px]"
+                          className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] cursor-pointer"
                         >
                           Editar Guía / Estado
                         </button>
                         <a
                           href={buildWhatsAppLink(
                             ship.clientPhone,
-                            `Hola ${ship.clientName}, te informamos desde *IPS TECNOLÓGICA* que el envío de tu pedido *${ship.orderId}* se encuentra en estado *${ship.status}*.\n📦 Transportadora: *${ship.carrier}*\n🔢 Número de Guía: *${ship.trackingNumber}*\n📍 Destino: ${ship.address}, ${ship.city}`
+                            `Hola ${ship.clientName}, te informamos desde *IPS TECNOLÓGICA* que el envío de tu pedido *${ship.orderId}* se encuentra en estado *${ship.status}*.\n📦 Transportadora: *${ship.carrier}*\n🔢 Número de Guía: *${ship.trackingNumber}*\n🔗 Consultar envío: ${ship.trackingUrl || ''}\n📍 Destino: ${ship.address}, ${ship.city}`
                           )}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -1028,10 +1133,10 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
 
       {/* Modal: Edit Shipment & Tracking Number */}
       {selectedShipment && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
           <form
             onSubmit={handleUpdateShipmentRecord}
-            className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl text-xs"
+            className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl text-xs my-8"
           >
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <div>
@@ -1051,20 +1156,38 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
                 <input
                   type="text"
                   required
+                  list="carrier-options-list"
                   value={selectedShipment.carrier}
-                  onChange={e => setSelectedShipment({ ...selectedShipment, carrier: e.target.value })}
+                  onChange={e => {
+                    const nextCarrier = e.target.value;
+                    const defaultUrl = carrierUrls[nextCarrier];
+                    setSelectedShipment({
+                      ...selectedShipment,
+                      carrier: nextCarrier,
+                      trackingUrl: defaultUrl || selectedShipment.trackingUrl
+                    });
+                  }}
                   placeholder="Servientrega / Coordinadora / Inter Rapidísimo"
                   className="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold"
                 />
+                <datalist id="carrier-options-list">
+                  {Object.keys(carrierUrls).map(c => (
+                    <option key={c} value={c} />
+                  ))}
+                </datalist>
               </div>
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Número de Guía (Manual) *</label>
+                <label className="block font-bold text-slate-700 mb-1">Número de Guía *</label>
                 <input
                   type="text"
                   required
                   value={selectedShipment.trackingNumber}
                   onChange={e =>
-                    setSelectedShipment({ ...selectedShipment, trackingNumber: e.target.value })
+                    setSelectedShipment({
+                      ...selectedShipment,
+                      trackingNumber: e.target.value,
+                      guideNumber: e.target.value
+                    })
                   }
                   placeholder="Ej: SRV-COL-994821045"
                   className="w-full px-3 py-2 border border-slate-300 rounded-xl font-mono font-bold text-blue-700"
@@ -1072,7 +1195,22 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Estado del Envío (8 Estados)</label>
+                <label className="block font-bold text-slate-700 mb-1">Fecha de Despacho *</label>
+                <input
+                  type="date"
+                  value={
+                    selectedShipment.dispatchDate ||
+                    (selectedShipment.shippedAt ? selectedShipment.shippedAt.slice(0, 10) : '')
+                  }
+                  onChange={e =>
+                    setSelectedShipment({ ...selectedShipment, dispatchDate: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Estado del Envío</label>
                 <select
                   value={selectedShipment.status}
                   onChange={e =>
@@ -1092,6 +1230,16 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
               </div>
 
               <div>
+                <label className="block font-bold text-slate-700 mb-1">Cliente</label>
+                <input
+                  type="text"
+                  value={selectedShipment.clientName}
+                  onChange={e => setSelectedShipment({ ...selectedShipment, clientName: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+
+              <div>
                 <label className="block font-bold text-slate-700 mb-1">Ciudad / Departamento</label>
                 <input
                   type="text"
@@ -1102,12 +1250,26 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block font-bold text-slate-700 mb-1">Enlace de Rastreo (URL)</label>
+                <label className="block font-bold text-slate-700 mb-1">
+                  Enlace de Rastreo Oficial (URL que abrirá el botón «Consultar mi envío») *
+                </label>
                 <input
-                  type="text"
+                  type="url"
+                  required
                   value={selectedShipment.trackingUrl || ''}
-                  onChange={e => setSelectedShipment({ ...selectedShipment, trackingUrl: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                  onChange={e => {
+                    const nextUrl = e.target.value;
+                    setSelectedShipment({ ...selectedShipment, trackingUrl: nextUrl });
+                    if (selectedShipment.carrier && nextUrl.startsWith('http')) {
+                      const updatedMap = { ...carrierUrls, [selectedShipment.carrier]: nextUrl };
+                      setCarrierUrls(updatedMap);
+                      try {
+                        localStorage.setItem('ips_carrier_tracking_urls_v1', JSON.stringify(updatedMap));
+                      } catch {}
+                    }
+                  }}
+                  placeholder="https://www.servientrega.com/wps/portal/rastreo-envio"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-mono text-blue-700"
                 />
               </div>
 
@@ -1132,6 +1294,189 @@ export const WarrantiesAndShippingManager: React.FC<WarrantiesAndShippingManager
               </button>
               <button type="submit" className="px-5 py-2 rounded-xl bg-sky-600 text-white font-bold">
                 Guardar Guía y Estado
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Modal: Create New Shipment & Tracking Guide */}
+      {showNewShipmentModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <form
+            onSubmit={handleCreateShipmentRecord}
+            className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl text-xs my-8"
+          >
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <div>
+                <span className="text-[11px] font-bold text-sky-700">NUEVO DESPACHO</span>
+                <h3 className="text-base font-extrabold text-slate-900">
+                  Registrar Envío y Número de Guía Oficial
+                </h3>
+              </div>
+              <button type="button" onClick={() => setShowNewShipmentModal(false)}>
+                <X className="w-5 h-5 text-slate-400" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Número de Pedido *</label>
+                <input
+                  type="text"
+                  required
+                  value={newShipmentForm.orderId || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, orderId: e.target.value })}
+                  placeholder="Ej: ORD-2026-105"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-mono font-bold"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Fecha de Despacho *</label>
+                <input
+                  type="date"
+                  required
+                  value={newShipmentForm.dispatchDate || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, dispatchDate: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Empresa Transportadora *</label>
+                <input
+                  type="text"
+                  required
+                  list="carrier-options-list"
+                  value={newShipmentForm.carrier || ''}
+                  onChange={e => {
+                    const nextCarrier = e.target.value;
+                    setNewShipmentForm({
+                      ...newShipmentForm,
+                      carrier: nextCarrier,
+                      trackingUrl: carrierUrls[nextCarrier] || newShipmentForm.trackingUrl
+                    });
+                  }}
+                  placeholder="Servientrega / Inter Rapidísimo / Coordinadora"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-semibold"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Número de Guía *</label>
+                <input
+                  type="text"
+                  required
+                  value={newShipmentForm.trackingNumber || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, trackingNumber: e.target.value })}
+                  placeholder="Ej: 2058941236"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-mono font-bold text-blue-700"
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block font-bold text-slate-700 mb-1">
+                  Enlace de Rastreo Oficial Configurable (para el botón «Consultar mi envío») *
+                </label>
+                <input
+                  type="url"
+                  required
+                  value={newShipmentForm.trackingUrl || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, trackingUrl: e.target.value })}
+                  placeholder="https://www.servientrega.com/wps/portal/rastreo-envio"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-mono text-blue-700"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Nombre del Cliente *</label>
+                <input
+                  type="text"
+                  required
+                  value={newShipmentForm.clientName || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, clientName: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Correo del Cliente (Portal)</label>
+                <input
+                  type="email"
+                  value={newShipmentForm.clientEmail || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, clientEmail: e.target.value })}
+                  placeholder="cliente@correo.com"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Teléfono / WhatsApp</label>
+                <input
+                  type="text"
+                  value={newShipmentForm.clientPhone || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, clientPhone: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Estado del Envío</label>
+                <select
+                  value={newShipmentForm.status || 'Despachado'}
+                  onChange={e =>
+                    setNewShipmentForm({
+                      ...newShipmentForm,
+                      status: e.target.value as ShipmentStatus
+                    })
+                  }
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl font-bold bg-white"
+                >
+                  {SHIPMENT_STATES.map(st => (
+                    <option key={st} value={st}>
+                      {st}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Ciudad</label>
+                <input
+                  type="text"
+                  value={newShipmentForm.city || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, city: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Dirección de Entrega</label>
+                <input
+                  type="text"
+                  value={newShipmentForm.address || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, address: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block font-bold text-slate-700 mb-1">Observaciones</label>
+                <textarea
+                  rows={2}
+                  value={newShipmentForm.notes || ''}
+                  onChange={e => setNewShipmentForm({ ...newShipmentForm, notes: e.target.value })}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-xl"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2 pt-3 border-t border-slate-200">
+              <button
+                type="button"
+                onClick={() => setShowNewShipmentModal(false)}
+                className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-bold"
+              >
+                Cancelar
+              </button>
+              <button type="submit" className="px-5 py-2 rounded-xl bg-sky-600 text-white font-bold">
+                Registrar Envío y Guía
               </button>
             </div>
           </form>

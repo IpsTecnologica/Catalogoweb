@@ -26,7 +26,7 @@ export interface User {
 }
 
 export type PromotionScope = 'product' | 'category';
-export type PromotionDiscountType = 'percentage' | 'fixed_price' | 'fixed_discount';
+export type PromotionDiscountType = 'percentage' | 'fixed_price' | 'fixed_discount' | 'porcentaje';
 export type PromotionManualStatus = 'active' | 'paused' | 'cancelled';
 export type PromotionComputedStatus =
   | 'Programada'
@@ -59,6 +59,7 @@ export interface Promotion {
   timezone: string; // 'America/Bogota'
   manualStatus: PromotionManualStatus;
   computedStatus?: PromotionComputedStatus;
+  giftDescription?: string;
   createdBy: string;
   createdAt: string;
   updatedAt: string;
@@ -89,7 +90,9 @@ export type ProductShippingType =
   | 'Gratis'
   | 'Pagado por el cliente'
   | 'Incluido en el precio'
-  | 'Cotizado según destino';
+  | 'Cotizado según destino'
+  | 'Envío Nacional Asegurado'
+  | string;
 
 export interface RemanufacturedDetails {
   aestheticGrade: string; // e.g., 'Grado A+ (Excelente)', 'Grado A (Muy bueno)'
@@ -107,6 +110,7 @@ export interface Product {
   id: string;
   name: string;
   reference: string;
+  sku?: string;
   brand?: string;
   model?: string;
   condition?: ProductCondition;
@@ -119,6 +123,8 @@ export interface Product {
   minStock?: number; // Minimum stock alert threshold
   serialNumbers?: string[];
   images: string[]; // images[0] is always the selected main image
+  imageUrl?: string;
+  imageDriveId?: string;
   driveFileId?: string;
   driveViewUrl?: string;
   driveFileIds?: string[];
@@ -127,6 +133,7 @@ export interface Product {
   shippingPolicyId?: string;
   shippingType?: ProductShippingType;
   remanufacturedDetails?: RemanufacturedDetails;
+  featured?: boolean;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
@@ -141,6 +148,29 @@ export interface SocialLinks {
   youtube: string;
   whatsapp: string;
   website: string;
+}
+
+export interface OtherTaxConcept {
+  id: string;
+  name: string;
+  ratePercent: number;
+  active: boolean;
+  description?: string;
+}
+
+export interface TaxConfiguration {
+  regime:
+    | 'Persona natural - No responsable de IVA'
+    | 'Responsable de IVA (Régimen Común)'
+    | 'Régimen Simple de Tributación';
+  ivaEnabled: boolean;
+  ivaRatePercent: number;
+  showIvaLabelInCatalog: boolean;
+  priceLabelText: string;
+  invoiceFooterText: string;
+  otherTaxes?: OtherTaxConcept[];
+  updatedAt?: string;
+  updatedBy?: string;
 }
 
 export interface CompanyProfile {
@@ -172,6 +202,7 @@ export interface CompanyProfile {
   activeWebTemplateId?: string;
   activePdfTemplateId?: string;
   commercialTerms: string;
+  taxConfig?: TaxConfiguration;
 }
 
 export type OrderStatus =
@@ -245,10 +276,16 @@ export interface CatalogOptions {
   title: string;
   subtitle: string;
   includeCover: boolean;
+  includeIndex?: boolean;
+  includeBackCover?: boolean;
   template: CatalogTemplateId;
   categoryFilter?: string;
   onlyActive: boolean;
+  selectionMode?: 'all' | 'category' | 'custom';
   selectedProductIds?: string[];
+  productsPerPage?: 4 | 6 | 8 | 12;
+  paperFormat?: 'letter' | 'a4';
+  orientation?: 'portrait' | 'landscape';
   includePrice: boolean;
   includeReference: boolean;
   includeDescription: boolean;
@@ -285,6 +322,7 @@ export interface AppReleaseConfig {
   updatedAt: string;
   updatedBy: string;
 }
+export type AppConfig = AppReleaseConfig;
 
 /* ============================================================================
    TECHNICAL SUPPORT & APPOINTMENTS (MÓDULO DE SOPORTE TÉCNICO Y AGENDAMIENTO)
@@ -403,10 +441,16 @@ export interface TechnicalServiceRequest {
   serviceOrderPdfUrl?: string;
   googleCalendarEventId?: string;
   scheduleHistory?: Array<{
+    id?: string;
     date: string;
     action: string;
     actor: string;
     note: string;
+    technicianName?: string;
+    newDate?: string;
+    newTime?: string;
+    reason?: string;
+    changedAt?: string;
   }>;
   createdAt: string;
   updatedAt: string;
@@ -904,7 +948,7 @@ export interface SeasonalTemplate {
   decorativeBadge: string;
   badgeText?: string;
   promoBlockText: string;
-  buttonStyle: 'rounded-xl' | 'rounded-full' | 'rounded-lg';
+  buttonStyle: 'rounded-xl' | 'rounded-full' | 'rounded-lg' | string;
   fontFamily: string;
   headerStyle?: string;
   footerStyle?: string;
@@ -930,9 +974,11 @@ export interface PromoBannerItem {
   slot: 1 | 2 | 3 | 4 | 5 | 6 | number;
   order: number;
   title: string;
+  subtitle?: string;
   description: string;
   badgeText?: string;
   imageUrl: string;
+  imageDriveId?: string;
   driveFileId?: string;
   normalPriceCOP?: number;
   originalPriceCOP?: number;
@@ -947,10 +993,12 @@ export interface PromoBannerItem {
   startAt?: string;
   endAt?: string;
   endDate?: string;
+  active?: boolean;
   isActive: boolean;
   updatedAt: string;
   updatedBy?: string;
 }
+export type PromotionalPoster = PromoBannerItem;
 
 /* ============================================================================
    GENERADOR DE CÓDIGOS DE DESCUENTO (SECCIÓN 12)
@@ -1082,6 +1130,7 @@ export interface ShipmentRecord {
   shippingType: ProductShippingType;
   shippingCostCOP: number;
   dispatchDate?: string;
+  shippedAt?: string;
   estimatedDeliveryDate?: string;
   status: ShipmentStatus;
   notes?: string;
@@ -1237,6 +1286,15 @@ export interface CustomerPushSubscription {
    ============================================================================ */
 
 export type DriveOfficialFolderPath =
+  | 'IPS TECNOLÓGICA / PRODUCTOS'
+  | 'IPS TECNOLÓGICA / CATEGORÍAS'
+  | 'IPS TECNOLÓGICA / BANNERS'
+  | 'IPS TECNOLÓGICA / PLANTILLAS PDF'
+  | 'IPS TECNOLÓGICA / TEMPORADAS'
+  | 'IPS TECNOLÓGICA / CATÁLOGOS GENERADOS'
+  | 'IPS TECNOLÓGICA / CLIENTES'
+  | 'IPS TECNOLÓGICA / DOCUMENTOS'
+  | 'IPS TECNOLÓGICA / COPIAS DE SEGURIDAD'
   | 'IPS TECNOLÓGICA / Productos'
   | 'IPS TECNOLÓGICA / Productos / Fotografías principales'
   | 'IPS TECNOLÓGICA / Productos / Fotografías adicionales'
@@ -1248,7 +1306,8 @@ export type DriveOfficialFolderPath =
   | 'IPS TECNOLÓGICA / Clientes'
   | 'IPS TECNOLÓGICA / Órdenes de servicio'
   | 'IPS TECNOLÓGICA / Garantías'
-  | 'IPS TECNOLÓGICA / Respaldos';
+  | 'IPS TECNOLÓGICA / Respaldos'
+  | string;
 
 export interface DriveMediaAsset {
   id: string;
@@ -1266,6 +1325,7 @@ export interface DriveMediaAsset {
   stableUrl: string;
   localUrl?: string;
   driveViewUrl: string;
+  driveDirectUrl?: string;
   verifiedInDrive: boolean;
   verifiedInSheets: boolean;
   status: 'active' | 'archived_previous' | 'broken';
@@ -1325,6 +1385,8 @@ export interface CrmOpportunity {
   title: string;
   description: string;
   estimatedValueCOP: number;
+  probabilityPercent?: number;
+  notes?: string;
   stage: 'Prospecto' | 'Cotización enviada' | 'En negociación' | 'Ganada' | 'Perdida';
   expectedCloseDate: string;
   assignedTo: string;
@@ -1343,6 +1405,7 @@ export interface CrmCustomerRecord {
   whatsapp?: string;
   documentOrNit?: string;
   documentId?: string;
+  nitOrDoc?: string;
   companyName?: string;
   city: string;
   address?: string;
@@ -1353,18 +1416,23 @@ export interface CrmCustomerRecord {
   lastContactDate?: string;
   nextFollowUpDate?: string;
   totalPurchasesCOP: number;
+  totalSpentCOP?: number;
   ordersCount: number;
   servicesCount: number;
+  technicalServicesCount?: number;
   warrantiesCount: number;
   preferredCategories?: string[];
+  preferredCategory?: string;
   internalNotes: string;
   followUps: CrmFollowUpEntry[];
   marketingConsent: boolean;
   consentAccepted?: boolean;
   consentDate?: string;
+  marketingConsentDate?: string;
   optedOut: boolean;
   optOutCommercial?: boolean;
   optOutDate?: string;
+  unsubscribedAt?: string;
   createdAt: string;
   updatedAt: string;
   updatedBy?: string;
@@ -1472,33 +1540,40 @@ export interface WhatsAppQrConfig {
 export interface LandingServiceItem {
   id: string;
   title: string;
-  category: string;
-  shortDescription: string;
-  features: string[];
-  ctaText: string;
-  ctaAction: 'support' | 'catalog' | 'portal' | 'whatsapp';
+  category?: string;
+  tag?: string;
+  shortDescription?: string;
+  description?: string;
+  icon?: string;
+  whatsappText?: string;
+  features?: string[];
+  ctaText?: string;
+  ctaAction?: 'support' | 'catalog' | 'portal' | 'whatsapp';
   imageUrl?: string;
-  visible: boolean;
-  order: number;
+  visible?: boolean;
+  order?: number;
 }
 
 export interface LandingTestimonialItem {
   id: string;
   clientName: string;
-  companyOrRole: string;
-  city: string;
-  quote: string;
+  companyOrRole?: string;
+  company?: string;
+  role?: string;
+  city?: string;
+  quote?: string;
+  comment?: string;
   rating: number;
-  serviceOrProduct: string;
-  visible: boolean;
+  serviceOrProduct?: string;
+  visible?: boolean;
 }
 
 export interface LandingFaqItem {
   id: string;
   question: string;
   answer: string;
-  category: string;
-  visible: boolean;
+  category?: string;
+  visible?: boolean;
 }
 
 export interface LandingSectionConfig {
@@ -1527,6 +1602,21 @@ export interface LandingPageCmsConfig {
   publishedAt: string;
   updatedAt: string;
   updatedBy: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroBadge?: string;
+  heroPrimaryCta?: string;
+  heroSecondaryCta?: string;
+  heroImageUrl?: string;
+  heroImageDriveId?: string;
+  aboutTitle?: string;
+  aboutDescription?: string;
+  aboutMission?: string;
+  aboutVision?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  contactAddress?: string;
+  businessHours?: string;
   hero: {
     badgeText: string;
     title: string;

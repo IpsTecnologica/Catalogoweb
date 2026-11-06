@@ -437,7 +437,7 @@ export const WhatsAppBusinessIntegration: React.FC<WhatsAppBusinessIntegrationPr
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <a
-                href={`https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage)}`}
+                href={`https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage || '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-sm"
@@ -456,7 +456,7 @@ export const WhatsAppBusinessIntegration: React.FC<WhatsAppBusinessIntegrationPr
               </span>
               <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
-                  `https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage)}`
+                  `https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage || '')}`
                 )}`}
                 alt="Código QR WhatsApp IPS TECNOLÓGICA"
                 className="w-44 h-44 rounded-lg border border-slate-200 p-2 bg-white"
@@ -467,7 +467,7 @@ export const WhatsAppBusinessIntegration: React.FC<WhatsAppBusinessIntegrationPr
               <div className="flex flex-wrap items-center justify-center gap-2 w-full pt-1">
                 <a
                   href={`https://api.qrserver.com/v1/create-qr-code/?size=500x500&format=png&data=${encodeURIComponent(
-                    `https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage)}`
+                    `https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage || '')}`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -481,7 +481,7 @@ export const WhatsAppBusinessIntegration: React.FC<WhatsAppBusinessIntegrationPr
                   type="button"
                   onClick={() =>
                     copyToClipboard(
-                      `https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage)}`,
+                      `https://wa.me/${(qrConfig.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(qrConfig.defaultWelcomeMessage || '')}`,
                       'Enlace directo wa.me'
                     )
                   }

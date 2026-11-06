@@ -3,20 +3,11 @@ import { Product, CompanyProfile, CatalogOptions } from '../types';
 import { formatCOP, formatBogotaDateTime } from './formatters';
 import { api } from '../services/api';
 
-/**
- * Letter Paper Dimensions in millimeters (ANSI Letter: 8.5 x 11 inches)
- */
-const PAGE_WIDTH = 215.9;
-const PAGE_HEIGHT = 279.4;
-
 const MARGIN_LEFT = 10;
-const MARGIN_RIGHT = 10;
 const MARGIN_TOP = 26; // start of product grid
 const MARGIN_BOTTOM = 18; // bottom reserved for footer
 
-const GRID_COLS = 3;
-const GRID_ROWS = 4;
-export const PRODUCTS_PER_PAGE = GRID_COLS * GRID_ROWS; // 12 products per page
+export const PRODUCTS_PER_PAGE = 12; // default 12 products per page
 
 export interface PreloadedImageAsset {
   dataUrl: string;
@@ -36,12 +27,54 @@ export interface PreloadedImageMap {
 
 export type PreloadedCatalogAssets = PreloadedImageMap;
 
+export function getPageDimensionsMm(
+  paperFormat: 'letter' | 'a4' = 'letter',
+  orientation: 'portrait' | 'landscape' = 'portrait'
+): { width: number; height: number } {
+  const baseW = paperFormat === 'a4' ? 210.0 : 215.9;
+  const baseH = paperFormat === 'a4' ? 297.0 : 279.4;
+  return orientation === 'landscape'
+    ? { width: baseH, height: baseW }
+    : { width: baseW, height: baseH };
+}
+
+export function getGridDimensions(
+  productsPerPage: 4 | 6 | 8 | 12 = 12,
+  orientation: 'portrait' | 'landscape' = 'portrait'
+): { cols: number; rows: number; perPage: number } {
+  switch (productsPerPage) {
+    case 4:
+      return { cols: 2, rows: 2, perPage: 4 };
+    case 6:
+      return orientation === 'landscape'
+        ? { cols: 3, rows: 2, perPage: 6 }
+        : { cols: 2, rows: 3, perPage: 6 };
+    case 8:
+      return orientation === 'landscape'
+        ? { cols: 4, rows: 2, perPage: 8 }
+        : { cols: 2, rows: 4, perPage: 8 };
+    case 12:
+    default:
+      return orientation === 'landscape'
+        ? { cols: 4, rows: 3, perPage: 12 }
+        : { cols: 3, rows: 4, perPage: 12 };
+  }
+}
+
 /**
  * Calculates page distribution for a list of products
  */
-export function calculateCatalogPages(productCount: number, includeCover: boolean) {
-  const interiorPages = Math.max(1, Math.ceil(productCount / PRODUCTS_PER_PAGE));
-  const totalPages = includeCover ? interiorPages + 1 : interiorPages;
+export function calculateCatalogPages(
+  productCount: number,
+  includeCover: boolean,
+  productsPerPage: 4 | 6 | 8 | 12 = 12,
+  includeIndex = false,
+  includeBackCover = false
+) {
+  const perPage = productsPerPage || PRODUCTS_PER_PAGE;
+  const interiorPages = Math.max(1, Math.ceil(productCount / perPage));
+  const extraPages = (includeCover ? 1 : 0) + (includeIndex ? 1 : 0) + (includeBackCover ? 1 : 0);
+  const totalPages = interiorPages + extraPages;
   return { interiorPages, totalPages };
 }
 
@@ -78,7 +111,6 @@ async function loadAndRasterizeImagePreservingAspect(
             return;
           }
 
-          // Scale down only if larger than maxDimensionPx, strictly keeping original aspect ratio
           const scale = Math.min(1, maxDimensionPx / Math.max(naturalW, naturalH));
           const canvasW = Math.max(1, Math.round(naturalW * scale));
           const canvasH = Math.max(1, Math.round(naturalH * scale));
@@ -223,7 +255,8 @@ export async function verifyAndPreloadCatalogImages(
 
 /**
  * Generates the professional PDF catalog with real verified images (strict aspect-ratio contain),
- * company logo, and promotional prices when active.
+ * company logo, configurable grid (4, 6, 8, or 12 products/page), format (Carta/A4), orientation,
+ * optional index, optional contact back cover, and DIAN tax rules.
  */
 export async function generateCatalogPDF(
   products: Product[],
@@ -234,48 +267,86 @@ export async function generateCatalogPDF(
   const filteredProducts = products.filter(p => !options.onlyActive || p.isActive);
   const imageAssets = preloaded || (await verifyAndPreloadCatalogImages(filteredProducts, company));
 
+  const paperFormat = options.paperFormat || 'letter';
+  const orientation = options.orientation || 'portrait';
+  const productsPerPage = options.productsPerPage || 12;
+  const includeCover = options.includeCover !== false;
+  const includeIndex = Boolean(options.includeIndex);
+  const includeBackCover = Boolean(options.includeBackCover);
+
   const doc = new jsPDF({
-    orientation: 'portrait',
+    orientation,
     unit: 'mm',
-    format: 'letter',
+    format: paperFormat,
     compress: true
   });
 
-  const { template, includeCover } = options;
-  const totalInteriorPages = Math.max(1, Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE));
-  const grandTotalPages = includeCover ? totalInteriorPages + 1 : totalInteriorPages;
+  const { interiorPages: totalInteriorPages, totalPages: grandTotalPages } = calculateCatalogPages(
+    filteredProducts.length,
+    includeCover,
+    productsPerPage,
+    includeIndex,
+    includeBackCover
+  );
 
-  const theme = getThemeColors(template, options.seasonalTemplate);
+  const theme = getThemeColors(options.template, options.seasonalTemplate);
+  let currentPageNumber = 1;
+  let hasDrawnFirstPage = false;
+
+  const ensureNextPage = () => {
+    if (hasDrawnFirstPage) {
+      doc.addPage(paperFormat, orientation);
+      currentPageNumber++;
+    } else {
+      hasDrawnFirstPage = true;
+    }
+  };
 
   // 1. COVER PAGE (Optional)
   if (includeCover) {
+    ensureNextPage();
     drawCoverPage(doc, company, options, filteredProducts, theme, imageAssets.logoAsset);
-    doc.addPage('letter', 'portrait');
   }
 
-  // 2. INTERIOR PAGES (3 cols x 4 rows = max 12 items per page)
-  for (let pageIdx = 0; pageIdx < totalInteriorPages; pageIdx++) {
-    if (pageIdx > 0) {
-      doc.addPage('letter', 'portrait');
-    }
+  // 2. INDEX PAGE (Optional)
+  if (includeIndex) {
+    ensureNextPage();
+    drawIndexPage(
+      doc,
+      company,
+      options,
+      filteredProducts,
+      theme,
+      imageAssets.logoAsset,
+      currentPageNumber,
+      grandTotalPages
+    );
+  }
 
-    // Interior Header with Logo & Company Info
+  // 3. INTERIOR PRODUCT PAGES (4, 6, 8, or 12 items per page)
+  for (let pageIdx = 0; pageIdx < totalInteriorPages; pageIdx++) {
+    ensureNextPage();
+
     drawInteriorHeader(doc, company, options, theme, imageAssets.logoAsset);
 
-    // Slice products for this page
-    const startIndex = pageIdx * PRODUCTS_PER_PAGE;
-    const pageProducts = filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+    const startIndex = pageIdx * productsPerPage;
+    const pageProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
 
-    // Draw the 3x4 grid with real product photos & promotions
-    drawProductGrid(doc, pageProducts, theme, options, imageAssets.productAssets);
+    drawProductGrid(doc, pageProducts, company, theme, options, imageAssets.productAssets);
 
-    // Interior Footer with pagination
-    drawInteriorFooter(
+    drawInteriorFooter(doc, company, options, theme, currentPageNumber, grandTotalPages);
+  }
+
+  // 4. BACK COVER CONTACT PAGE (Optional)
+  if (includeBackCover) {
+    ensureNextPage();
+    drawBackCoverPage(
       doc,
       company,
       options,
       theme,
-      includeCover ? pageIdx + 2 : pageIdx + 1,
+      imageAssets.logoAsset,
+      currentPageNumber,
       grandTotalPages
     );
   }
@@ -364,6 +435,16 @@ function getThemeColors(template: string, seasonalTemplate?: CatalogOptions['sea
   }
 }
 
+function getTaxFooterNotice(company: CompanyProfile): string {
+  if (company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog) {
+    return company.taxConfig.invoiceFooterText || `Régimen Responsable de IVA (${company.taxConfig.ivaRatePercent}%).`;
+  }
+  return (
+    company.taxConfig?.invoiceFooterText ||
+    'Persona natural no responsable de IVA · Precios oficiales en Pesos Colombianos (COP).'
+  );
+}
+
 /**
  * Draws the independent Cover Page with official company logo, details, and promotion validity
  */
@@ -375,6 +456,10 @@ function drawCoverPage(
   theme: ReturnType<typeof getThemeColors>,
   logoAsset: PreloadedImageAsset | null
 ) {
+  const { width: PAGE_WIDTH, height: PAGE_HEIGHT } = getPageDimensionsMm(
+    options.paperFormat,
+    options.orientation
+  );
   const marginX = getEffectiveHorizontalMargin(options);
   const contentWidth = PAGE_WIDTH - marginX * 2;
   const productCount = filteredProducts.length;
@@ -382,114 +467,110 @@ function drawCoverPage(
 
   // Top Corporate Accent Bar
   doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
-  doc.rect(0, 0, PAGE_WIDTH, 12, 'F');
+  doc.rect(0, 0, PAGE_WIDTH, 10, 'F');
 
   // Background Header Block
   doc.setFillColor(theme.darkHeader[0], theme.darkHeader[1], theme.darkHeader[2]);
-  doc.rect(0, 12, PAGE_WIDTH, 74, 'F');
+  doc.rect(0, 10, PAGE_WIDTH, 68, 'F');
 
-  // Draw Configured Company Logo or Emblem with strict aspect ratio
   let textStartX = marginX + 26;
   if (logoAsset) {
     doc.setFillColor(255, 255, 255);
-    doc.roundedRect(marginX, 22, 42, 20, 2, 2, 'F');
-    const ok = drawImageContainInBox(doc, logoAsset, marginX, 22, 42, 20, 1.2);
+    doc.roundedRect(marginX, 18, 42, 20, 2, 2, 'F');
+    const ok = drawImageContainInBox(doc, logoAsset, marginX, 18, 42, 20, 1.2);
     if (ok) {
       textStartX = marginX + 47;
     } else {
       doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
-      doc.roundedRect(marginX, 24, 18, 18, 2, 2, 'F');
+      doc.roundedRect(marginX, 20, 18, 18, 2, 2, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(14);
-      doc.text('IPS', marginX + 9, 36, { align: 'center' });
+      doc.text('IPS', marginX + 9, 32, { align: 'center' });
     }
   } else {
     doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
-    doc.roundedRect(marginX, 24, 18, 18, 2, 2, 'F');
+    doc.roundedRect(marginX, 20, 18, 18, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(14);
-    doc.text('IPS', marginX + 9, 36, { align: 'center' });
+    doc.text('IPS', marginX + 9, 32, { align: 'center' });
   }
 
   // Company Name
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(22);
+  doc.setFontSize(21);
   doc.setFont('helvetica', 'bold');
   const companyLines = doc.splitTextToSize(company.name || 'IPS TECNOLÓGICA', PAGE_WIDTH - marginX - textStartX);
-  doc.text(companyLines.slice(0, 1), textStartX, 32);
+  doc.text(companyLines.slice(0, 1), textStartX, 28);
 
   // Slogan
-  doc.setFontSize(9.2);
+  doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(203, 213, 225);
   const sloganLines = doc.splitTextToSize(
     company.slogan || 'Innovación y Soluciones Tecnológicas de Alta Gama',
     PAGE_WIDTH - marginX - textStartX
   );
-  doc.text(sloganLines.slice(0, 1), textStartX, 40);
+  doc.text(sloganLines.slice(0, 1), textStartX, 36);
 
   // Thin primary divider
   doc.setDrawColor(theme.primary[0], theme.primary[1], theme.primary[2]);
-  doc.setLineWidth(1.2);
-  doc.line(marginX, 48, PAGE_WIDTH - marginX, 48);
+  doc.setLineWidth(1.1);
+  doc.line(marginX, 44, PAGE_WIDTH - marginX, 44);
 
   // Generation Date & Edition Metadata
-  doc.setFontSize(8.2);
+  doc.setFontSize(8);
   doc.setTextColor(226, 232, 240);
   const generatedStr = formatBogotaDateTime(new Date().toISOString());
   const seasonalTag = theme.seasonalName ? ` · EDICIÓN: ${theme.seasonalName.toUpperCase()}` : '';
-  doc.text(`FECHA DE GENERACIÓN (COLOMBIA): ${generatedStr.toUpperCase()}${seasonalTag}`, marginX, 56);
+  doc.text(`FECHA DE GENERACIÓN (COLOMBIA): ${generatedStr.toUpperCase()}${seasonalTag}`, marginX, 52);
 
   if (activePromoCount > 0) {
     doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
-    doc.roundedRect(marginX, 61, contentWidth, 10, 2, 2, 'F');
+    doc.roundedRect(marginX, 57, contentWidth, 9.5, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.2);
+    doc.setFontSize(8);
     doc.text(
       `★ INCLUYE ${activePromoCount} ${activePromoCount === 1 ? 'PRODUCTO CON PROMOCIÓN ACTIVA' : 'PRODUCTOS CON PROMOCIONES ACTIVAS'} POR TIEMPO LIMITADO`,
       marginX + 4,
-      67.5
+      63
     );
   } else {
-    doc.setFontSize(8);
+    doc.setFontSize(7.8);
     doc.setTextColor(148, 163, 184);
     const valLines = doc.splitTextToSize(
       options.validityText ||
         options.offerValidityText ||
-        'Vigencia comercial sujeta a disponibilidad de inventario · Precios en COP con IVA incluido.',
+        `Vigencia comercial sujeta a disponibilidad de inventario · ${getTaxFooterNotice(company)}`,
       contentWidth
     );
-    doc.text(valLines.slice(0, 2), marginX, 64);
+    doc.text(valLines.slice(0, 2), marginX, 60);
   }
 
   // Central Hero Frame
-  const cardY = 96;
-  const cardH = 100;
+  const cardY = 86;
+  const cardH = Math.min(94, PAGE_HEIGHT - cardY - 68);
   doc.setFillColor(248, 250, 252);
   doc.setDrawColor(226, 232, 240);
   doc.setLineWidth(0.5);
   doc.roundedRect(marginX, cardY, contentWidth, cardH, 4, 4, 'FD');
 
-  // Left vertical primary strip in hero
   doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
-  doc.rect(marginX, cardY + 8, 4, cardH - 16, 'F');
+  doc.rect(marginX, cardY + 6, 4, cardH - 12, 'F');
 
-  // Hero Title (measured & wrapped so it never overflows)
   doc.setTextColor(17, 24, 39);
-  doc.setFontSize(18);
+  doc.setFontSize(17);
   doc.setFont('helvetica', 'bold');
   const heroTitleLines = doc.splitTextToSize(
     options.title || 'PORTAFOLIO DE EQUIPOS TECNOLÓGICOS',
     contentWidth - 22
   );
-  doc.text(heroTitleLines.slice(0, 2), marginX + 12, cardY + 18);
+  doc.text(heroTitleLines.slice(0, 2), marginX + 12, cardY + 15);
 
-  // Subtitle
-  const subY = heroTitleLines.length > 1 ? cardY + 32 : cardY + 27;
-  doc.setFontSize(10);
+  const subY = heroTitleLines.length > 1 ? cardY + 28 : cardY + 23;
+  doc.setFontSize(9.5);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(71, 85, 105);
   const subLines = doc.splitTextToSize(
@@ -498,89 +579,265 @@ function drawCoverPage(
   );
   doc.text(subLines.slice(0, 2), marginX + 12, subY);
 
-  // Company Description (wrapped)
-  doc.setFontSize(8.8);
+  doc.setFontSize(8.5);
   doc.setTextColor(100, 116, 139);
   const descLines = doc.splitTextToSize(
     company.description ||
       'Presentamos nuestra selección oficial de productos tecnológicos certificados con garantía directa en Colombia. Soluciones integrales para optimizar el rendimiento y la conectividad empresarial.',
     contentWidth - 24
   );
-  doc.text(descLines.slice(0, 3), marginX + 12, subY + 10);
+  doc.text(descLines.slice(0, 2), marginX + 12, subY + 9);
 
   // 3 Feature Metrics inside Hero
-  const featY = cardY + 70;
+  const featY = cardY + cardH - 24;
   const boxGap = 6;
   const boxW = (contentWidth - 24 - boxGap * 2) / 3;
 
   doc.setFillColor(255, 255, 255);
-  doc.roundedRect(marginX + 12, featY, boxW, 20, 2, 2, 'FD');
+  doc.roundedRect(marginX + 12, featY, boxW, 18, 2, 2, 'FD');
   doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(12);
-  doc.text(`${productCount} EQUIPOS`, marginX + 12 + boxW / 2, featY + 9, { align: 'center' });
+  doc.setFontSize(11);
+  doc.text(`${productCount} EQUIPOS`, marginX + 12 + boxW / 2, featY + 8, { align: 'center' });
   doc.setTextColor(100, 116, 139);
-  doc.setFontSize(7.2);
+  doc.setFontSize(7);
   doc.setFont('helvetica', 'normal');
-  doc.text('Fotografías reales proporcionales', marginX + 12 + boxW / 2, featY + 15, { align: 'center' });
+  doc.text('Fotografías reales proporcionales', marginX + 12 + boxW / 2, featY + 14, { align: 'center' });
 
   doc.setFillColor(255, 255, 255);
-  doc.roundedRect(marginX + 12 + boxW + boxGap, featY, boxW, 20, 2, 2, 'FD');
+  doc.roundedRect(marginX + 12 + boxW + boxGap, featY, boxW, 18, 2, 2, 'FD');
   doc.setTextColor(17, 24, 39);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11.5);
-  doc.text('100% GARANTÍA', marginX + 12 + boxW + boxGap + boxW / 2, featY + 9, { align: 'center' });
+  doc.setFontSize(11);
+  doc.text('100% GARANTÍA', marginX + 12 + boxW + boxGap + boxW / 2, featY + 8, { align: 'center' });
   doc.setTextColor(100, 116, 139);
-  doc.setFontSize(7.2);
+  doc.setFontSize(7);
   doc.setFont('helvetica', 'normal');
-  doc.text('Soporte directo Ley 1480', marginX + 12 + boxW + boxGap + boxW / 2, featY + 15, { align: 'center' });
+  doc.text('Soporte directo Ley 1480', marginX + 12 + boxW + boxGap + boxW / 2, featY + 14, { align: 'center' });
 
   doc.setFillColor(255, 255, 255);
-  doc.roundedRect(marginX + 12 + (boxW + boxGap) * 2, featY, boxW, 20, 2, 2, 'FD');
+  doc.roundedRect(marginX + 12 + (boxW + boxGap) * 2, featY, boxW, 18, 2, 2, 'FD');
   doc.setTextColor(17, 24, 39);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11.5);
-  doc.text('ENVÍO NACIONAL', marginX + 12 + (boxW + boxGap) * 2 + boxW / 2, featY + 9, { align: 'center' });
+  doc.setFontSize(11);
+  doc.text('ENVÍO NACIONAL', marginX + 12 + (boxW + boxGap) * 2 + boxW / 2, featY + 8, { align: 'center' });
   doc.setTextColor(100, 116, 139);
-  doc.setFontSize(7.2);
+  doc.setFontSize(7);
   doc.setFont('helvetica', 'normal');
-  doc.text('Despachos asegurados', marginX + 12 + (boxW + boxGap) * 2 + boxW / 2, featY + 15, { align: 'center' });
+  doc.text('Despachos asegurados', marginX + 12 + (boxW + boxGap) * 2 + boxW / 2, featY + 14, { align: 'center' });
 
   // Contact & Business Info Footer on Cover
-  const contactY = 208;
+  const contactY = PAGE_HEIGHT - 62;
   doc.setFillColor(17, 24, 39);
-  doc.roundedRect(marginX, contactY, contentWidth, 56, 4, 4, 'F');
+  doc.roundedRect(marginX, contactY, contentWidth, 50, 4, 4, 'F');
 
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(10);
+  doc.setFontSize(9.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('DATOS DE CONTACTO OFICIALES Y CANALES COMERCIALES', marginX + 10, contactY + 11);
+  doc.text('DATOS DE CONTACTO OFICIALES Y CANALES COMERCIALES', marginX + 10, contactY + 10);
 
-  doc.setFontSize(8);
+  doc.setFontSize(7.8);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(203, 213, 225);
-  doc.text(`Empresa: ${company.name} ${company.nit ? `· NIT: ${company.nit}` : ''}`, marginX + 10, contactY + 20);
-  doc.text(`Teléfono / PBX: ${company.phone || '+57 (601) 745-8920'}`, marginX + 10, contactY + 26);
-  doc.text(`WhatsApp Comercial: ${company.whatsapp || '+57 310 894 7231'}`, marginX + 10, contactY + 32);
-  doc.text(`Correo Electrónico: ${company.email || 'contacto@ipstecnologica.com.co'}`, marginX + 10, contactY + 38);
-  doc.text(`Dirección: ${company.address || 'Cra. 15 # 85-30, Of. 402'} · ${company.city || 'Bogotá D.C.'}`, marginX + 10, contactY + 44);
-  doc.text(`Sitio Web: ${company.website || 'https://ipstecnologica.com.co'}`, marginX + 10, contactY + 50);
+  doc.text(`Empresa: ${company.name} ${company.nit ? `· NIT: ${company.nit}` : ''}`, marginX + 10, contactY + 18);
+  doc.text(`Teléfono / PBX: ${company.phone || '+57 (601) 745-8920'}`, marginX + 10, contactY + 24);
+  doc.text(`WhatsApp Comercial: ${company.whatsapp || '+57 310 894 7231'}`, marginX + 10, contactY + 30);
+  doc.text(`Correo Electrónico: ${company.email || 'contacto@ipstecnologica.com.co'}`, marginX + 10, contactY + 36);
+  doc.text(
+    `Dirección: ${company.address || 'Cra. 15 # 85-30, Of. 402'} · ${company.city || 'Bogotá D.C.'}`,
+    marginX + 10,
+    contactY + 42
+  );
 
   doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
   doc.setFont('helvetica', 'bold');
-  doc.text('REDES Y ATENCIÓN DIGITAL:', marginX + contentWidth * 0.62, contactY + 20);
+  doc.text('REDES Y ATENCIÓN DIGITAL:', marginX + contentWidth * 0.62, contactY + 18);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(203, 213, 225);
-  doc.text(`Instagram: ${company.social?.instagram || '@ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 27);
-  doc.text(`Facebook: ${company.social?.facebook || '/ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 34);
-  doc.text(`TikTok: ${company.social?.tiktok || '@ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 41);
-  doc.text(`YouTube: ${company.social?.youtube || '@ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 48);
+  doc.text(`Sitio Web: ${company.website || 'https://ipstecnologica.com.co'}`, marginX + contentWidth * 0.62, contactY + 24);
+  doc.text(`Instagram: ${company.social?.instagram || '@ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 30);
+  doc.text(`Facebook: ${company.social?.facebook || '/ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 36);
+  doc.text(`TikTok: ${company.social?.tiktok || '@ipstecnologica'}`, marginX + contentWidth * 0.62, contactY + 42);
 
-  // Bottom Notice
+  // Bottom Notice (Strictly without IVA unless configured)
   doc.setTextColor(100, 116, 139);
   doc.setFontSize(6.8);
-  const termsLine = (company.commercialTerms || 'Precios en pesos colombianos (COP). Incluyen IVA.').substring(0, 135);
-  doc.text(termsLine, PAGE_WIDTH / 2, PAGE_HEIGHT - 6, { align: 'center' });
+  const termsLine = getTaxFooterNotice(company).substring(0, 135);
+  doc.text(termsLine, PAGE_WIDTH / 2, PAGE_HEIGHT - 5, { align: 'center' });
+}
+
+/**
+ * Draws the optional Category & Product Index Page
+ */
+function drawIndexPage(
+  doc: jsPDF,
+  company: CompanyProfile,
+  options: CatalogOptions,
+  filteredProducts: Product[],
+  theme: ReturnType<typeof getThemeColors>,
+  logoAsset: PreloadedImageAsset | null,
+  pageNum: number,
+  totalPages: number
+) {
+  const { width: PAGE_WIDTH, height: PAGE_HEIGHT } = getPageDimensionsMm(
+    options.paperFormat,
+    options.orientation
+  );
+  const marginX = getEffectiveHorizontalMargin(options);
+  const contentWidth = PAGE_WIDTH - marginX * 2;
+
+  drawInteriorHeader(doc, company, options, theme, logoAsset);
+
+  doc.setFillColor(17, 24, 39);
+  doc.roundedRect(marginX, 26, contentWidth, 12, 2, 2, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.text('ÍNDICE DE CATEGORÍAS Y REFERENCIAS DEL CATÁLOGO', marginX + 6, 33.5);
+
+  const categoryCounts: Record<string, { count: number; minPrice: number; maxPrice: number }> = {};
+  filteredProducts.forEach(p => {
+    const cat = p.category || 'General';
+    const price = p.activePromotion ? p.activePromotion.promotionalPriceCOP : p.priceCOP;
+    if (!categoryCounts[cat]) {
+      categoryCounts[cat] = { count: 0, minPrice: price, maxPrice: price };
+    }
+    categoryCounts[cat].count += 1;
+    categoryCounts[cat].minPrice = Math.min(categoryCounts[cat].minPrice, price);
+    categoryCounts[cat].maxPrice = Math.max(categoryCounts[cat].maxPrice, price);
+  });
+
+  let y = 46;
+  doc.setFontSize(8.5);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
+  doc.text('RESUMEN POR LÍNEA TECNOLÓGICA', marginX, y);
+  y += 5;
+
+  Object.entries(categoryCounts).forEach(([cat, stats]) => {
+    if (y > PAGE_HEIGHT - 36) return;
+    doc.setFillColor(248, 250, 252);
+    doc.setDrawColor(226, 232, 240);
+    doc.roundedRect(marginX, y, contentWidth, 8, 1.5, 1.5, 'FD');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(15, 23, 42);
+    doc.text(cat, marginX + 4, y + 5.3);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text(
+      `${stats.count} ${stats.count === 1 ? 'referencia' : 'referencias'} · Desde ${formatCOP(stats.minPrice)} hasta ${formatCOP(stats.maxPrice)}`,
+      PAGE_WIDTH - marginX - 4,
+      y + 5.3,
+      { align: 'right' }
+    );
+    y += 10;
+  });
+
+  y += 4;
+  if (y < PAGE_HEIGHT - 45) {
+    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
+    doc.text('LISTADO RÁPIDO DE EQUIPOS INCLUIDOS', marginX, y);
+    y += 5;
+
+    const maxRows = Math.floor((PAGE_HEIGHT - 25 - y) / 5.5);
+    filteredProducts.slice(0, maxRows).forEach((p, idx) => {
+      const price = p.activePromotion ? p.activePromotion.promotionalPriceCOP : p.priceCOP;
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7);
+      doc.setTextColor(15, 23, 42);
+      doc.text(`${idx + 1}. [${p.reference}] ${p.name.substring(0, 62)}`, marginX + 2, y);
+
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
+      doc.text(formatCOP(price), PAGE_WIDTH - marginX - 2, y, { align: 'right' });
+      y += 5.5;
+    });
+  }
+
+  drawInteriorFooter(doc, company, options, theme, pageNum, totalPages);
+}
+
+/**
+ * Draws the optional Final Corporate Contact Back Cover Page
+ */
+function drawBackCoverPage(
+  doc: jsPDF,
+  company: CompanyProfile,
+  options: CatalogOptions,
+  theme: ReturnType<typeof getThemeColors>,
+  logoAsset: PreloadedImageAsset | null,
+  pageNum: number,
+  totalPages: number
+) {
+  const { width: PAGE_WIDTH, height: PAGE_HEIGHT } = getPageDimensionsMm(
+    options.paperFormat,
+    options.orientation
+  );
+  const marginX = getEffectiveHorizontalMargin(options);
+  const contentWidth = PAGE_WIDTH - marginX * 2;
+
+  drawInteriorHeader(doc, company, options, theme, logoAsset);
+
+  const boxY = 40;
+  const boxH = PAGE_HEIGHT - 70;
+  doc.setFillColor(17, 24, 39);
+  doc.roundedRect(marginX, boxY, contentWidth, boxH, 4, 4, 'F');
+
+  doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
+  doc.rect(marginX, boxY, contentWidth, 6, 'F');
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.text('CONTACTO COMERCIAL Y PEDIDOS DIRECTOS', PAGE_WIDTH / 2, boxY + 24, { align: 'center' });
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(203, 213, 225);
+  doc.text(
+    company.slogan || 'Asesoría tecnológica, equipos nuevos y remanufacturados con garantía certificada.',
+    PAGE_WIDTH / 2,
+    boxY + 33,
+    { align: 'center' }
+  );
+
+  const infoY = boxY + 48;
+  doc.setFillColor(30, 41, 59);
+  doc.roundedRect(marginX + 12, infoY, contentWidth - 24, 68, 3, 3, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
+  doc.text('CANALES OFICIALES DE ATENCIÓN', marginX + 20, infoY + 12);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(248, 250, 252);
+  doc.text(`• WhatsApp Pedidos y Cotizaciones: ${company.whatsapp || '+57 310 894 7231'}`, marginX + 20, infoY + 23);
+  doc.text(`• Línea Telefónica / PBX: ${company.phone || '+57 (601) 745-8920'}`, marginX + 20, infoY + 32);
+  doc.text(`• Correo Electrónico: ${company.email || 'contacto@ipstecnologica.com.co'}`, marginX + 20, infoY + 41);
+  doc.text(
+    `• Sede Principal: ${company.address || 'Cra. 15 # 85-30, Of. 402'} — ${company.city || 'Bogotá D.C., Colombia'}`,
+    marginX + 20,
+    infoY + 50
+  );
+  doc.text(`• Catálogo Online 24/7: ${company.website || 'https://ipstecnologica.com.co'}`, marginX + 20, infoY + 59);
+
+  doc.setFontSize(8);
+  doc.setTextColor(148, 163, 184);
+  const legalLines = doc.splitTextToSize(
+    `${getTaxFooterNotice(company)} · Garantía directa bajo la Ley 1480 de 2011 (Estatuto del Consumidor).`,
+    contentWidth - 28
+  );
+  doc.text(legalLines, PAGE_WIDTH / 2, boxY + boxH - 14, { align: 'center' });
+
+  drawInteriorFooter(doc, company, options, theme, pageNum, totalPages);
 }
 
 /**
@@ -593,9 +850,9 @@ function drawInteriorHeader(
   theme: ReturnType<typeof getThemeColors>,
   logoAsset: PreloadedImageAsset | null
 ) {
+  const { width: PAGE_WIDTH } = getPageDimensionsMm(options.paperFormat, options.orientation);
   const marginX = getEffectiveHorizontalMargin(options);
 
-  // Top primary line
   doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
   doc.rect(0, 0, PAGE_WIDTH, 3.5, 'F');
 
@@ -607,7 +864,6 @@ function drawInteriorHeader(
     }
   }
 
-  // Company Name & Slogan on Left
   doc.setTextColor(theme.textDark[0], theme.textDark[1], theme.textDark[2]);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
@@ -618,7 +874,6 @@ function drawInteriorHeader(
   doc.setTextColor(theme.textMuted[0], theme.textMuted[1], theme.textMuted[2]);
   doc.text((company.slogan || 'Catálogo Profesional de Productos Tecnológicos').substring(0, 56), textX, 15.2);
 
-  // Title & Contact on Right
   doc.setFontSize(8.2);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(theme.primary[0], theme.primary[1], theme.primary[2]);
@@ -632,22 +887,31 @@ function drawInteriorHeader(
     align: 'right'
   });
 
-  // Divider line
   doc.setDrawColor(theme.border[0], theme.border[1], theme.border[2]);
   doc.setLineWidth(0.4);
   doc.line(marginX, 20, PAGE_WIDTH - marginX, 20);
 }
 
 /**
- * Draws 3 columns x 4 rows = 12 products maximum per page
+ * Draws configurable grid (4, 6, 8, or 12 products per page)
  */
 function drawProductGrid(
   doc: jsPDF,
   products: Product[],
+  company: CompanyProfile,
   theme: ReturnType<typeof getThemeColors>,
   options: CatalogOptions,
   productAssets: Record<string, PreloadedImageAsset>
 ) {
+  const { width: PAGE_WIDTH, height: PAGE_HEIGHT } = getPageDimensionsMm(
+    options.paperFormat,
+    options.orientation
+  );
+  const { cols: GRID_COLS, rows: GRID_ROWS } = getGridDimensions(
+    options.productsPerPage || 12,
+    options.orientation || 'portrait'
+  );
+
   const marginX = getEffectiveHorizontalMargin(options);
   const availableWidth = PAGE_WIDTH - marginX * 2;
   const colGap = 4;
@@ -667,21 +931,29 @@ function drawProductGrid(
       const x = marginX + col * (colWidth + colGap);
       const y = startY + row * (rowHeight + rowGap);
 
-      drawProductCard(doc, product, x, y, colWidth, rowHeight, theme, options, productAssets[product.id]);
+      drawProductCard(
+        doc,
+        product,
+        company,
+        x,
+        y,
+        colWidth,
+        rowHeight,
+        theme,
+        options,
+        productAssets[product.id]
+      );
     }
   }
 }
 
 /**
- * Draws an individual product card with:
- * - Strict text width/height measurement before drawing
- * - Automatic line wrapping within inner card padding
- * - Reserved non-overlapping zones for Photo, Reference+Brand, Title, Description, and Price Bar
- * - Image fitted via strict `contain` calculation centered horizontally and vertically (never stretched)
+ * Draws an individual product card with proportional `contain` photo and tax-compliant price bar
  */
 function drawProductCard(
   doc: jsPDF,
   product: Product,
+  company: CompanyProfile,
   x: number,
   y: number,
   width: number,
@@ -694,7 +966,6 @@ function drawProductCard(
   const padX = 2.8;
   const innerW = Math.max(20, width - padX * 2);
 
-  // Card outer container
   doc.setFillColor(theme.bgCard[0], theme.bgCard[1], theme.bgCard[2]);
   if (hasPromo) {
     doc.setDrawColor(theme.primary[0], theme.primary[1], theme.primary[2]);
@@ -705,8 +976,8 @@ function drawProductCard(
   }
   doc.roundedRect(x, y, width, height, 1.5, 1.5, 'FD');
 
-  // 1. Uniform Upper Photo Area (strictly bounded)
-  const photoH = 22.5;
+  // 1. Uniform Upper Photo Area (scales dynamically with card height for 4/6/8/12 grids)
+  const photoH = Math.max(20, Math.min(height * 0.44, 48));
   const photoW = width - 4;
   const photoX = x + 2;
   const photoY = y + 2;
@@ -732,7 +1003,6 @@ function drawProductCard(
     doc.text(product.reference, photoX + photoW / 2, photoY + photoH / 2 + 2.5, { align: 'center' });
   }
 
-  // Promotional Corner Ribbon if active
   if (hasPromo && product.activePromotion) {
     const pct = product.activePromotion.savingsPercentage ?? product.activePromotion.discountPercentage ?? 0;
     doc.setFillColor(theme.primary[0], theme.primary[1], theme.primary[2]);
@@ -745,11 +1015,10 @@ function drawProductCard(
     });
   }
 
-  // Reserve bottom price zone height so text above never collides with prices
   const priceZoneH = options.includePrice !== false ? (hasPromo ? 9.5 : 7.5) : 1.5;
   const maxContentBottomY = y + height - priceZoneH - 1.2;
 
-  // 2. Reference Code & Brand/Category (measured so left & right never collide)
+  // 2. Reference Code & Brand/Category
   let cursorY = photoY + photoH + 3.4;
   let refWidth = 0;
   if (options.includeReference !== false) {
@@ -771,7 +1040,7 @@ function drawProductCard(
   const fittedBrandCat = doc.splitTextToSize(rawBrandCat, maxRightTextW)[0] || 'Disponible';
   doc.text(fittedBrandCat, x + width - padX, cursorY, { align: 'right' });
 
-  // 3. Product Name (measured & wrapped up to 2 lines, height-checked)
+  // 3. Product Name
   cursorY += 3.5;
   doc.setFontSize(6.8);
   doc.setFont('helvetica', 'bold');
@@ -785,7 +1054,7 @@ function drawProductCard(
   }
   cursorY += titleLines.length * titleLineHeight + 0.8;
 
-  // 4. Short Description (wrapped & strictly clipped to available vertical space above price bar)
+  // 4. Short Description
   if (options.includeDescription !== false && cursorY + 2.2 <= maxContentBottomY) {
     doc.setFontSize(5.2);
     doc.setFont('helvetica', 'normal');
@@ -804,13 +1073,18 @@ function drawProductCard(
     }
   }
 
-  // 5. Bottom Price Area (Non-overlapping normal + promotional price)
+  // 5. Bottom Price Area (Tax-compliant: never shows "IVA incluido" unless enabled in Admin taxConfig)
   if (options.includePrice !== false) {
     const barY = y + height - priceZoneH;
 
     doc.setDrawColor(241, 245, 249);
     doc.setLineWidth(0.25);
     doc.line(x + padX, barY, x + width - padX, barY);
+
+    const priceRightLabel =
+      company.taxConfig?.ivaEnabled && company.taxConfig?.showIvaLabelInCatalog
+        ? company.taxConfig.priceLabelText || `IVA ${company.taxConfig.ivaRatePercent}%`
+        : 'Precio COP';
 
     if (hasPromo && product.activePromotion) {
       const normalStr = `Antes: ${formatCOP(product.priceCOP)}`;
@@ -849,13 +1123,13 @@ function drawProductCard(
       doc.setFontSize(5);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(100, 116, 139);
-      doc.text('IVA incluido', x + width - padX, barY + 5.0, { align: 'right' });
+      doc.text(priceRightLabel, x + width - padX, barY + 5.0, { align: 'right' });
     }
   }
 }
 
 /**
- * Draws interior footer with company links, conditions and exact pagination
+ * Draws interior footer with company links, tax-compliant conditions and exact pagination
  */
 function drawInteriorFooter(
   doc: jsPDF,
@@ -865,6 +1139,10 @@ function drawInteriorFooter(
   pageNum: number,
   totalPages: number
 ) {
+  const { width: PAGE_WIDTH, height: PAGE_HEIGHT } = getPageDimensionsMm(
+    options.paperFormat,
+    options.orientation
+  );
   const marginX = getEffectiveHorizontalMargin(options);
   const footerY = PAGE_HEIGHT - 12;
 
@@ -884,7 +1162,7 @@ function drawInteriorFooter(
   doc.setFontSize(5.4);
   doc.text(
     options.includeTermsFooter
-      ? 'Precios en COP incluyen IVA. Las promociones activas rigen únicamente hasta su fecha y hora de finalización.'
+      ? `${getTaxFooterNotice(company)} Las promociones activas rigen hasta su fecha de finalización.`
       : 'Asesoría comercial y despachos asegurados a toda Colombia.',
     marginX,
     footerY + 5.5

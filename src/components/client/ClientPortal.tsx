@@ -773,7 +773,7 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({
                   Seguimiento de Envíos y Números de Guía
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Rastreo de despachos en Cali, Valle del Cauca y envíos nacionales con transportadora certificada.
+                  Consulta el estado de tu despacho, empresa transportadora, número de guía, fecha de envío y enlace oficial de rastreo.
                 </p>
               </div>
 
@@ -781,7 +781,7 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({
                 <div className="py-12 text-center space-y-2">
                   <Truck className="w-10 h-10 text-slate-300 mx-auto" />
                   <p className="text-xs text-slate-500">
-                    Cuando tus pedidos sean despachados verás aquí la transportadora, el Número de Guía y el enlace de rastreo.
+                    Cuando tus pedidos sean despachados verás aquí la transportadora, el Número de Guía y el botón «Consultar mi envío».
                   </p>
                 </div>
               ) : (
@@ -789,12 +789,12 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({
                   {shipments.map(sh => (
                     <div key={sh.id} className="p-4 rounded-xl border border-slate-200 bg-slate-50/40 space-y-3 text-xs">
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           <span className="font-mono font-bold text-slate-900 bg-white px-2.5 py-1 rounded border border-slate-200">
-                            Pedido {sh.orderId}
+                            Pedido: {sh.orderId}
                           </span>
                           <span className="font-mono font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200">
-                            Guía: {sh.guideNumber}
+                            Guía: {sh.guideNumber || sh.trackingNumber}
                           </span>
                         </div>
                         <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold">
@@ -802,34 +802,61 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-slate-600">
+                      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-slate-600">
                         <div>
-                          <span className="text-slate-400 block">Transportadora</span>
+                          <span className="text-slate-400 block">Empresa Transportadora</span>
                           <strong className="text-slate-900">{sh.carrier}</strong>
+                        </div>
+                        <div>
+                          <span className="text-slate-400 block">Fecha de Despacho</span>
+                          <strong className="text-slate-900">
+                            {sh.dispatchDate || (sh.shippedAt ? sh.shippedAt.slice(0, 10) : 'En preparación')}
+                          </strong>
                         </div>
                         <div>
                           <span className="text-slate-400 block">Destino</span>
                           <strong className="text-slate-900">
-                            {sh.city}, {sh.department} ({sh.shippingType})
+                            {sh.city}, {sh.department}
                           </strong>
                         </div>
                         <div>
                           <span className="text-slate-400 block">Entrega Estimada</span>
-                          <strong className="text-slate-900">{sh.estimatedDeliveryDate || 'En tránsito'}</strong>
+                          <strong className="text-slate-900">{sh.estimatedDeliveryDate || 'Según transportadora'}</strong>
                         </div>
                       </div>
 
+                      {sh.notes && (
+                        <div className="p-2.5 rounded-lg bg-white border border-slate-200 text-slate-600">
+                          <strong className="text-slate-800">Información del envío:</strong> {sh.notes}
+                        </div>
+                      )}
+
                       <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200">
-                        <span className="text-slate-500">{sh.address}</span>
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="text-slate-500">{sh.address}</span>
+                          {sh.address && (
+                            <a
+                              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                `${sh.address}, ${sh.city}, Colombia`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 hover:underline"
+                            >
+                              <MapPin className="w-3.5 h-3.5" />
+                              Ver dirección en Google Maps
+                            </a>
+                          )}
+                        </div>
                         {sh.trackingUrl && (
                           <a
                             href={sh.trackingUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold shadow-xs transition"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
-                            <span>Rastrear Guía</span>
+                            <span>Consultar mi envío</span>
                           </a>
                         )}
                       </div>
@@ -930,7 +957,14 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({
                     address: 'Carrera 15 # 85-30, Oficina 402',
                     city: 'Bogotá D.C., Colombia',
                     website: 'https://ipstecnologica.com.co',
-                    social: {},
+                    social: {
+                      facebook: '',
+                      instagram: '',
+                      tiktok: '',
+                      youtube: '',
+                      whatsapp: whatsappCompanyPhone,
+                      website: 'https://ipstecnologica.com.co'
+                    },
                     colors: {
                       primary: '#DC2626',
                       secondary: '#111827',
@@ -1042,8 +1076,7 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({
                     onClick={() => {
                       const next = saveLocalPushPrefs({
                         ...pushPrefs,
-                        enabled: !pushPrefs.enabled,
-                        notifyNewOffers: !pushPrefs.enabled
+                        enabled: !pushPrefs.enabled
                       });
                       setPushPrefs(next);
                       notify(

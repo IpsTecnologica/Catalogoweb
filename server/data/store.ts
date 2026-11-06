@@ -312,6 +312,7 @@ export interface CompanyProfile {
   activeWebTemplateId?: string;
   activePdfTemplateId?: string;
   commercialTerms: string;
+  taxConfig?: import('../../src/types/index.js').TaxConfiguration;
 }
 
 export type OrderStatus =
@@ -428,10 +429,12 @@ export interface DatabaseSchema {
   customerPushEvents?: CustomerPushEvent[];
   customerPushSubscriptions?: CustomerPushSubscription[];
   crmCustomers?: CrmCustomerRecord[];
+  crmOpportunities?: import('../../src/types/index.js').CrmOpportunity[];
   marketingCampaigns?: MarketingCampaign[];
   paymentMethods?: PaymentMethodItem[];
   remoteSupportTools?: RemoteSupportToolItem[];
   whatsappQrConfig?: WhatsAppQrConfig;
+  landingPageCms?: import('../../src/types/index.js').LandingPageCmsConfig;
   driveMediaAssets?: DriveMediaAsset[];
   sessions: { token: string; userId: string; expiresAt: number; googleAccessToken?: string }[];
   resetTokens: { email: string; token: string; expiresAt: number }[];
@@ -625,7 +628,31 @@ const DEFAULT_COMPANY: CompanyProfile = {
     background: '#FFFFFF'
   },
   commercialTerms:
-    'Precios expresados en Pesos Colombianos (COP). Incluyen IVA. Garantía legal de 12 a 36 meses directamente con fabricante. Precios y disponibilidad sujetos a cambio sin previo aviso. Envíos asegurados a todo el territorio nacional.'
+    'Precios expresados en Pesos Colombianos (COP). Persona natural no responsable de IVA. Garantía legal de 12 a 36 meses según línea de producto. Precios y disponibilidad sujetos a cambio sin previo aviso. Envíos asegurados a todo el territorio nacional.',
+  taxConfig: {
+    regime: 'Persona natural - No responsable de IVA',
+    ivaEnabled: false,
+    ivaRatePercent: 0,
+    showIvaLabelInCatalog: false,
+    priceLabelText: 'Precio Oficial COP',
+    invoiceFooterText: 'Persona natural no responsable de IVA (Art. 437 Estatuto Tributario - DIAN).',
+    otherTaxes: [
+      {
+        id: 'tax_retencion',
+        name: 'Retención en la fuente (operaciones especiales)',
+        ratePercent: 0,
+        active: false,
+        description: 'Concepto tributario independiente configurable por operación particular.'
+      },
+      {
+        id: 'tax_ica',
+        name: 'ReteICA municipal (operaciones especiales)',
+        ratePercent: 0,
+        active: false,
+        description: 'Concepto tributario municipal independiente.'
+      }
+    ]
+  }
 };
 
 const DEFAULT_USERS_DATA: Array<{ name: string; email: string; phone?: string; pass: string; role: UserRole }> = [
@@ -932,7 +959,7 @@ const INITIAL_ORDERS: Order[] = [
     totalCOP: 4680000,
     status: 'En preparación',
     shippingAddress: 'Calle 100 # 19-61, Oficina 502, Bogotá D.C.',
-    notes: 'Facturar con IVA a nombre de la empresa.',
+    notes: 'Generar cuenta de cobro / soporte a nombre de la empresa.',
     items: [
       {
         productId: 'prod_6',
@@ -1198,11 +1225,17 @@ class DatabaseStore {
               const seedTpl = INITIAL_SEASONAL_TEMPLATES.find(st => st.id === tpl.id);
               return {
                 ...tpl,
+                name: seedTpl?.name || tpl.name,
                 backgroundImageUrl: tpl.backgroundImageUrl || seedTpl?.backgroundImageUrl || `/uploads/tpl_bg_${tpl.id.replace('tpl_', '')}.svg`,
                 bannerImageUrl: tpl.bannerImageUrl || seedTpl?.bannerImageUrl || `/uploads/tpl_bg_${tpl.id.replace('tpl_', '')}.svg`,
                 isActiveHome: tpl.isActiveHome !== undefined ? tpl.isActiveHome : Boolean(tpl.isActiveWeb)
               };
             });
+            for (const seedTpl of INITIAL_SEASONAL_TEMPLATES) {
+              if (!parsed.seasonalTemplates.some((t: SeasonalTemplate) => t.id === seedTpl.id)) {
+                parsed.seasonalTemplates.push(seedTpl);
+              }
+            }
           }
           if (!Array.isArray(parsed.promoBanners) || parsed.promoBanners.length === 0) {
             parsed.promoBanners = buildInitialPromoBanners();
@@ -1289,7 +1322,7 @@ class DatabaseStore {
             parsed.whatsappQrConfig = INITIAL_WHATSAPP_QR_CONFIG;
           }
 
-          // Ensure company has logoUrl and active template IDs
+          // Ensure company has logoUrl, active template IDs, and taxConfig (Persona natural no responsable de IVA)
           if (!parsed.company.logoUrl) {
             parsed.company.logoUrl = defaultLogoUrl;
           }
@@ -1298,6 +1331,14 @@ class DatabaseStore {
           }
           if (!parsed.company.activePdfTemplateId) {
             parsed.company.activePdfTemplateId = 'tpl_corporativa';
+          }
+          if (!parsed.company.taxConfig) {
+            parsed.company.taxConfig = DEFAULT_COMPANY.taxConfig;
+          }
+          if (!parsed.company.taxConfig?.ivaEnabled && typeof parsed.company.commercialTerms === 'string') {
+            parsed.company.commercialTerms = parsed.company.commercialTerms
+              .replace(/Incluyen IVA\.?\s*/gi, 'Persona natural no responsable de IVA. ')
+              .replace(/IVA incluido\.?\s*/gi, '');
           }
 
           // Ensure foundational admins and default role accounts exist without overwriting existing users
@@ -4125,7 +4166,7 @@ class DatabaseStore {
     let payloadData: any = {};
     if (moduleScope === 'productos_categorias' || moduleScope === 'solo_productos') {
       const prodEmbedded = allEmbeddedFiles.filter(
-        ef => ef.folderPath.startsWith('Productos') || this.data.products.some(p => p.images.includes(ef.localUrl))
+        ef => ef.folderPath.startsWith('Productos') || this.data.products.some(p => p.images.includes((ef as any).localUrl || (ef as any).stableUrl))
       );
       payloadData = {
         backupType: type,

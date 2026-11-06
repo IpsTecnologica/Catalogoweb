@@ -504,6 +504,159 @@ export const CompanySettings: React.FC<CompanySettingsProps> = ({
           </div>
         </div>
 
+        {/* Section 5: Tax Configuration (DIAN — Persona Natural No Responsable de IVA) */}
+        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-2xs space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-red-600" />
+              <span>5. Configuración Tributaria (DIAN — Exclusivo Administrador)</span>
+            </h3>
+            <span className="px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-[11px] font-bold text-emerald-800">
+              {form.taxConfig?.regime || 'Persona natural - No responsable de IVA'}
+            </span>
+          </div>
+
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Condición actual predeterminada: <strong>Persona natural no responsable de IVA</strong>. El sistema no calcula ni suma automáticamente el 19% de IVA, no incrementa precios existentes y no muestra etiquetas de IVA por defecto en productos, servicios, cotizaciones, cuentas de cobro, recibos ni catálogos PDF. Solo el administrador puede modificar esta condición si cambia la responsabilidad ante la DIAN.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Régimen Tributario Actual ante la DIAN
+              </label>
+              <select
+                disabled={!isAdmin}
+                value={form.taxConfig?.regime || 'Persona natural - No responsable de IVA'}
+                onChange={e => {
+                  const nextRegime = e.target.value as any;
+                  const isIvaResp = nextRegime === 'Responsable de IVA (Régimen Común)';
+                  setForm({
+                    ...form,
+                    taxConfig: {
+                      regime: nextRegime,
+                      ivaEnabled: isIvaResp,
+                      ivaRatePercent: isIvaResp ? (form.taxConfig?.ivaRatePercent || 19) : 0,
+                      showIvaLabelInCatalog: isIvaResp ? Boolean(form.taxConfig?.showIvaLabelInCatalog) : false,
+                      priceLabelText: form.taxConfig?.priceLabelText || 'Precio Oficial COP',
+                      invoiceFooterText: isIvaResp
+                        ? 'Responsable de Impuesto sobre las Ventas - Régimen Común DIAN.'
+                        : 'Persona natural no responsable de IVA (Art. 437 Estatuto Tributario - DIAN).',
+                      otherTaxes: form.taxConfig?.otherTaxes || []
+                    }
+                  });
+                }}
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:bg-slate-50"
+              >
+                <option value="Persona natural - No responsable de IVA">
+                  Persona natural - No responsable de IVA (Predeterminado)
+                </option>
+                <option value="Responsable de IVA (Régimen Común)">
+                  Responsable de IVA (Régimen Común)
+                </option>
+                <option value="Régimen Simple de Tributación">
+                  Régimen Simple de Tributación
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Etiqueta de Precio en Catálogo y PDFs
+              </label>
+              <input
+                type="text"
+                disabled={!isAdmin}
+                value={form.taxConfig?.priceLabelText || 'Precio Oficial COP'}
+                onChange={e =>
+                  setForm({
+                    ...form,
+                    taxConfig: {
+                      ...(form.taxConfig || {
+                        regime: 'Persona natural - No responsable de IVA',
+                        ivaEnabled: false,
+                        ivaRatePercent: 0,
+                        showIvaLabelInCatalog: false,
+                        invoiceFooterText: 'Persona natural no responsable de IVA.'
+                      }),
+                      priceLabelText: e.target.value
+                    }
+                  })
+                }
+                placeholder="Precio Oficial COP"
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:bg-slate-50"
+              />
+            </div>
+
+            <div className="sm:col-span-2">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
+                Nota Tributaria en Cotizaciones, Cuentas de Cobro, Recibos y Reportes
+              </label>
+              <input
+                type="text"
+                disabled={!isAdmin}
+                value={
+                  form.taxConfig?.invoiceFooterText ||
+                  'Persona natural no responsable de IVA (Art. 437 Estatuto Tributario - DIAN).'
+                }
+                onChange={e =>
+                  setForm({
+                    ...form,
+                    taxConfig: {
+                      ...(form.taxConfig || {
+                        regime: 'Persona natural - No responsable de IVA',
+                        ivaEnabled: false,
+                        ivaRatePercent: 0,
+                        showIvaLabelInCatalog: false,
+                        priceLabelText: 'Precio Oficial COP'
+                      }),
+                      invoiceFooterText: e.target.value
+                    }
+                  })
+                }
+                className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:bg-slate-50"
+              />
+            </div>
+
+            <div className="sm:col-span-2 flex flex-wrap items-center gap-6 pt-1">
+              <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  disabled={!isAdmin}
+                  checked={Boolean(form.taxConfig?.ivaEnabled)}
+                  onChange={e =>
+                    setForm({
+                      ...form,
+                      taxConfig: {
+                        ...(form.taxConfig || {
+                          regime: 'Persona natural - No responsable de IVA',
+                          ivaRatePercent: 0,
+                          showIvaLabelInCatalog: false,
+                          priceLabelText: 'Precio Oficial COP',
+                          invoiceFooterText: 'Persona natural no responsable de IVA.'
+                        }),
+                        ivaEnabled: e.target.checked,
+                        showIvaLabelInCatalog: e.target.checked ? Boolean(form.taxConfig?.showIvaLabelInCatalog) : false
+                      }
+                    })
+                  }
+                  className="rounded text-red-600 focus:ring-red-500"
+                />
+                <span>Habilitar cálculo de IVA (desactivado para Persona natural no responsable de IVA)</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+            <span className="font-bold text-slate-800 block">
+              Otros conceptos tributarios separados (Operaciones particulares)
+            </span>
+            <p className="text-[11px] text-slate-500">
+              Se mantienen separados de los precios de catálogo y solo aplican cuando una operación empresarial particular lo requiera (ej. Retención en la fuente o ReteICA).
+            </p>
+          </div>
+        </div>
+
         {isAdmin && (
           <div className="flex justify-end">
             <button

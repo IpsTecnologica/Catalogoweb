@@ -14,6 +14,7 @@ import { PublicCatalog } from './components/public/PublicCatalog';
 import { CompanySettings } from './components/company/CompanySettings';
 import { UserManager } from './components/users/UserManager';
 import { WorkspaceManager } from './components/workspace/WorkspaceManager';
+import { DriveImagesManager } from './components/workspace/DriveImagesManager';
 import { CloudGuideModal } from './components/backup/CloudGuideModal';
 import { SystemBackupManager } from './components/backup/SystemBackupManager';
 import { LoginModal } from './components/auth/LoginModal';
@@ -65,7 +66,7 @@ const DEFAULT_COMPANY: CompanyProfile = {
     background: '#FFFFFF'
   },
   commercialTerms:
-    'Precios expresados en Pesos Colombianos (COP). Incluyen IVA. Garantía legal de 12 a 36 meses directamente con fabricante. Precios y disponibilidad sujetos a cambio sin previo aviso. Envíos asegurados a todo el territorio nacional.'
+    'Precios expresados en Pesos Colombianos (COP). Persona natural no responsable de IVA. Garantía legal de 12 a 36 meses según línea de producto. Precios y disponibilidad sujetos a cambio sin previo aviso. Envíos asegurados a todo el territorio nacional.'
 };
 
 const EDITOR_OR_ADMIN_TABS = ['dashboard', 'landing-cms', 'products', 'promotions', 'templates-banners', 'crm-marketing', 'crm-campaigns'];
@@ -74,6 +75,7 @@ const ADMIN_ONLY_TABS = [
   'system-config',
   'integrations-whatsapp',
   'system-backups',
+  'drive-images',
   'company',
   'workspace',
   'users',
@@ -97,9 +99,10 @@ const TAB_TITLES: Record<string, string> = {
   'system-config': 'Configuración del Sistema (12 Módulos e Integraciones)',
   'integrations-whatsapp': 'Configuración → Integraciones → Conectar WhatsApp (QR wa.me & API Oficial)',
   'system-backups': 'Respaldos, Bóveda Drive de Imágenes y Recuperación del Sistema',
+  'drive-images': 'GESTIÓN DE IMÁGENES GOOGLE DRIVE',
   'admin-orders': 'Gestión de Pedidos de Clientes y Números de Guía',
-  company: 'Identidad Corporativa y Configuración',
-  workspace: 'Google Workspace (Hojas Sheets & 12 Carpetas Drive)',
+  company: 'Identidad Corporativa y Configuración Tributaria',
+  workspace: 'Google Workspace (18 Hojas Sheets & 9 Carpetas Drive)',
   users: 'Gestión de Usuarios y Permisos (RBAC)',
   'app-manager': 'Gestión de la App (PWA y Android APK)',
   'cloud-guide': 'Nube, Respaldo y Despliegue'
@@ -335,9 +338,6 @@ function MainApp() {
                       setActiveTab('public-support');
                     }
                   }}
-                  onOpenLogin={() => setIsLoginOpen(true)}
-                  onOpenRegister={() => setIsRegisterOpen(true)}
-                  onOpenStudio={() => setActiveTab('studio')}
                 />
               )}
 
@@ -438,7 +438,7 @@ function MainApp() {
                 <CrmMarketingManager
                   products={products}
                   company={company}
-                  initialSubTab="customers"
+                  initialSubTab="crm"
                 />
               )}
 
@@ -451,7 +451,7 @@ function MainApp() {
               )}
 
               {activeTab === 'admin-support' && (
-                <AdminSupportManager company={company} initialSubTab="tickets" />
+                <AdminSupportManager company={company} initialSubTab="ordenes" />
               )}
 
               {activeTab === 'admin-technicians' && (
@@ -459,7 +459,7 @@ function MainApp() {
               )}
 
               {activeTab === 'admin-service-orders' && (
-                <AdminSupportManager company={company} initialSubTab="tickets" />
+                <AdminSupportManager company={company} initialSubTab="ordenes" />
               )}
 
               {activeTab === 'warranties-shipping' && (
@@ -488,6 +488,10 @@ function MainApp() {
 
               {activeTab === 'system-backups' && (
                 <SystemBackupManager onDataRestored={loadData} />
+              )}
+
+              {activeTab === 'drive-images' && (
+                <DriveImagesManager />
               )}
 
               {activeTab === 'admin-orders' && <AdminOrdersManager />}
